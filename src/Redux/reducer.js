@@ -1,12 +1,19 @@
-import { store } from "./store";
-
-const reducer = (state = store, action) => {
-  console.log(`[EVENT] ${JSON.stringify(state)} / ${JSON.stringify(action)}`);
+import { GET_USER_USERINFO_SUCCESS, GET_USER_USERINFO_REQUEST, GET_USER_USERINFO_FAILURE  } from "./action";
+const stateDefault = {
+  reqState: null,
+  userinfo: null,
+  errorMassage: null
+}
+const reducer = (state = stateDefault, action) => {
 
   // 액션 처리
   switch (action.type) {
-    case "TEST_REQUEST":
-      return { ...state, TEST_REQUEST: `${Math.random()}` };
+    case GET_USER_USERINFO_REQUEST:
+      return { ...state, reqState: "request" };
+    case GET_USER_USERINFO_SUCCESS:
+      return { ...state, userinfo: action.userinfo, reqState: "success" };
+    case GET_USER_USERINFO_FAILURE:
+      return { ...state, reqState: "failure", errorMassage: action.errorMassage };
     default:
       return state;
   }

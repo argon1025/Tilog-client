@@ -1,6 +1,6 @@
 import { TestComponent } from "../../Components";
 import { connect } from "react-redux";
-
+import { fechUserInfo } from "../../Redux/action"
 /**
  * 해당 컴포넌트에 전달할 상태를 정의합니다
  * @param {*} state
@@ -8,7 +8,7 @@ import { connect } from "react-redux";
  */
 function reduxStateToReactProps(state) {
   return {
-    TEST_REQUEST: state.TEST_REQUEST,
+    userinfo: state.userinfo,
   };
 }
 /**
@@ -18,10 +18,8 @@ function reduxStateToReactProps(state) {
  */
 function reduxDispatchToReactProps(dispatch) {
   return {
-    testRequest: () => {
-      dispatch({
-        type: "TEST_REQUEST",
-      });
+    fechUserInfo: () => {
+      dispatch(fechUserInfo());
     },
   };
 }
