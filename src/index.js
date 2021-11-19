@@ -28,7 +28,7 @@ ReactDOM.render(
         <PersistGate loading={null} persistor={persistor}>
           <Routes>
             {/* 테스트 컨테이너 */}
-            <Route path="/" element={<Containers.TestContainer />} />
+            <Route path="/" element={<Containers.IntroduceContainer />} />
           </Routes>
         </PersistGate>
       </Provider>
