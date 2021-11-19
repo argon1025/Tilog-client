@@ -17,6 +17,17 @@ export default class IntroduceComponent extends Component {
   constructor(props) {
     super(props);
   }
+  async componentDidMount() {
+    try {
+      await this.props.fechUserInfo();
+    } catch (error) {
+      console.log("asd");
+      console.log(error);
+    }
+  }
+  clickGithubLoginButton = () => {
+    window.open("http://localhost:3000/auth/github", "_self");
+  };
   render() {
     let title = "</>";
     return (
@@ -35,6 +46,7 @@ export default class IntroduceComponent extends Component {
               <button
                 type="button"
                 className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+                onClick={this.clickGithubLoginButton}
               >
                 <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
                   <span className="text-sm">Login with Github</span>

@@ -7,7 +7,9 @@ import { fechUserInfo } from "../../Redux/action";
  * @returns
  */
 function reduxStateToReactProps(state) {
-  return {};
+  return {
+    userinfo: state.userinfo,
+  };
 }
 /**
  * 해당 컴포넌트에 전달할 dispatch 메서드를 정의합니다
@@ -15,7 +17,11 @@ function reduxStateToReactProps(state) {
  * @returns
  */
 function reduxDispatchToReactProps(dispatch) {
-  return {};
+  return {
+    fechUserInfo: () => {
+      dispatch(fechUserInfo());
+    },
+  };
 }
 
 export default connect(
