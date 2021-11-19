@@ -10,6 +10,8 @@ import {
   FaKiwiBird,
 } from "react-icons/fa";
 
+import NotFoundContent from "./NotFoundContent.component";
+
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -20,7 +22,7 @@ export default class IntroduceComponent extends Component {
     return (
       <div className="flex flex-col">
         {/* Nav */}
-        <div className="flex flex-col justify-center items-center bg-bg-1 bg-fixed bg-cover">
+        <div className="flex flex-col justify-center items-center bg-bg-1 bg-fixed bg-cover filter drop-shadow-md">
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
             <div className="ml-5 mt-5 p-1 px-4 bg-white">
@@ -69,12 +71,17 @@ export default class IntroduceComponent extends Component {
 
         {/* now Issue */}
         <div className="flex flex-col justify-center items-center py-10">
-          <div className="flex flex-row max-w-5xl w-full px-4">
+          <div className="flex flex-col max-w-5xl w-full px-4">
+            {/* title */}
             <div className="flex text-gray-600">
               <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaHotjar />
                 <span className="text-xs">TRENDING ON TILOG</span>
               </IconContext.Provider>
+            </div>
+            {/* content */}
+            <div className="flex flex-row max-w-5xl w-full px-4">
+              <NotFoundContent />
             </div>
           </div>
         </div>
@@ -83,12 +90,17 @@ export default class IntroduceComponent extends Component {
 
         {/* your Recommend */}
         <div className="flex flex-col justify-center items-center py-10">
-          <div className="flex flex-row max-w-5xl w-full px-4">
+          <div className="flex flex-col max-w-5xl w-full px-4">
+            {/* title */}
             <div className="flex text-gray-600">
               <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaWpexplorer />
                 <span className="text-xs">EXPLORE IN TILOG</span>
               </IconContext.Provider>
+            </div>
+            {/* content */}
+            <div className="flex flex-row max-w-5xl w-full px-4">
+              <NotFoundContent />
             </div>
           </div>
         </div>
@@ -96,8 +108,9 @@ export default class IntroduceComponent extends Component {
         <hr className="border-gray-200" />
 
         {/* Footer */}
-        <div className="flex flex-col justify-center items-center py-10 bg-gray-900 absolute inset-x-0 bottom-0">
+        <div className="flex flex-col justify-center items-center mt-20 bg-gray-900 relative inset-x-0 bottom-0">
           <div className="flex flex-row max-w-5xl w-full justify-center">
+            {/* sub */}
             <div className="grid grid-cols-1 lg:grid-cols-3 ">
               <div className="m-5">
                 <h1 class="flex text-2xl text-white item-center">
@@ -152,7 +165,8 @@ export default class IntroduceComponent extends Component {
               </div>
             </div>
           </div>
-          <div className="mt-5">
+          {/* copyright */}
+          <div>
             <hr className="border-white" />
             <h1 class="mt-3 text-sm text-white">
               Copyright 2021.TILog inc. all rights reserved.
