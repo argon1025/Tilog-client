@@ -16,9 +16,13 @@ import * as serviceWorker from "./serviceWorker";
 // Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Toaster
+import { Toaster } from "react-hot-toast";
+
 // Redux Persist
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+
 const persistor = persistStore(store);
 
 ReactDOM.render(
@@ -26,6 +30,16 @@ ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <Toaster
+            toastOptions={{
+              className: "p-4 filter drop-shadow-2xl text-xs w-64 h-14",
+              style: {
+                borderRadius: "20px",
+                backgroundColor: "rgba(255, 255, 255, 0.4)",
+                backdropFilter: "blur(5px)",
+              },
+            }}
+          />
           <Routes>
             {/* 테스트 컨테이너 */}
             <Route path="/" element={<Containers.IntroduceContainer />} />
