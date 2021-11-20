@@ -41,8 +41,13 @@ ReactDOM.render(
             }}
           />
           <Routes>
-            {/* 테스트 컨테이너 */}
+            {/* 메인 컨테이너 */}
             <Route path="/" element={<Containers.IntroduceContainer />} />
+            {/* 포스트 디테일 뷰어 컨테이너 */}
+            <Route
+              path="/postviewer"
+              element={<Containers.PostDetailContainer />}
+            />
           </Routes>
         </PersistGate>
       </Provider>
