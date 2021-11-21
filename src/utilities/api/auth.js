@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "./server";
+import { server } from "../server";
 
 // 유저 정보를 가져옵니다.
 export const  fetchUserInfo = () =>{
