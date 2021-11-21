@@ -11,23 +11,32 @@ import {
 } from "react-icons/fa";
 
 import NotFoundContent from "./NotFoundContent.component";
+import { logout } from "../../utilities/api";
+import { server } from "../../utilities/server";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
   }
-  async componentDidMount() {
+  componentDidMount() {
+    // 현재 로그인된 유저 정보 확인
+    this.props.getUserInfo()
+  }
+  // 로그인로직
+  clickGithubLoginButton = () => {
+    window.open(`${server}/auth/github`, "_self");
+  };
+  // 로그아웃 로직
+  clickLogoutButton = async() => {
     try {
-      await this.props.fechUserInfo();
+      await logout();
+      window.location.href = '/';
     } catch (error) {
-      console.log("asd");
+      console.log("로그아웃 에러!");
       console.log(error);
     }
   }
-  clickGithubLoginButton = () => {
-    window.open("http://localhost:3000/auth/github", "_self");
-  };
   render() {
     let title = "</>";
     return (
@@ -43,6 +52,21 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
+              {
+                this.props.ISLOGIN 
+              ? 
+              // Logined
+              <button
+              type="button"
+              className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+              onClick={this.clickLogoutButton}
+            >
+              <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
+                <span className="text-sm">Logout</span>
+              </div>
+            </button>
+              :
+              // Un Logined
               <button
                 type="button"
                 className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
@@ -55,6 +79,7 @@ export default class IntroduceComponent extends Component {
                   </IconContext.Provider>
                 </div>
               </button>
+              }
             </div>
           </div>
           {/* Banner */}
