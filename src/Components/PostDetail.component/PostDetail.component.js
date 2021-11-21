@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { DiGithubBadge } from "react-icons/di";
 import { IconContext } from "react-icons";
+import { PostCommentContainer } from "../../Containers";
 
 export default class PostDetailComponent extends Component {
   render() {
@@ -165,15 +166,8 @@ export default class PostDetailComponent extends Component {
             </div>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-col w-full max-w-5xl justify-start items-start ml-3">
-            <div className="flex text-gray-600  mr-3">
-              <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
-                <FaRegComment />
-                <span className="text-xs">Comments</span>
-              </IconContext.Provider>
-            </div>
-          </div>
+          {/* Comments */}
+          <PostCommentContainer />
         </div>
       </div>
     );
