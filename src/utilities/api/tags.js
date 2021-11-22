@@ -1,18 +1,20 @@
-import axios from "axios"
-import { server } from "../server"
+import request from "./core"
+
+
+///////////////// 인가가 필요한 요청 /////////////////
+
 // 태그를 생성합니다.
-export const  createTag = (body) =>{
-    return new Promise((resolve, reject) => {
-        axios.post(`${server}/tags`, { 
-            data: {
-                tagsName: body.tagsName,
-            },
-            withCredentials: true })
-        .then(({data}) =>{
-            resolve(data)
-        })
-        .catch(error =>{
-            reject(error)
-        })
+const  createTag = (body) =>{
+    request({
+        url: '/tags',
+        method: 'post',
+        data: {
+            tagsName: body.tagsName,
+        },
+        withCredentials: true
     })
+}
+
+export {
+    createTag
 }

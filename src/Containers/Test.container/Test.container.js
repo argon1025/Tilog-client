@@ -7,7 +7,7 @@ import { connect } from "react-redux";
  * @returns
  */
 function reduxStateToReactProps(state) {
-  return {};
+return {};
 }
 /**
  * 해당 컴포넌트에 전달할 dispatch 메서드를 정의합니다
