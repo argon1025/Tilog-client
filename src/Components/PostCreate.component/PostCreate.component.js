@@ -16,7 +16,7 @@ import {
 export default class PostCreateComponent extends Component {
   state = {
     title: "", // 게시글 제목
-    content: {}, // 게시글 내용
+    contentData: {}, // 게시글 내용
     addStep: false, // 추가정보 입력모달 출력 여부
   };
 
@@ -35,16 +35,22 @@ export default class PostCreateComponent extends Component {
   /**
    * 게시글 입력 정보를 상태에 반영한다
    */
-  setContent = (contentData) => {
-    console.log(contentData);
-    this.setState({ ...this.state, content: contentData });
+  setContent = async (contentData) => {
+    await this.updateState({ ...this.state, contentData: contentData });
   };
   /**
    * 게시글 입력 정보를 반환한다
    */
   getContent = () => {
-    console.log("this.state.content");
-    return this.state.content;
+    return this.state.contentData;
+  };
+
+  updateState = (stateObject) => {
+    return new Promise((resolve) => {
+      this.setState(stateObject, () => {
+        resolve();
+      });
+    });
   };
 
   /**
