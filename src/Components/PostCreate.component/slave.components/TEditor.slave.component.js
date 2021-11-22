@@ -99,15 +99,17 @@ const Tiptap = (props) => {
     },
     autofocus: true,
     editable: true,
-    content: "내용을 입력하세요..",
+    content: props.getContent(),
   });
 
-  const clickNextButton = () => {
+  const clickNextButton = async () => {
     // 상위 컴포넌트 메서드를 호출해 게시글 데이터를 동기화한다
-    props.setContent(editor.getJSON());
+    await props.setContent(editor.getJSON());
 
     // 상위 컴포넌트 메서드를 호출해 다음 페이지로 이동한다
     props.openAddStepModal();
+
+    console.log(props.getContent());
   };
 
   return (
