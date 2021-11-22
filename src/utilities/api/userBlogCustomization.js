@@ -10,8 +10,8 @@ export const createUserBlogCustomization = (body) =>{
                 blogTitle: body.blogTitle,
                 statusMessage: body.statusMessage,
                 selfIntroduction: body.selfIntroduction
-            },
-            withCredentials: true })
+            }},
+            { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })
@@ -28,8 +28,8 @@ export const updateUserBlogCustomization = (body) =>{
                 blogTitle: body.blogTitle,
                 statusMessage: body.statusMessage,
                 selfIntroduction: body.selfIntroduction
-            },
-            withCredentials: true })
+            }},
+            { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })

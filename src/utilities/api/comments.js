@@ -4,11 +4,10 @@ import { server } from "../server"
 // 포스트에 새로운 댓글을 생성합니다.
 export const  createComment = (postID, body) =>{
     return new Promise((resolve, reject) => {
-        axios.post(`${server}/comments/posts/${postID}`, {  
+        axios.post(`${server}/comments/post/${postID}`, {  
             data: {
                 htmlContent: body.htmlContent,
-            },
-            withCredentials: true })
+            }}, { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })
@@ -39,8 +38,8 @@ export const  createCommentToComment = (commentID, userID, postID,  body) =>{
                 htmlContent: body.htmlContent,
                 replyTo: 1,
                 replyLevel: 0
-            },
-            withCredentials: true })
+            }},
+            { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })

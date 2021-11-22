@@ -6,8 +6,8 @@ export const  createTag = (body) =>{
         axios.post(`${server}/categories`, { 
             data: {
                 categoryName: body.categoryName,
-            },
-            withCredentials: true })
+            }},
+            { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })

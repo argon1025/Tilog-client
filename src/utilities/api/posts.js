@@ -10,12 +10,13 @@ export const  createPost = (body) =>{
                 thumbNailUrl: body.thumbNailUrl,
                 markDownContent: body.markDownContent,
                 private: body.private
-            },
-            withCredentials: true })
+            }}, { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })
         .catch(error =>{
+            console.log("나야")
+            console.log(error.message);
             reject(error)
         })
     })
@@ -30,8 +31,8 @@ export const  updatePost = (postID, body) =>{
                 thumbNailUrl: body.thumbNailUrl,
                 markDownContent: body.markDownContent,
                 private: body.private
-            },
-            withCredentials: true })
+            }},
+            { withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })

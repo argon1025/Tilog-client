@@ -7,8 +7,8 @@ export const  uploadImage = (formData) =>{
         axios.post(`${server}/files/images`, formData , {   
             headers:{
                 'Content-Type': 'multipart/form-data'
-            },
-            withCredentials: true })
+            }},
+            {  withCredentials: true })
         .then(({data}) =>{
             resolve(data)
         })
