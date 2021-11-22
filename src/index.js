@@ -48,6 +48,10 @@ ReactDOM.render(
               path="/postviewer"
               element={<Containers.PostDetailContainer />}
             />
+            <Route
+              path="/post/editor"
+              element={<Containers.PostCreateContainer />}
+            />
           </Routes>
         </PersistGate>
       </Provider>
