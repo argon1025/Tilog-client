@@ -10,10 +10,10 @@ export const getUserInfo = () =>{
             //api서버에 유저 정보를 요청합니다.
             const data = await fetchUserInfo()
             // 요청한 유저 정보가 정상적으로 처리되어 반환되었습니다.
-            dispatch({ type: GET_USER_USERINFO_SUCCESS, USERINFO: data, AUTHERROR: null})
+            dispatch({ type: GET_USER_USERINFO_SUCCESS, ISLOGIN: true, USERINFO: data, AUTHERROR: null})
         } catch (error) {
             // 요청중 에러가 발생하였습니다.
-            dispatch({ type: GET_USER_USERINFO_FAILURE, AUTHERROR: error.message})
+            dispatch({ type: GET_USER_USERINFO_FAILURE,ISLOGIN: false,USERINFO: null, AUTHERROR: error.message})
         }
     }
 }

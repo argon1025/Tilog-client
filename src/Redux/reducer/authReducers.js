@@ -2,6 +2,7 @@
 import { GET_USER_USERINFO_SUCCESS, GET_USER_USERINFO_FAILURE  } from "../action";
 // default state data
 const stateDefault = {
+  ISLOGIN: false,
   USERINFO: null,
   AUTHERROR: null
 }
@@ -12,10 +13,10 @@ const authReducers = (state = stateDefault, action) => {
   switch (action.type) {
     // 유저 정보 요청에 성공하였습니다.
     case GET_USER_USERINFO_SUCCESS:
-      return { ...state, USERINFO: action.USERINFO, AUTHERROR: action.AUTHERROR };
+      return { ...state, ISLOGIN: action.ISLOGIN, USERINFO: action.USERINFO, AUTHERROR: action.AUTHERROR };
     // 유저 정보 요청에 실패하였습니다.
     case GET_USER_USERINFO_FAILURE:
-      return { ...state, AUTHERROR: action.AUTHERROR };
+      return { ...state, ISLOGIN: action.ISLOGIN, USERINFO: action.USERINFO, AUTHERROR: action.AUTHERROR };
     default:
       return state;
   }
