@@ -1,64 +1,57 @@
-import axios from "axios"
-import { server } from "../server"
+import request from "./core"
 
+
+///////////////// 인가가 필요한 요청 /////////////////
 
 // 유저 블로그 커스텀 데이터를 등록합니다.
-export const createUserBlogCustomization = (body) =>{
-    return new Promise((resolve, reject) => {
-        axios.post(`${server}/user-blog-customizaion`, { 
-            data:{
-                blogTitle: body.blogTitle,
-                statusMessage: body.statusMessage,
-                selfIntroduction: body.selfIntroduction
-            },
-            withCredentials: true })
-        .then(({data}) =>{
-            resolve(data)
-        })
-        .catch(error =>{
-            reject(error)
-        })
+const createUserBlogCustomization = (body) =>{
+    request({
+        url: 'user-blog-customizaion',
+        method:  'post',
+        data:{
+            blogTitle: body.blogTitle,
+            statusMessage: body.statusMessage,
+            selfIntroduction: body.selfIntroduction
+        },
+        withCredentials: true
     })
 }
 // 유저 블로그 커스텀 데이터를 수정합니다.
-export const updateUserBlogCustomization = (body) =>{
-    return new Promise((resolve, reject) => {
-        axios.patch(`${server}/user-blog-customizaion`, { 
-            data:{
-                blogTitle: body.blogTitle,
-                statusMessage: body.statusMessage,
-                selfIntroduction: body.selfIntroduction
-            },
-            withCredentials: true })
-        .then(({data}) =>{
-            resolve(data)
-        })
-        .catch(error =>{
-            reject(error)
-        })
+const updateUserBlogCustomization = (body) =>{
+    request({
+        url: 'user-blog-customizaion',
+        method:  'patch',
+        data:{
+            blogTitle: body.blogTitle,
+            statusMessage: body.statusMessage,
+            selfIntroduction: body.selfIntroduction
+        },
+        withCredentials: true
     })
 }
 // 유저 블로그 커스텀 데이터를 삭제합니다.
-export const deleteUserBlogCustomization = () =>{
-    return new Promise((resolve, reject) => {
-        axios.delete(`${server}/user-blog-customizaion`, { withCredentials: true })
-        .then(({data}) =>{
-            resolve(data)
-        })
-        .catch(error =>{
-            reject(error)
-        })
+const deleteUserBlogCustomization = () =>{
+    request({
+        url: 'user-blog-customizaion',
+        method:  'delete',
+        withCredentials: true
     })
 }
+
+
+///////////////// 인가가 필요없는 요청 /////////////////
+
 // 유저 블로그 커스텀 데이터를 가져옵니다.
-export const getUserBlogCustomization = (userID) =>{
-    return new Promise((resolve, reject) => {
-        axios.get(`${server}/user-blog-customizaion/${userID}`)
-        .then(({data}) =>{
-            resolve(data)
-        })
-        .catch(error =>{
-            reject(error)
-        })
+const getUserBlogCustomization = (userID) =>{
+    request({
+        url: `/user-blog-customizaion/${userID}`,
+        method:  'get'
     })
+}
+
+export {
+    createUserBlogCustomization,
+    updateUserBlogCustomization,
+    deleteUserBlogCustomization,
+    getUserBlogCustomization
 }

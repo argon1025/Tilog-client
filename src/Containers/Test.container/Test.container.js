@@ -1,6 +1,5 @@
 import { TestComponent } from "../../Components";
 import { connect } from "react-redux";
-import { fechUserInfo } from "../../Redux/action"
 /**
  * 해당 컴포넌트에 전달할 상태를 정의합니다
  * @param {*} state
@@ -8,7 +7,6 @@ import { fechUserInfo } from "../../Redux/action"
  */
 function reduxStateToReactProps(state) {
   return {
-    userinfo: state.userinfo,
   };
 }
 /**
@@ -18,9 +16,6 @@ function reduxStateToReactProps(state) {
  */
 function reduxDispatchToReactProps(dispatch) {
   return {
-    fechUserInfo: () => {
-      dispatch(fechUserInfo());
-    },
   };
 }
 
