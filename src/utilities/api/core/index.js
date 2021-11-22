@@ -10,7 +10,7 @@ request.defaults.timeout = 2500;
 // 요청 인터셉터  추가
 request.interceptors.request.use(
     config => {
-        return config
+        return Promise.resolve(config)
     },
     error =>{
         console.log("요청 인터셉터 에러");
@@ -21,8 +21,9 @@ request.interceptors.request.use(
 // 응답 인터셉터  추가
 request.interceptors.response.use(
     response => {
+        console.log(response);
         const res = response.data
-        return res
+        return Promise.resolve(res)
     },
     error => {
         console.log("응답 인터셉터 에러");
