@@ -49,8 +49,8 @@ ReactDOM.render(
               element={<Containers.PostDetailContainer />}
             />
             <Route
-              path="/test"
-              element={<Containers.TestContainer />}
+              path="/post/editor"
+              element={<Containers.PostCreateContainer />}
             />
           </Routes>
         </PersistGate>
