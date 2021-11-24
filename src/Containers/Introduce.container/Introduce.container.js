@@ -19,7 +19,11 @@ function reduxStateToReactProps(state) {
  * @returns
  */
 function reduxDispatchToReactProps(dispatch) {
-  return {};
+  return {
+    getUserInfo: () =>{
+      dispatch(getUserInfo())
+    }
+  };
 }
 
 export default connect(
