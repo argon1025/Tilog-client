@@ -11,7 +11,6 @@ import {
   GoLink,
 } from "react-icons/go";
 import { FaRegThumbsUp, FaClock, FaLock, FaCheckDouble } from "react-icons/fa";
-import { SiTypescript, SiHtml5 } from "react-icons/si";
 import TechIconLoader from "../Utility.components/techIconLoader";
 
 export default class UserBlogComponent extends Component {
@@ -55,7 +54,7 @@ export default class UserBlogComponent extends Component {
             <img
               className="h-28 w-28 object-cover object-center rounded-full"
               src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-              alt="photo"
+              alt="profile"
             />
             <div className="m-5">
               {/* Name, message */}

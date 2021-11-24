@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 // src/Tiptap.jsx
 import { useEditor, EditorContent } from "@tiptap/react";
 import Document from "@tiptap/extension-document";

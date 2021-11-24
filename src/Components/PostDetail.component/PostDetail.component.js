@@ -5,7 +5,6 @@ import {
   FaRegEye,
   FaBookmark,
   FaHashtag,
-  FaRegComment,
   FaRegThumbsUp,
 } from "react-icons/fa";
 import { DiGithubBadge } from "react-icons/di";
@@ -27,12 +26,12 @@ export default class PostDetailComponent extends Component {
     proFileImageUrl: null,
     updatedAt: null,
     viewCounts: null,
-  }
+  };
   // 포스트의 정보를 가져옵니다.
-  getPostDetail = async(postID) => {
+  getPostDetail = async (postID) => {
     try {
-      const result = await viewDetailPost(4)
-      console.log(result.data)
+      const result = await viewDetailPost(4);
+      console.log(result.data);
       this.setState({
         ...this.state,
         userName: result.userName,
@@ -45,12 +44,12 @@ export default class PostDetailComponent extends Component {
         markDownContent: result.markDownContent,
         private: result.private,
         proFileImageUrl: result.proFileImageUrl,
-        viewCounts: result.viewCounts
-      })
+        viewCounts: result.viewCounts,
+      });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   render() {
     return (
       <div>
@@ -86,9 +85,14 @@ export default class PostDetailComponent extends Component {
           <img
             className="object-cover h-full w-full filter blur-lg"
             src={this.state.thumbNailUrl}
+            alt="banner-background"
           />
           <div className="absolute flex max-w-lg max-h-64 overflow-hidden filter drop-shadow-2xl rounded-3xl">
-            <img className="object-cover h-full w-full" src={this.state.thumbNailUrl} />
+            <img
+              className="object-cover h-full w-full"
+              src={this.state.thumbNailUrl}
+              alt="banner"
+            />
           </div>
         </div>
 
@@ -113,7 +117,9 @@ export default class PostDetailComponent extends Component {
               <div className="flex text-gray-600  mr-3">
                 <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                   <FaRegEye />
-                  <span className="text-xs">{this.state.viewCounts} viewed</span>
+                  <span className="text-xs">
+                    {this.state.viewCounts} viewed
+                  </span>
                 </IconContext.Provider>
               </div>
               <div className="flex text-gray-600  mr-3">
@@ -135,9 +141,7 @@ export default class PostDetailComponent extends Component {
 
           {/* Markdown Content */}
           <div className="flex flex-col max-w-5xl w-full mt-10 ml-3">
-            <div>
-              {this.state.markDownContent}
-            </div>
+            <div>{this.state.markDownContent}</div>
           </div>
 
           <hr className="border-gray-200 w-full my-10" />

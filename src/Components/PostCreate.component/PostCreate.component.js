@@ -2,16 +2,7 @@ import React, { Component } from "react";
 import { Tiptap } from "./slave.components/TEditor.slave.component";
 import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
-import {
-  FaRegLaughSquint,
-  FaRegCalendarAlt,
-  FaRegEye,
-  FaBookmark,
-  FaHashtag,
-  FaRegComment,
-  FaRegThumbsUp,
-  FaRegHandPointRight,
-} from "react-icons/fa";
+import { FaBookmark, FaHashtag } from "react-icons/fa";
 
 export default class PostCreateComponent extends Component {
   state = {
