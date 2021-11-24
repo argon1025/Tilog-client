@@ -52,6 +52,7 @@ ReactDOM.render(
               path="/post/editor"
               element={<Containers.PostCreateContainer />}
             />
+            <Route path="/blog" element={<Containers.UserBlogContainer />} />
           </Routes>
         </PersistGate>
       </Provider>
