@@ -4,12 +4,12 @@ import request from "./core"
 ///////////////// 인가가 필요한 요청 /////////////////
 
 // 포스트에 새로운 댓글을 생성합니다.
-const  createComment = (postID, body) =>{
-    request({
+const  createComment = (postID, htmlContent) =>{
+    return request({
         url: `/comments/post/${postID}`,
         method: 'post',
         data: {
-            htmlContent: body.htmlContent
+            htmlContent: htmlContent
         },
         withCredentials: true
     })
@@ -17,31 +17,33 @@ const  createComment = (postID, body) =>{
 
 
 // 댓글에 답글을 작성합니다.
-const  createCommentToComment = (commentID, userID, postID,  body) =>{
-    request({
-        url: `/comments/${commentID}/posts/${postID}`,
+const  createCommentToComment = (commentID, postID,  htmlContent) =>{
+    return request({
+        url: `/comments/${commentID}/post/${postID}`,
         method: 'post',
         data: {
-            usersId: userID,
             postsId: postID,
-            htmlContent: body.htmlContent,
+            htmlContent: htmlContent,
             replyTo: 1,
             replyLevel: 0
         },
         withCredentials: true
     })
 }
-// 삭제한 댓글을 복구합니다.
-const  restoreComment = (commentID) =>{
-    request({
+// 댓글을 수정 합니다.
+const  updateComment = (commentID, htmlContent) =>{
+    return request({
         url: `/comments/${commentID}`,
         method: 'patch',
+        data: {
+            htmlContent: htmlContent
+        },
         withCredentials: true
     })
 }
 // 포스트의 모든 코멘트를 삭제합니다.
 const  deleteComment = (commentID) =>{
-    request({
+    return request({
         url: `/comments/${commentID}`,
         method: 'delete',
         withCredentials: true
@@ -53,18 +55,23 @@ const  deleteComment = (commentID) =>{
 
 // 포스트의 모든 코멘트를 가져옵니다.
 const  viewAllComment = (postID) =>{
-    request({
-        url: `/comments/posts/${postID}`,
+    return request({
+        url: `/comments/post/${postID}`,
         method: 'get',
     })
 }
+const getCommentsWriteUsers = (postID) => {
+    return request({
+        url: `/comments/writeusers/post/${postID}`,
+        method: 'get'
+    })
+} 
 
 // 특정 코멘트를 가져옵니다.
 const  viewComment = (commentID) =>{
-    request({
+    return request({
         url: `comments/${commentID}`,
-        method: 'get',
-        withCredentials: true
+        method: 'get'
     })
 }
 
@@ -72,7 +79,8 @@ export {
     createComment,
     createCommentToComment,
     deleteComment,
-    restoreComment,
+    updateComment,
     viewAllComment,
-    viewComment
+    viewComment,
+    getCommentsWriteUsers
 }

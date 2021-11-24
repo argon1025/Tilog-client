@@ -5,7 +5,7 @@ import request from "./core"
 
 // 유저 블로그 커스텀 데이터를 등록합니다.
 const createUserBlogCustomization = (body) =>{
-    request({
+    return request({
         url: 'user-blog-customizaion',
         method:  'post',
         data:{
@@ -18,7 +18,7 @@ const createUserBlogCustomization = (body) =>{
 }
 // 유저 블로그 커스텀 데이터를 수정합니다.
 const updateUserBlogCustomization = (body) =>{
-    request({
+    return request({
         url: 'user-blog-customizaion',
         method:  'patch',
         data:{
@@ -31,7 +31,7 @@ const updateUserBlogCustomization = (body) =>{
 }
 // 유저 블로그 커스텀 데이터를 삭제합니다.
 const deleteUserBlogCustomization = () =>{
-    request({
+    return request({
         url: 'user-blog-customizaion',
         method:  'delete',
         withCredentials: true
@@ -43,7 +43,7 @@ const deleteUserBlogCustomization = () =>{
 
 // 유저 블로그 커스텀 데이터를 가져옵니다.
 const getUserBlogCustomization = (userID) =>{
-    request({
+    return request({
         url: `/user-blog-customizaion/${userID}`,
         method:  'get'
     })

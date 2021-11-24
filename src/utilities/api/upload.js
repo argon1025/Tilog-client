@@ -5,7 +5,7 @@ import request from "./core"
 
 // 이미지 파일을 업로드합니다.
 const  uploadImage = (formData) =>{
-    request({
+    return request({
         url: '/files/images',
         method: 'post',
         headers:{

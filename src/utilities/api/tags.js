@@ -5,7 +5,7 @@ import request from "./core"
 
 // 태그를 생성합니다.
 const  createTag = (body) =>{
-    request({
+    return request({
         url: '/tags',
         method: 'post',
         data: {
