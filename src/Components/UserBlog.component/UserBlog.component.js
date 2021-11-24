@@ -12,6 +12,8 @@ import {
 } from "react-icons/go";
 import { FaRegThumbsUp, FaClock, FaLock, FaCheckDouble } from "react-icons/fa";
 import { SiTypescript, SiHtml5 } from "react-icons/si";
+import TechIconLoader from "../Utility.components/techIconLoader";
+
 export default class UserBlogComponent extends Component {
   state = {};
   // eslint-disable-next-line no-useless-constructor
@@ -108,13 +110,7 @@ export default class UserBlogComponent extends Component {
               <div className="flex flex-col w-full lg:w-32 h-32 border border-gray-200 rounded-3xl bg-gray-800 mr-5">
                 {/* Card icon */}
                 <div className="flex items-center justify-center w-9 h-9 border border-gray-500 rounded-xl m-3">
-                  <IconContext.Provider
-                    value={{
-                      className: "w-5 h-5 text-gray-100",
-                    }}
-                  >
-                    <GoTerminal />
-                  </IconContext.Provider>
+                  <TechIconLoader iconName="Typescript" color="white" />
                 </div>
                 {/* Card title */}
                 <div className="m-3">
@@ -163,23 +159,11 @@ export default class UserBlogComponent extends Component {
                 <div className="flex flex-row mx-5">
                   {/* icon example-1 */}
                   <div className="flex items-center justify-center w-9 h-9 border border-gray-400 rounded-xl mr-2">
-                    <IconContext.Provider
-                      value={{
-                        className: "w-5 h-5 text-gray-700",
-                      }}
-                    >
-                      <SiTypescript />
-                    </IconContext.Provider>
+                    <TechIconLoader iconName="Typescript" color="#393939" />
                   </div>
                   {/* icon example-2 */}
                   <div className="flex items-center justify-center w-9 h-9 border border-gray-400 rounded-xl  mr-2">
-                    <IconContext.Provider
-                      value={{
-                        className: "w-5 h-5 text-gray-700",
-                      }}
-                    >
-                      <SiHtml5 />
-                    </IconContext.Provider>
+                    <TechIconLoader iconName="html" color="#393939" />
                   </div>
                 </div>
                 {/* progress bar */}
@@ -226,13 +210,7 @@ export default class UserBlogComponent extends Component {
               <div className="rounded-lg w-full h-72 bg-white shadow-lg">
                 {/* Category Icon */}
                 <div className="absolute m-3 bg-white flex items-center justify-center w-9 h-9 rounded-xl shadow-lg">
-                  <IconContext.Provider
-                    value={{
-                      className: "w-5 h-5 text-gray-700",
-                    }}
-                  >
-                    <SiHtml5 />
-                  </IconContext.Provider>
+                  <TechIconLoader iconName="html" color="#393939" />
                 </div>
                 {/* Image */}
                 <img
