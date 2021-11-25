@@ -4,6 +4,7 @@ import PostDetailComponent from "./PostDetail.component/PostDetail.component";
 import PostCommentComponent from "./PostComment.component/PostComment.component";
 import PostCreateComponent from "./PostCreate.component/PostCreate.component";
 import UserBlogComponent from "./UserBlog.component/UserBlog.component";
+import ProfileDropdownComponent from "./ProfileDropdown.component/ProfileDropdown.component";
 
 export {
   TestComponent,
@@ -12,4 +13,5 @@ export {
   PostCommentComponent,
   PostCreateComponent,
   UserBlogComponent,
+  ProfileDropdownComponent,
 };
