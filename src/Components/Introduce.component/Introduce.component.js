@@ -12,7 +12,7 @@ import {
 
 import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
-import { server } from "../../utilities/server";
+import { TILogServer } from "../../utilities/server";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -25,7 +25,7 @@ export default class IntroduceComponent extends Component {
   }
   // 로그인로직
   clickGithubLoginButton = () => {
-    window.open(`${server}/auth/github`, "_self");
+    window.open(`${TILogServer}/auth/github`, "_self");
   };
   // 로그아웃 로직
   clickLogoutButton = async() => {

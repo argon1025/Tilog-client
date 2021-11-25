@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Tiptap } from "./slave.components/TEditor.slave.component";
 import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
+
 import { FaBookmark, FaHashtag } from "react-icons/fa";
 import { createPost } from "../../utilities/api/posts";
 

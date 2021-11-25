@@ -69,10 +69,11 @@ const  viewDetailPost = (postID) =>{
     })
 }
 // 특정 유저가 작성한 게시글 리스트를 요청합니다.
-const  viewSpecialUserPost = (userID) =>{
+const  viewAllFindByUserID = (userID, nextCursorNumber) =>{
     return request({
-        url: `/users/${userID}/posts`,
-        method: 'get'
+        url: `/users/${userID}/posts?cursor=${nextCursorNumber}`,
+        method: 'get',
+        withCredentials: true
     })
 }
 export {
@@ -82,5 +83,5 @@ export {
     setLikePost,
     unSetLikePost,
     viewDetailPost,
-    viewSpecialUserPost
+    viewAllFindByUserID
 }

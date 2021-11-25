@@ -10,7 +10,7 @@ import {
 import { DiGithubBadge } from "react-icons/di";
 import { IconContext } from "react-icons";
 import { PostCommentContainer } from "../../Containers";
-import { viewDetailPost } from "../../utilities/api";
+import { viewDetailPost, setLikePost } from "../../utilities/api";
 
 export default class PostDetailComponent extends Component {
   state = {
@@ -26,12 +26,17 @@ export default class PostDetailComponent extends Component {
     proFileImageUrl: null,
     updatedAt: null,
     viewCounts: null,
-  };
+    tagData: [],
+    categoryName: null
+  }
+  componentDidMount() {
+    this.getPostDetail()
+  }
   // 포스트의 정보를 가져옵니다.
   getPostDetail = async (postID) => {
     try {
-      const result = await viewDetailPost(4);
-      console.log(result.data);
+      const result = await viewDetailPost(4)
+      console.log(result);
       this.setState({
         ...this.state,
         userName: result.userName,
@@ -45,11 +50,20 @@ export default class PostDetailComponent extends Component {
         private: result.private,
         proFileImageUrl: result.proFileImageUrl,
         viewCounts: result.viewCounts,
-      });
+        tagData: result.TagData,
+        categoryName: result.categoryName
+      })
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+  pushLike = async() => {
+    try {
+      await setLikePost()
+    } catch (error) {
+      
+    }
+  }
   render() {
     return (
       <div>
@@ -131,7 +145,7 @@ export default class PostDetailComponent extends Component {
               <div className="flex text-gray-600  mr-3">
                 <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                   <FaBookmark />
-                  <span className="text-xs">{this.state.categoryId}</span>
+                  <span className="text-xs">{this.state.categoryName}</span>
                 </IconContext.Provider>
               </div>
             </div>
@@ -168,18 +182,17 @@ export default class PostDetailComponent extends Component {
               </IconContext.Provider>
             </div>
             <div>
-              <button
-                class="px-4 py-2 m-2 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
-                type="submit"
-              >
-                Mysql
-              </button>
-              <button
-                class="px-4 py-2 m-2 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
-                type="submit"
-              >
-                Database
-              </button>
+              {
+                this.state.tagData.map(tag=>(
+                  <button
+                  key={tag.id}
+                  class="px-4 py-2 m-2 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
+                  type="submit"
+                >
+                  {tag.tags_tagsName}
+                </button>
+                ))
+              }
             </div>
           </div>
 

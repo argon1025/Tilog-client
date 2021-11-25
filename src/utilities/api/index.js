@@ -1,5 +1,10 @@
-export { createComment, viewAllComment, createCommentToComment,viewComment, updateComment, deleteComment } from "./comments"
-export { createPost, updatePost, deletePost, viewDetailPost, viewSpecialUserPost, setLikePost, unSetLikePost } from "./posts"
-export { fetchUserInfo, logout } from "./auth";
-export { uploadImage } from "./upload"
-export { createUserBlogCustomization, updateUserBlogCustomization, deleteUserBlogCustomization, getUserBlogCustomization } from "./userBlogCustomization"
+//// TILOG
+export { createComment, viewAllComment, createCommentToComment,viewComment, updateComment, deleteComment, getCommentsWriteUsers } from "./TILog/comments"
+export { createPost, updatePost, deletePost, viewDetailPost, viewAllFindByUserID, setLikePost, unSetLikePost } from "./TILog/posts"
+export { fetchUserInfo, logout } from "./TILog/auth";
+export { uploadImage } from "./TILog/upload"
+export { createUserBlogCustomization, updateUserBlogCustomization, deleteUserBlogCustomization, getUserBlogCustomization } from "./TILog/userBlogCustomization"
+export { fetchUserInfoFromUserName } from "./TILog/users"
+
+//// github-stats
+export { getGithubStats, getTopLanguage, getPinnedRepo } from "./github-stats/github"
