@@ -2,6 +2,18 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import Document from "@tiptap/extension-document";
 import StarterKit from "@tiptap/starter-kit";
+import Highlight from "@tiptap/extension-highlight";
+import Typography from "@tiptap/extension-typography";
+import TextAlign from "@tiptap/extension-text-align";
+import CharacterCount from "@tiptap/extension-character-count";
+import Blockquote from "@tiptap/extension-blockquote";
+import TaskList from "@tiptap/extension-task-list";
+import TaskItem from "@tiptap/extension-task-item";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import Code from "@tiptap/extension-code";
+
+// load all highlight.js languages
+import lowlight from "lowlight";
 
 import { IconContext } from "react-icons";
 import {
@@ -12,7 +24,13 @@ import {
   BsTypeItalic,
   BsTypeStrikethrough,
 } from "react-icons/bs";
-import { FaRegHandPointRight } from "react-icons/fa";
+import {
+  FaRegHandPointRight,
+  FaHighlighter,
+  FaAlignLeft,
+  FaAlignJustify,
+  FaAlignRight,
+} from "react-icons/fa";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -83,13 +101,75 @@ const MenuBar = ({ editor }) => {
           <BsTypeStrikethrough />
         </IconContext.Provider>
       </button>
+      <button
+        onClick={() => editor.chain().focus().toggleHighlight().run()}
+        className={editor.isActive("strike") ? "flex is-active" : "flex"}
+      >
+        <IconContext.Provider
+          value={{ className: "mr-2 w-6 h-6 text-gray-600" }}
+        >
+          <FaHighlighter />
+        </IconContext.Provider>
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("left").run()}
+        className={editor.isActive("strike") ? "flex is-active" : "flex"}
+      >
+        <IconContext.Provider
+          value={{ className: "mr-2 w-6 h-6 text-gray-600" }}
+        >
+          <FaAlignLeft />
+        </IconContext.Provider>
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("center").run()}
+        className={editor.isActive("strike") ? "flex is-active" : "flex"}
+      >
+        <IconContext.Provider
+          value={{ className: "mr-2 w-6 h-6 text-gray-600" }}
+        >
+          <FaAlignJustify />
+        </IconContext.Provider>
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("right").run()}
+        className={editor.isActive("strike") ? "flex is-active" : "flex"}
+      >
+        <IconContext.Provider
+          value={{ className: "mr-2 w-6 h-6 text-gray-600" }}
+        >
+          <FaAlignRight />
+        </IconContext.Provider>
+      </button>
     </div>
   );
 };
 
 const Tiptap = (props) => {
+  const CONTENT_LIMIT = 10000;
   let editor = useEditor({
-    extensions: [StarterKit, Document],
+    extensions: [
+      StarterKit.configure({
+        document: false,
+      }),
+      Document,
+      Highlight,
+      Typography,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+      CharacterCount.configure({
+        CONTENT_LIMIT,
+      }),
+      Blockquote,
+      CodeBlockLowlight.configure({ lowlight }),
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
+      Code,
+    ],
     editorProps: {
       attributes: {
         class:
@@ -116,6 +196,10 @@ const Tiptap = (props) => {
       <MenuBar editor={editor} />
       <hr className="mt-2" />
       <EditorContent className="w-full h-full" editor={editor} />
+      {/* content Limit alert */}
+      <div className="text-sm text-gray-300">
+        {editor.getCharacterCount()} / {CONTENT_LIMIT} 자
+      </div>
       {/* send Button */}
       <div className="flex flex-col fixed bottom-10 left-10 w-52">
         <div>
