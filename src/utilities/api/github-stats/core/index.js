@@ -1,9 +1,9 @@
 import axios from "axios";
-import { server } from "../../server";
+import { githubStatsServer } from "../../../server";
 
 // 인스턴스 설정
 const request = axios.create({
-    baseURL: server
+    baseURL: githubStatsServer
 })
 // 타임아웃 
 request.defaults.timeout = 2500;
