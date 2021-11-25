@@ -1,3 +1,5 @@
 export { useUserStats } from "./github/useUserStats"
 export { useUserTopLanguage } from "./github/useUserTopLanguage"
-export { useUserInfo } from "./users/userinfo"
+export { usePinnedRepo } from "./github/useUserPinnedRepo"
+export { useUserInfo } from "./users/useUserInfo"
+export { useAllFindByUserID } from "./posts/useAllFindByUserID"
