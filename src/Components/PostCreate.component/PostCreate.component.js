@@ -2,22 +2,21 @@ import React, { Component } from "react";
 import { Tiptap } from "./slave.components/TEditor.slave.component";
 import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
-import {
-  FaRegLaughSquint,
-  FaRegCalendarAlt,
-  FaRegEye,
-  FaBookmark,
-  FaHashtag,
-  FaRegComment,
-  FaRegThumbsUp,
-  FaRegHandPointRight,
-} from "react-icons/fa";
+
+import { FaBookmark, FaHashtag } from "react-icons/fa";
+import { createPost } from "../../utilities/api/posts";
+
+// Toaster
+import { toast } from "react-hot-toast";
 
 export default class PostCreateComponent extends Component {
   state = {
     title: "", // 게시글 제목
     contentData: {}, // 게시글 내용
+    isPrivate: false, // 비밀글 여부
     addStep: false, // 추가정보 입력모달 출력 여부
+    categoryId: 0, // 카테고리 ID 0 -> 지정안됨
+    isFetch: false, // API Fetch 유무
   };
 
   /**
@@ -26,18 +25,21 @@ export default class PostCreateComponent extends Component {
   openAddStepModal = () => {
     this.setState({ ...this.state, addStep: true });
   };
+
   /**
    * 추가정보 입력 모달을 닫는다
    */
   closeAddStepModal = () => {
     this.setState({ ...this.state, addStep: false });
   };
+
   /**
    * 게시글 입력 정보를 상태에 반영한다
    */
   setContent = async (contentData) => {
     await this.updateState({ ...this.state, contentData: contentData });
   };
+
   /**
    * 게시글 입력 정보를 반환한다
    */
@@ -45,6 +47,75 @@ export default class PostCreateComponent extends Component {
     return this.state.contentData;
   };
 
+  /**
+   * 타이틀 입력정보를 상태에 반영한다
+   */
+  titleFromChange = (event) => {
+    this.setState({ ...this.state, title: event.target.value });
+  };
+
+  /**
+   * 비밀글 설정 유무를 체크박스로 입력받는다
+   */
+  checkedPrivateBox = (event) => {
+    this.setState({ ...this.state, isPrivate: event.target.checked });
+  };
+
+  /**
+   * 피칭 상태 변경
+   */
+  setIsFetch = (fetchData) => {
+    this.setState({ ...this.state, isFetch: fetchData });
+  };
+
+  /**
+   * 서비스에 게시글 등록 요청을 시작한다
+   */
+  setPostRequest = async () => {
+    // 피칭 상태 설정
+    this.setIsFetch(true);
+    try {
+      // 토스트 메시징
+      toast("게시물을 등록할께요!");
+
+      // DTO Mapping
+      const requestData = {
+        categoryId: this.state.categoryId,
+        title: this.state.title,
+        thumbNailUrl: null,
+        markDownContent: JSON.stringify(this.state.contentData),
+        private: this.state.isPrivate ? 1 : 0,
+      };
+
+      // 포스트 등록을 요청한다
+      await createPost(requestData);
+
+      // 포스트 등록이 완료되더라도 1초 대기한다
+      await this.waitTime(3000);
+
+      // 상태를 변경하고 종료한다
+      this.setIsFetch(false);
+
+      // 토스트 메시징
+      toast.success("게시글을 발행했습니다!");
+
+      // 뒤로 이동
+      window.history.back();
+    } catch (error) {
+      // 포스트 등록에 실패하더라도 1초 대기한다
+      await this.waitTime(1000);
+
+      // 토스트 메시징
+      toast.error("게시글 등록에 실패했습니다..");
+
+      // 상태를 변경하고 종료한다
+      this.setIsFetch(false);
+    }
+  };
+
+  /**
+   *  동기화 리팩터링 펑션
+   */
   updateState = (stateObject) => {
     return new Promise((resolve) => {
       this.setState(stateObject, () => {
@@ -52,12 +123,10 @@ export default class PostCreateComponent extends Component {
       });
     });
   };
-
-  /**
-   * 타이틀 입력정보를 상태에 반영한다
-   */
-  titleFromChange = (event) => {
-    this.setState({ ...this.state, title: event.target.value });
+  waitTime = (delay) => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(), delay);
+    });
   };
 
   render() {
@@ -138,6 +207,9 @@ export default class PostCreateComponent extends Component {
             setContent={this.setContent}
             openAddStepModal={this.openAddStepModal}
             getContent={this.getContent}
+            checkedPrivateBox={this.checkedPrivateBox}
+            setPostRequest={this.setPostRequest}
+            isFetch={this.state.isFetch}
           />
         </div>
       </div>
