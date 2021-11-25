@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
 import { FaBookmark, FaHashtag } from "react-icons/fa";
-import { createPost } from "../../utilities/api/posts";
+import { createPost } from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";
