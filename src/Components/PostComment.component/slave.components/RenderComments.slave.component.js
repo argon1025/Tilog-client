@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { viewAllComment, createComment, createCommentToComment, deleteComment, updateComment } from "../../../utilities/api";
-import { getCommentsWriteUsers } from "../../../utilities/api/comments";
+import { viewAllComment, createComment, createCommentToComment, deleteComment, updateComment, getCommentsWriteUsers } from "../../../utilities/api";
 import CommentComponent from "./Comment.slave.component";
 import CommentToCommentComponent from "./CommentToComment.slave.component"
 import InputComment from "./InputComment.slave.component";
@@ -75,21 +74,17 @@ export default class RenderComments extends Component {
       console.log("hi");
       comments_temp.map(async(comment, idx)=>{
         if(comment.id === id) {
-          console.log(idx+"부모였네 찾는거");
           await deleteComment(id)
           const result = comments_temp.filter(item=> item.id !== id)
           this.setState({...this.state, comments: result})
-          return 0;
         }
         else {
           comment.childComment.map(async(childcomment, childidx) => {
           if(childcomment.id === id) {
-            console.log(idx +""+childidx+"자식이였네 찾는거");
             await deleteComment(id)
             const result = comments_temp[idx].childComment.filter(item=> item.id !== id)
             comments_temp[idx].childComment = result
             this.setState({...this.state, comments: comments_temp})
-            return 0;
           }
         })
       }
@@ -103,20 +98,16 @@ export default class RenderComments extends Component {
     try {
       comments_temp.map(async(comment, idx)=>{
         if(comment.id === commentId) {
-          console.log(idx+"부모였네 찾는거");
           await updateComment(commentId, htmlcontent)
           comments_temp[idx].htmlContent = htmlcontent
           this.setState({...this.state, comments: comments_temp})
-          return 0;
         }
         else {
           comment.childComment.map(async(childcomment, childidx) => {
           if(childcomment.id === commentId) {
-            console.log(idx +""+childidx+"자식이였네 찾는거");
             await updateComment(commentId, htmlcontent)
             comments_temp[idx].childComment[childidx].htmlContent = htmlcontent
             this.setState({...this.state, comments: comments_temp})
-            return 0;
           }
         })
       }
