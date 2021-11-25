@@ -33,7 +33,7 @@ export default class PostDetailComponent extends Component {
     this.getPostDetail()
   }
   // 포스트의 정보를 가져옵니다.
-  getPostDetail = async(postID) => {
+  getPostDetail = async (postID) => {
     try {
       const result = await viewDetailPost(4)
       console.log(result);
@@ -99,9 +99,14 @@ export default class PostDetailComponent extends Component {
           <img
             className="object-cover h-full w-full filter blur-lg"
             src={this.state.thumbNailUrl}
+            alt="banner-background"
           />
           <div className="absolute flex max-w-lg max-h-64 overflow-hidden filter drop-shadow-2xl rounded-3xl">
-            <img className="object-cover h-full w-full" src={this.state.thumbNailUrl} />
+            <img
+              className="object-cover h-full w-full"
+              src={this.state.thumbNailUrl}
+              alt="banner"
+            />
           </div>
         </div>
 
@@ -126,7 +131,9 @@ export default class PostDetailComponent extends Component {
               <div className="flex text-gray-600  mr-3">
                 <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                   <FaRegEye />
-                  <span className="text-xs">{this.state.viewCounts} viewed</span>
+                  <span className="text-xs">
+                    {this.state.viewCounts} viewed
+                  </span>
                 </IconContext.Provider>
               </div>
               <div className="flex text-gray-600  mr-3">
@@ -148,9 +155,7 @@ export default class PostDetailComponent extends Component {
 
           {/* Markdown Content */}
           <div className="flex flex-col max-w-5xl w-full mt-10 ml-3">
-            <div>
-              {this.state.markDownContent}
-            </div>
+            <div>{this.state.markDownContent}</div>
           </div>
 
           <hr className="border-gray-200 w-full my-10" />
@@ -180,6 +185,7 @@ export default class PostDetailComponent extends Component {
               {
                 this.state.tagData.map(tag=>(
                   <button
+                  key={tag.id}
                   class="px-4 py-2 m-2 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
                   type="submit"
                 >
