@@ -11,6 +11,7 @@ import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import Code from "@tiptap/extension-code";
+import LoadingComponent from "./Loading.slave.component";
 
 // load all highlight.js languages
 import lowlight from "lowlight";
@@ -30,6 +31,7 @@ import {
   FaAlignLeft,
   FaAlignJustify,
   FaAlignRight,
+  FaPaperPlane,
 } from "react-icons/fa";
 
 const MenuBar = ({ editor }) => {
@@ -185,21 +187,21 @@ const Tiptap = (props) => {
     // 상위 컴포넌트 메서드를 호출해 게시글 데이터를 동기화한다
     await props.setContent(editor.getJSON());
 
-    // 상위 컴포넌트 메서드를 호출해 다음 페이지로 이동한다
-    props.openAddStepModal();
-
-    console.log(props.getContent());
+    // 등록 요청을 보낸다
+    await props.setPostRequest();
   };
 
   return (
     <div>
+      {props.isFetch ? <LoadingComponent /> : null}
       <MenuBar editor={editor} />
       <hr className="mt-2" />
       <EditorContent className="w-full h-full" editor={editor} />
-      {/* content Limit alert */}
+      {/* content Limit alert 
       <div className="text-sm text-gray-300">
         {editor.getCharacterCount()} / {CONTENT_LIMIT} 자
       </div>
+      */}
       {/* send Button */}
       <div className="flex flex-col fixed bottom-10 left-10 w-52">
         <div>
@@ -212,6 +214,7 @@ const Tiptap = (props) => {
                 id="checkbox"
                 type="checkbox"
                 className="relative peer z-20 text-purple-600 rounded-md focus:ring-0"
+                onChange={props.checkedPrivateBox}
               />
               <span className="ml-2 relative z-20 text-sm text-gray-400">
                 비밀글 생성
@@ -226,10 +229,21 @@ const Tiptap = (props) => {
           onClick={clickNextButton}
         >
           <div className="flex flex-row flex-nowrap align-middle justify-center items-center ">
-            <span className="text-sm">다음 단계로</span>
-            <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
-              <FaRegHandPointRight />
-            </IconContext.Provider>
+            {props.isFetch ? (
+              <div className="flex items-center animate-pulse cursor-wait">
+                <span className="text-sm">게시물을 보내는중</span>
+                <IconContext.Provider value={{ className: "ml-2 w-6 h-6" }}>
+                  <FaPaperPlane />
+                </IconContext.Provider>
+              </div>
+            ) : (
+              <div className="flex items-center">
+                <span className="text-sm">게시글 발행</span>
+                <IconContext.Provider value={{ className: "ml-2 w-6 h-6" }}>
+                  <FaRegHandPointRight />
+                </IconContext.Provider>
+              </div>
+            )}
           </div>
         </button>
       </div>
