@@ -65,7 +65,8 @@ const  unSetLikePost = (postID) =>{
 const  viewDetailPost = (postID) =>{
     return request({
         url: `/posts/${postID}`,
-        method: 'get'
+        method: 'get',
+        withCredentials: true
     })
 }
 // 특정 유저가 작성한 게시글 리스트를 요청합니다.
