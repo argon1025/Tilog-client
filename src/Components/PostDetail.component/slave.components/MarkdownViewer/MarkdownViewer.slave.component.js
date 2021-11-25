@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // src/Tiptap.jsx
 import { useEditor, EditorContent } from "@tiptap/react";
 import Document from "@tiptap/extension-document";
@@ -15,18 +15,18 @@ import Code from "@tiptap/extension-code";
 // load all highlight.js languages
 import lowlight from "lowlight";
 
-// string to json
-function stringToJson(contentData) {
-  try {
-    const markdownContentData = JSON.parse(contentData);
-
-    return markdownContentData;
-  } catch (error) {
-    return undefined;
-  }
-}
-
 export default function Tiptap(contentData) {
+
+
+  const stringToJson = (contentData) =>{
+    try {
+      const markdownContentData = JSON.parse(contentData);
+      return markdownContentData
+    } catch (error) {
+      console.log(error);
+      return undefined;
+  }
+  }
   let editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -54,7 +54,7 @@ export default function Tiptap(contentData) {
     },
     autofocus: true,
     editable: false,
-    content: stringToJson(contentData),
+    content: stringToJson(contentData.contentData),
   });
 
   return (
