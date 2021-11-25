@@ -4,6 +4,7 @@ import PostDetailContainer from "./PostDetail.container/PostDetail.container";
 import PostCommentContainer from "./PostComment.container/PostComment.container";
 import PostCreateContainer from "./PostCreate.container/PostCreate.container";
 import UserBlogContainer from "./UserBlog.container/UserBlog.container";
+import ProfileDropdownContainer from "./ProfileDropdown.container/ProfileDropdown.container";
 
 export {
   TestContainer,
@@ -12,4 +13,5 @@ export {
   PostCommentContainer,
   PostCreateContainer,
   UserBlogContainer,
+  ProfileDropdownContainer,
 };
