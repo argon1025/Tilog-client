@@ -6,7 +6,6 @@ import {
   FaBookmark,
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { formatDistance, subDays } from "date-fns"
 
 
 export default function PostHeaderComponent({ title, createdAt, viewCounts, likes, categoryName }) {

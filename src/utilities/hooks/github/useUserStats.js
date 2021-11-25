@@ -15,6 +15,6 @@ export function useUserStats(username) {
           }
       
           fetchData()
-    },[setUserStats])
+    },[username])
     return userStats
 }

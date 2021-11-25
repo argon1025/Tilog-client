@@ -15,6 +15,6 @@ export function useUserInfo(username) {
           }
       
           fetchData()
-    },[setUserInfo])
+    },[username])
     return userInfo
 }

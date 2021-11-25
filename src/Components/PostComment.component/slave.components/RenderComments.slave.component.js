@@ -53,7 +53,7 @@ export default class RenderComments extends Component {
     try {
       const result = await createCommentToComment(commentId, TESTPOST, htmlcontent);
       // 자식 추가 이벤트
-      comments_temp.map(comment => {
+      comments_temp.forEach(comment => {
         if(comment.id === commentId){
           comment.childComment.push(result)
         }

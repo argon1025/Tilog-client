@@ -15,6 +15,6 @@ export function usePinnedRepo(username) {
           }
       
           fetchData()
-    },[setPinnedRepo])
+    },[username])
     return userPinnedRepo
 }

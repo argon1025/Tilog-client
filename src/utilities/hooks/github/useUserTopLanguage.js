@@ -9,10 +9,10 @@ export function useUserTopLanguage(username) {
             let totalSize = 0
             try {
               const response = await getTopLanguage(username)
-              Object.keys(response).map( v => {
+              Object.keys(response).forEach( v => {
                   totalSize += response[v].size;
               })
-              Object.keys(response).map( v => {
+              Object.keys(response).forEach( v => {
                 response[v].percent = ((response[v].size / totalSize) * 100).toFixed(0)
               })
               
@@ -23,6 +23,6 @@ export function useUserTopLanguage(username) {
           }
       
           fetchData()
-    },[setTopLanguage])
+    },[username])
     return userTopLanguage
 }

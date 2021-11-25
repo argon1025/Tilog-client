@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { DiGithubBadge } from "react-icons/di";
 import { IconContext } from "react-icons";
 import { FaSmog } from "react-icons/fa";
 

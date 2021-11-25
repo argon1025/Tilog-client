@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { createPost, fetchUserInfo } from "../../utilities/api";
-import AuthComponent from "../Auth.component/Auth.component";
 
 export default class TestComponent extends Component {
   state = {

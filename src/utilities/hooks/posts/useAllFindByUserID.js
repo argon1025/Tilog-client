@@ -16,6 +16,6 @@ export function useAllFindByUserID(username, nextCursorNumber) {
           }
       
           fetchData()
-    },[setAllFindByUserID])
+    },[username, nextCursorNumber])
     return allFindByUserID
 }

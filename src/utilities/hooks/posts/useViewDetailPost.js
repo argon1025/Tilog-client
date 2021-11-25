@@ -15,6 +15,6 @@ export function useViewDetailPost(postID) {
           }
       
           fetchData()
-    },[setDetailPost])
+    },[postID])
     return DetailPost
 }
