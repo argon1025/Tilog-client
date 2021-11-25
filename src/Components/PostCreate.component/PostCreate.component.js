@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tiptap } from "./slave.components/TEditor.slave.component";
+import Tiptap from "./slave.components/Editor.slave.component";
 import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
@@ -80,13 +80,12 @@ export default class PostCreateComponent extends Component {
 
       // DTO Mapping
       const requestData = {
-        categoryId: this.state.categoryId,
+        categoryId: 1,
         title: this.state.title,
-        thumbNailUrl: null,
+        thumbNailUrl: "https://github.githubassets.com/images/mona-loading-default.gif",
         markDownContent: JSON.stringify(this.state.contentData),
         private: this.state.isPrivate ? 1 : 0,
       };
-
       // 포스트 등록을 요청한다
       await createPost(requestData);
 
@@ -102,6 +101,7 @@ export default class PostCreateComponent extends Component {
       // 뒤로 이동
       window.history.back();
     } catch (error) {
+      console.log(error);
       // 포스트 등록에 실패하더라도 1초 대기한다
       await this.waitTime(1000);
 
