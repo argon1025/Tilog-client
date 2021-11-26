@@ -6,6 +6,7 @@ import UserStatsComponent from "./slave.components/ProfileCard/UserStats.slave.c
 import UserTopLanguageComponent from "./slave.components/TopLanguage/UserTopLanguage.slave.component";
 import UserPinnedRepoCommponent from "./slave.components/PinnedRepo/UserPinnedRepo.slave.component";
 import RecentPostsComponent from "./slave.components/RecentPosts/RecentPosts.slave.component";
+import { ProfileDropdownComponent } from "..";
 
 export default class UserBlogComponent extends Component {
   state = {
@@ -25,7 +26,7 @@ export default class UserBlogComponent extends Component {
   };
 
   render() {
-    const title = `${this.state.params.username}.</>`;
+    const title = `${this.state.params.username}.log`;
     return (
       <div className="flex flex-col">
         {/* Nav */}
@@ -42,18 +43,7 @@ export default class UserBlogComponent extends Component {
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-              <button
-                type="button"
-                className="border text-black dark:text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white dark:hover:text-gray-800 hover:bg-black hover:border-black dark:hover:bg-white focus:outline-none focus:shadow-outline"
-                onClick={this.getPostDetail}
-              >
-                <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-                  <span className="text-sm">Login with Github</span>
-                  <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
-                    <DiGithubBadge />
-                  </IconContext.Provider>
-                </div>
-              </button>
+            <ProfileDropdownComponent />
             </div>
           </div>
           {/* UserStats */}
