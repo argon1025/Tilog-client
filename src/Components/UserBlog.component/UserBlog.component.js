@@ -7,6 +7,7 @@ import UserTopLanguageComponent from "./slave.components/TopLanguage/UserTopLang
 import UserPinnedRepoCommponent from "./slave.components/PinnedRepo/UserPinnedRepo.slave.component";
 import RecentPostsComponent from "./slave.components/RecentPosts/RecentPosts.slave.component";
 import { Tab } from "@headlessui/react";
+import UserActivityComponent from "./slave.components/Activity/UserActivity.slave.component";
 
 export default class UserBlogComponent extends Component {
   state = {
@@ -94,6 +95,11 @@ export default class UserBlogComponent extends Component {
                   <UserPinnedRepoCommponent
                     username={this.state.params.username}
                   />
+
+                  <hr className="w-full dark:border-gray-900" />
+
+                  {/* User Activity */}
+                  <UserActivityComponent username="argon1025" />
                 </Tab.Panel>
                 <Tab.Panel>
                   {/* Recent Posts component */}
