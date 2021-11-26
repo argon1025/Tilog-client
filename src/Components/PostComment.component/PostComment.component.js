@@ -20,7 +20,8 @@ export default class PostCommentComponent extends Component {
         </div>
         {/* content */}
         <div className="w-full">
-          <RenderComments />
+          {console.log(this.props.postid)}
+          <RenderComments postid={this.props.postid} />
         </div>
       </div>
     );
