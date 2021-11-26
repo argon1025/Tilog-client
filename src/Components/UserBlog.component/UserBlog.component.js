@@ -31,10 +31,10 @@ export default class UserBlogComponent extends Component {
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
             <div
-              className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
+              className="ml-5 mt-5 p-1 px-4 bg-black dark:bg-white cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-eng-sub-font-1 text-lg text-white">
+              <h1 className="font-eng-sub-font-1 text-lg text-white dark:text-gray-800">
                 {title}
               </h1>
             </div>
@@ -42,7 +42,7 @@ export default class UserBlogComponent extends Component {
             <div className="ml-auto mr-5">
               <button
                 type="button"
-                className="border text-black px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+                className="border text-black dark:text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white dark:hover:text-gray-800 hover:bg-black hover:border-black dark:hover:bg-white focus:outline-none focus:shadow-outline"
                 onClick={this.getPostDetail}
               >
                 <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
@@ -59,16 +59,16 @@ export default class UserBlogComponent extends Component {
           {/* Top Language */}
           <UserTopLanguageComponent username={USERNAME} />
 
-          <hr className="w-full" />
+          <hr className="w-full dark:border-gray-900" />
 
           {/* Pinned Projects component */}
           <UserPinnedRepoCommponent username={USERNAME} />
 
-          <hr className="w-full" />
+          <hr className="w-full dark:border-gray-900" />
 
           {/* Recent Posts component */}
           <RecentPostsComponent username={USERNAME} />
-          <hr className="w-full" />
+          <hr className="w-full dark:border-gray-900" />
         </div>
       </div>
     );

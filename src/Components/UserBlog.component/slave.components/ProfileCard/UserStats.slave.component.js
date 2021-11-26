@@ -7,7 +7,7 @@ export default function UserStatsComponent({ username }) {
   const userInfo = useUserInfo(username);
   const userStats = useUserStats(username);
   return (
-    <div className="flex lg:flex-row items-center lg:items-start flex-col max-w-5xl w-full bg-white mt-10 p-10 rounded-lg border border-gray-00">
+    <div className="flex lg:flex-row items-center lg:items-start flex-col max-w-5xl w-full bg-white dark:bg-gray-800 mt-10 p-10 rounded-lg border border-gray-00 dark:border-gray-900">
       <img
         className="h-28 w-28 object-cover object-center rounded-full"
         src={!userInfo ? "/profile.jpg" : userInfo.proFileImageUrl}
@@ -15,40 +15,48 @@ export default function UserStatsComponent({ username }) {
       />
       <div className="m-5">
         {/* Name, message */}
-        <p className="text-xl text-gray-700 font-bold">
+        <p className="text-xl text-gray-700 dark:text-gray-100 font-bold">
           {!userStats ? (
             <>fetching..</>
           ) : (
             <>{`${userStats.name}(${username})`}</>
           )}
         </p>
-        <p className="text-sm text-gray-400">@Software Engineer</p>
+        <p className="text-sm text-gray-400 dark:text-gray-200">
+          @Software Engineer
+        </p>
         {/* user gitInfo */}
         <div className="flex mt-3 items-center">
-          <IconContext.Provider value={{ className: "w-4 h-4" }}>
+          <IconContext.Provider
+            value={{ className: "w-4 h-4 dark:text-blue-500" }}
+          >
             <GoStar />
-            <p className="text-sm text-gray-700 font-bold mr-1">
+            <p className="text-sm text-gray-700 dark:text-gray-100 font-bold mr-1">
               {!userStats ? <>fetching..</> : userStats.totalStars}
             </p>
             <p className="text-sm text-gray-400">stars</p>
           </IconContext.Provider>
-          <IconContext.Provider value={{ className: "ml-2 w-4 h-4" }}>
+          <IconContext.Provider
+            value={{ className: "ml-2 w-4 h-4 dark:text-blue-500" }}
+          >
             <GoGitPullRequest />
-            <p className="text-sm text-gray-700 font-bold mr-1">
+            <p className="text-sm text-gray-700 dark:text-gray-100 font-bold mr-1">
               {!userStats ? <>fetching..</> : userStats.totalPRs}
             </p>
             <p className="text-sm text-gray-400">PRs</p>
           </IconContext.Provider>
-          <IconContext.Provider value={{ className: "ml-2 w-4 h-4" }}>
+          <IconContext.Provider
+            value={{ className: "ml-2 w-4 h-4 dark:text-blue-500" }}
+          >
             <GoGitCommit />
-            <p className="text-sm text-gray-700 font-bold mr-1">
+            <p className="text-sm text-gray-700 dark:text-gray-100 font-bold mr-1">
               {!userStats ? <>fetching..</> : userStats.totalCommits}
             </p>
             <p className="text-sm text-gray-400">Commits</p>
           </IconContext.Provider>
         </div>
         <div className="mt-3">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-100">
             보내는 튼튼하며, 웅대한 그림자는 것이다. 하여도 대한 찾아다녀도,
             설산에서 트고, 보는 방지하는 그들에게 것이다. 바이며, 위하여 바이며,
             내려온 눈에 설레는 고동을 청춘의 있는 것이다. 얼음과 아니더면, 가는
