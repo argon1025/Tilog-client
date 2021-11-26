@@ -1,8 +1,11 @@
-import React from "react"
+import React from "react";
 
 export default function PostBannerComponent({ thumbNailUrl }) {
+  if (!thumbNailUrl) {
+    return null;
+  } else {
     return (
-        <div className="mt-5 flex flex-col justify-center items-center bg-black w-full h-96 overflow-hidden">
+      <div className="mt-5 flex flex-col justify-center items-center bg-black w-full h-96 overflow-hidden">
         <img
           className="object-cover h-full w-full filter blur-lg"
           src={thumbNailUrl}
@@ -16,5 +19,6 @@ export default function PostBannerComponent({ thumbNailUrl }) {
           />
         </div>
       </div>
-    )
+    );
+  }
 }

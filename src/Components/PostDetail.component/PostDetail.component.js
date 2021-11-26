@@ -50,7 +50,7 @@ export default function PostDetailComponent() {
       {console.log(postData)}
       {/* Banner */}
       <PostBannerComponent
-        thumbNailUrl={!postData ? <>fetching...</> : postData.thumbNailUrl}
+        thumbNailUrl={!postData ? null : postData.thumbNailUrl}
       />
 
       {/* Content */}
