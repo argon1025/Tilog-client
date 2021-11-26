@@ -18,12 +18,8 @@ import LoadingComponent from "./Loading.slave.component";
 import lowlight from "lowlight";
 
 import { IconContext } from "react-icons";
-import {
-  FaRegHandPointRight,
-  FaPaperPlane,
-} from "react-icons/fa";
-import MenuBar from "./MenuBar.slave.component"
-
+import { FaRegHandPointRight, FaPaperPlane } from "react-icons/fa";
+import MenuBar from "./MenuBar.slave.component";
 
 export default function Tiptap(props) {
   const CONTENT_LIMIT = 10000;
@@ -85,7 +81,7 @@ export default function Tiptap(props) {
           <section className="container">
             <label
               for="checkbox"
-              className="relative flex-inline items-center isolate p-4 rounded-3xl"
+              className="relative flex-inline items-center isolate p-4 rounded-3xl cursor-pointer"
             >
               <input
                 id="checkbox"
@@ -126,6 +122,6 @@ export default function Tiptap(props) {
       </div>
     </div>
   );
-};
+}
 
 export { Tiptap };

@@ -9,16 +9,27 @@ import PostTagsComponent from "./slave.components/Tags/PostTags.slave.component"
 import PostCommentComponent from "../PostComment.component/PostComment.component";
 import { Tiptap } from "./slave.components/MarkdownViewer/MarkdownViewer.slave.component";
 
+/**
+ * 로고 클릭 이벤트
+ */
+function clickLogoButton() {
+  window.location.href = "/";
+}
+
 export default function PostDetailComponent() {
   const postData = useViewDetailPost(19);
+  const title = "</>";
   return (
     <div>
       {/* Nav */}
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-row max-w-5xl w-full">
           {/* Logo */}
-          <div className="ml-5 mt-5 p-1 px-4 bg-black">
-            <h1 className="font-eng-sub-font-1 text-lg text-white">.log</h1>
+          <div
+            className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
+            onClick={clickLogoButton}
+          >
+            <h1 className="font-eng-sub-font-1 text-lg text-white">{title}</h1>
           </div>
           {/* Login Button */}
           <div className="ml-auto mr-5">
@@ -39,7 +50,7 @@ export default function PostDetailComponent() {
       {console.log(postData)}
       {/* Banner */}
       <PostBannerComponent
-        thumbNailUrl={!postData ? <>fetching...</> : postData.thumbNailUrl}
+        thumbNailUrl={!postData ? null : postData.thumbNailUrl}
       />
 
       {/* Content */}
@@ -57,7 +68,11 @@ export default function PostDetailComponent() {
 
         {/* Markdown Content */}
         <div className="flex flex-col max-w-5xl w-full mt-10 ml-3">
-        {!postData ? <div></div> : <Tiptap contentData={postData.markDownContent} />}
+          {!postData ? (
+            <div></div>
+          ) : (
+            <Tiptap contentData={postData.markDownContent} />
+          )}
         </div>
 
         <hr className="border-gray-200 w-full my-10" />
