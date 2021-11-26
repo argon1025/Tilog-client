@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DiGithubBadge } from "react-icons/di";
 import { IconContext } from "react-icons";
+import queryString from "query-string";
 import PostBannerComponent from "./slave.components/Banner/PostBanner.slave.component";
 import { useViewDetailPost } from "../../utilities/hooks";
 import PostHeaderComponent from "./slave.components/Header/PostHeader.slave.component";
@@ -10,7 +11,12 @@ import PostCommentComponent from "../PostComment.component/PostComment.component
 import { Tiptap } from "./slave.components/MarkdownViewer/MarkdownViewer.slave.component";
 
 export default function PostDetailComponent() {
-  const postData = useViewDetailPost(19);
+  const [params, setParams] = useState(null);
+  useEffect(()=>{
+    const { postid } = queryString.parse(window.location.search);
+    setParams(postid)
+  },[])
+  const postData = useViewDetailPost(params);
   return (
     <div>
       {/* Nav */}
@@ -18,7 +24,7 @@ export default function PostDetailComponent() {
         <div className="flex flex-row max-w-5xl w-full">
           {/* Logo */}
           <div className="ml-5 mt-5 p-1 px-4 bg-black">
-            <h1 className="font-eng-sub-font-1 text-lg text-white">.log</h1>
+            <h1 className="font-eng-sub-font-1 text-lg text-white">{params}.log</h1>
           </div>
           {/* Login Button */}
           <div className="ml-auto mr-5">
@@ -69,7 +75,7 @@ export default function PostDetailComponent() {
         <PostTagsComponent tags={!postData ? [] : postData.TagData} />
 
         {/* Comments */}
-        <PostCommentComponent />
+        <PostCommentComponent postid={params} />
       </div>
     </div>
   );

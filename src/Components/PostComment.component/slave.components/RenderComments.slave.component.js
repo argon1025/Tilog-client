@@ -3,7 +3,6 @@ import { viewAllComment, createComment, createCommentToComment, deleteComment, u
 import CommentComponent from "./Comment.slave.component";
 import CommentToCommentComponent from "./CommentToComment.slave.component"
 import InputComment from "./InputComment.slave.component";
-const TESTPOST = 4
 
 export default class RenderComments extends Component {
   state ={
@@ -17,7 +16,7 @@ export default class RenderComments extends Component {
   // 게시글의 모든 댓글을 가져옵니다.
   getComments = async() => {
       try {
-        const result = await viewAllComment(TESTPOST);
+        const result = await viewAllComment(this.props.postid);
         this.setState({
           comments: result
         })
@@ -28,7 +27,7 @@ export default class RenderComments extends Component {
   // 모든 댓글 작성자들을 가져옵니다.
   getCommentWriter = async() => {
     try {
-      const result = await getCommentsWriteUsers(TESTPOST);
+      const result = await getCommentsWriteUsers(this.props.postid);
       this.setState({
         users: result
       })
@@ -38,11 +37,9 @@ export default class RenderComments extends Component {
   }
   // 새로운 코멘트를 작성합니다.
   writeComment = async(htmlcontent) => {
-    const comments_temp = this.state.comments
     try {
-      const result = await createComment(TESTPOST, htmlcontent);
-      comments_temp.push(result)
-      this.setState({...this.state, comments: comments_temp})
+      await createComment(this.props.postid, htmlcontent);
+      this.getComments()
     } catch (error) {
       alert(error.message)
     }
@@ -51,7 +48,7 @@ export default class RenderComments extends Component {
   writeCommentToComment = async(commentId, htmlcontent) => {
     const comments_temp = this.state.comments
     try {
-      const result = await createCommentToComment(commentId, TESTPOST, htmlcontent);
+      const result = await createCommentToComment(commentId, this.props.postid, htmlcontent);
       // 자식 추가 이벤트
       comments_temp.forEach(comment => {
         if(comment.id === commentId){
