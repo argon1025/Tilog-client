@@ -52,14 +52,14 @@ export default class IntroduceComponent extends Component {
     return (
       <div className="flex flex-col">
         {/* Nav */}
-        <div className="flex flex-col justify-center items-center bg-bg-1 bg-fixed bg-cover filter drop-shadow-md">
+        <div className="flex flex-col justify-center items-center bg-bgd-1 bg-fixed bg-cover filter drop-shadow-md">
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
             <div
-              className="ml-5 mt-5 p-1 px-4 bg-white cursor-pointer"
+              className="ml-5 mt-5 p-1 px-4 bg-white dark:bg-gray-800 cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-eng-sub-font-1 text-lg text-black">
+              <h1 className="font-eng-sub-font-1 text-lg text-black dark:text-white">
                 {title}
               </h1>
             </div>
@@ -69,7 +69,7 @@ export default class IntroduceComponent extends Component {
                 // Logined
                 <button
                   type="button"
-                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black dark:hover:bg-white focus:outline-none focus:shadow-outline"
                   onClick={this.clickLogoutButton}
                 >
                   <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
@@ -80,7 +80,7 @@ export default class IntroduceComponent extends Component {
                 // Un Logined
                 <button
                   type="button"
-                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline"
                   onClick={this.clickGithubLoginButton}
                 >
                   <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
@@ -101,7 +101,7 @@ export default class IntroduceComponent extends Component {
                   <h1 class="text-7xl sm:text-8xl lg:text-8xl xl:text-9xl text-white font-bold my-8">
                     Bring Your
                     <br />
-                    Ideas to{" "}
+                    Ideas to
                     <span class="flex text-white bg-bg-2">
                       Life
                       <IconContext.Provider value={{ className: "ml-5" }}>
@@ -121,7 +121,7 @@ export default class IntroduceComponent extends Component {
         <div className="flex flex-col justify-center items-center py-10">
           <div className="flex flex-col max-w-5xl w-full px-4">
             {/* title */}
-            <div className="flex text-gray-600">
+            <div className="flex text-gray-600 dark:text-gray-300">
               <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaHotjar />
                 <span className="text-xs">TRENDING ON TILOG</span>
@@ -134,13 +134,13 @@ export default class IntroduceComponent extends Component {
           </div>
         </div>
 
-        <hr className="border-gray-200" />
+        <hr className="border-gray-200 dark:border-gray-900" />
 
         {/* your Recommend */}
         <div className="flex flex-col justify-center items-center py-10">
           <div className="flex flex-col max-w-5xl w-full px-4">
             {/* title */}
-            <div className="flex text-gray-600">
+            <div className="flex text-gray-600 dark:text-gray-300">
               <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaWpexplorer />
                 <span className="text-xs">EXPLORE IN TILOG</span>
@@ -153,7 +153,7 @@ export default class IntroduceComponent extends Component {
           </div>
         </div>
 
-        <hr className="border-gray-200" />
+        <hr className="border-gray-200 dark:border-gray-900" />
 
         {/* Footer */}
         <div className="flex flex-col justify-center items-center mt-20 bg-gray-900 relative inset-x-0 bottom-0">

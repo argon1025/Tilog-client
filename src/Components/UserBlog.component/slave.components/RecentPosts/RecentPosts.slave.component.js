@@ -10,12 +10,16 @@ export default function RecentPostsComponent({ username }) {
   let postList = useAllFindByUserID(username, nextCursorNumber);
 
   return (
-    <div className="flex flex-col max-w-5xl w-full bg-white p-10">
+    <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
       {/* component title */}
       <div className="flex mb-5">
-        <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
+        <IconContext.Provider
+          value={{ className: "mr-2 w-4 h-4 dark:text-blue-500" }}
+        >
           <GoBook />
-          <span className="text-xs">{username}'s Recent Posts</span>
+          <span className="text-xs dark:text-gray-200">
+            {username}'s Recent Posts
+          </span>
         </IconContext.Provider>
       </div>
       {/* Card Area */}
