@@ -45,7 +45,7 @@ ReactDOM.render(
             <Route path="/" element={<Containers.IntroduceContainer />} />
             {/* 포스트 디테일 뷰어 컨테이너 */}
             <Route
-              path="/postviewer"
+              path="/post"
               element={<Containers.PostDetailContainer />}
             />
             <Route

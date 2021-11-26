@@ -21,7 +21,6 @@ export default class TechIconLoader extends Component {
     this.state.originalName = !props.iconName ? null : props.iconName;
     this.state.color = !props.color ? null : props.color;
     this.state.customUrl = !props.customUrl ? null : props.customUrl;
-    console.log(this.state);
   }
 
   onMouseIn = () => {

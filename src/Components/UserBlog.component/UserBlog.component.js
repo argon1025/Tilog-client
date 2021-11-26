@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import { DiGithubBadge } from "react-icons/di";
 import { IconContext } from "react-icons";
+import queryString from "query-string";
 import UserStatsComponent from "./slave.components/ProfileCard/UserStats.slave.component";
 import UserTopLanguageComponent from "./slave.components/TopLanguage/UserTopLanguage.slave.component";
 import UserPinnedRepoCommponent from "./slave.components/PinnedRepo/UserPinnedRepo.slave.component";
 import RecentPostsComponent from "./slave.components/RecentPosts/RecentPosts.slave.component";
 
-const USERNAME = "MINJE-98";
-
 export default class UserBlogComponent extends Component {
-  state = {};
+  state = {
+    params: {}
+  };
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
+     this.state.params = queryString.parse(window.location.search);
   }
 
   /**
@@ -23,7 +25,7 @@ export default class UserBlogComponent extends Component {
   };
 
   render() {
-    const title = "</>";
+    const title = `${this.state.params.username}.</>`;
     return (
       <div className="flex flex-col">
         {/* Nav */}
@@ -55,19 +57,19 @@ export default class UserBlogComponent extends Component {
             </div>
           </div>
           {/* UserStats */}
-          <UserStatsComponent username={USERNAME} />
+          <UserStatsComponent username={this.state.params.username} />
           {/* Top Language */}
-          <UserTopLanguageComponent username={USERNAME} />
+          <UserTopLanguageComponent username={this.state.params.username}/>
 
           <hr className="w-full dark:border-gray-900" />
 
           {/* Pinned Projects component */}
-          <UserPinnedRepoCommponent username={USERNAME} />
+          <UserPinnedRepoCommponent username={this.state.params.username} />
 
           <hr className="w-full dark:border-gray-900" />
 
           {/* Recent Posts component */}
-          <RecentPostsComponent username={USERNAME} />
+          <RecentPostsComponent username={this.state.params.username} />
           <hr className="w-full dark:border-gray-900" />
         </div>
       </div>
