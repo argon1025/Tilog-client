@@ -7,15 +7,16 @@ import UserTopLanguageComponent from "./slave.components/TopLanguage/UserTopLang
 import UserPinnedRepoCommponent from "./slave.components/PinnedRepo/UserPinnedRepo.slave.component";
 import RecentPostsComponent from "./slave.components/RecentPosts/RecentPosts.slave.component";
 import { ProfileDropdownComponent } from "..";
+import { Tab } from "@headlessui/react";
 
 export default class UserBlogComponent extends Component {
   state = {
-    params: {}
+    params: {},
   };
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
-     this.state.params = queryString.parse(window.location.search);
+    this.state.params = queryString.parse(window.location.search);
   }
 
   /**
@@ -48,19 +49,49 @@ export default class UserBlogComponent extends Component {
           </div>
           {/* UserStats */}
           <UserStatsComponent username={this.state.params.username} />
-          {/* Top Language */}
-          <UserTopLanguageComponent username={this.state.params.username}/>
+          <div className="max-w-5xl w-full mt-5">
+            <Tab.Group>
+              <Tab.List className="grid grid-cols-2 gap-4 p-2 border border-gray-200 rounded-xl ">
+                <Tab
+                  className={({ selected }) => {
+                    return selected
+                      ? "w-full py-2.5 text-sm leading-5 font-medium text-gray-900 rounded-lg bg-white shadow"
+                      : "w-full text-sm focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60 text-gray-300 hover:bg-white/[0.12] hover:text-gray-500";
+                  }}
+                >
+                  통계
+                </Tab>
+                <Tab
+                  className={({ selected }) => {
+                    return selected
+                      ? "w-full py-2.5 text-sm leading-5 font-medium text-gray-900 rounded-lg bg-white shadow"
+                      : "w-full text-sm  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60 text-gray-300 hover:bg-white/[0.12] hover:text-gray-500";
+                  }}
+                >
+                  글
+                </Tab>
+              </Tab.List>
+              <Tab.Panels>
+                <Tab.Panel>
+                  {/* Top Language */}
+                  <UserTopLanguageComponent
+                    username={this.state.params.username}
+                  />
 
-          <hr className="w-full dark:border-gray-900" />
+                  <hr className="w-full dark:border-gray-900" />
 
-          {/* Pinned Projects component */}
-          <UserPinnedRepoCommponent username={this.state.params.username} />
-
-          <hr className="w-full dark:border-gray-900" />
-
-          {/* Recent Posts component */}
-          <RecentPostsComponent username={this.state.params.username} />
-          <hr className="w-full dark:border-gray-900" />
+                  {/* Pinned Projects component */}
+                  <UserPinnedRepoCommponent
+                    username={this.state.params.username}
+                  />
+                </Tab.Panel>
+                <Tab.Panel>
+                  {/* Recent Posts component */}
+                  <RecentPostsComponent username={this.state.params.username} />
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </div>
         </div>
       </div>
     );

@@ -71,14 +71,14 @@ export default class IntroduceComponent extends Component {
           </div>
           {/* Banner */}
           <div className="flex flex-row max-w-5xl w-full py-10">
-            <div class="px-4 grid grid-cols-12">
-              <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-8 xxl:col-span-12">
-                <div class="w-full">
-                  <h1 class="text-7xl sm:text-8xl lg:text-8xl xl:text-9xl text-white font-bold my-8">
+            <div className="px-4 grid grid-cols-12">
+              <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-8 xxl:col-span-12">
+                <div className="w-full">
+                  <h1 className="text-7xl sm:text-8xl lg:text-8xl xl:text-9xl text-white font-bold my-8">
                     Bring Your
                     <br />
                     Ideas to
-                    <span class="flex text-white bg-bg-2">
+                    <span className="flex text-white bg-bg-2">
                       Life
                       <IconContext.Provider value={{ className: "ml-5" }}>
                         <FaKiwiBird />
@@ -137,7 +137,7 @@ export default class IntroduceComponent extends Component {
             {/* sub */}
             <div className="grid grid-cols-1 lg:grid-cols-3 ">
               <div className="m-5">
-                <h1 class="flex text-2xl text-white item-center">
+                <h1 className="flex text-2xl text-white item-center">
                   <IconContext.Provider
                     value={{ className: "mt-1 mr-2 w-4 h-4" }}
                   >
@@ -145,7 +145,7 @@ export default class IntroduceComponent extends Component {
                     탐험하세요
                   </IconContext.Provider>
                 </h1>
-                <span class="text-sm text-gray-400 hidden lg:flex">
+                <span className="text-sm text-gray-400 hidden lg:flex">
                   이 이상 사랑의 청춘의 많이 이성은 용기가 이것이다. 같이,
                   낙원을 것은 이상의 대중을 끓는 황금시대다. 인간에 붙잡아
                   끝까지 이것을 있는 풀밭에 부패를 있는가? 영락과 끓는 거친
@@ -156,7 +156,7 @@ export default class IntroduceComponent extends Component {
                 </span>
               </div>
               <div className="m-5">
-                <h1 class="flex text-2xl text-white item-center">
+                <h1 className="flex text-2xl text-white item-center">
                   <IconContext.Provider
                     value={{ className: "mt-1 mr-2 w-4 h-4" }}
                   >
@@ -164,7 +164,7 @@ export default class IntroduceComponent extends Component {
                     배운것을 작성하세요
                   </IconContext.Provider>
                 </h1>
-                <span class="text-sm text-gray-400 hidden lg:flex">
+                <span className="text-sm text-gray-400 hidden lg:flex">
                   이성은 이는 위하여, 천자만홍이 얼마나 내려온 이 아니다.
                   천자만홍이 대고, 없는 무엇이 산야에 끓는다. 피고, 청춘 온갖
                   붙잡아 것이다. 실현에 목숨이 고동을 노래하며 가지에 사랑의 곧
@@ -172,7 +172,7 @@ export default class IntroduceComponent extends Component {
                 </span>
               </div>
               <div className="m-5">
-                <h1 class="flex text-2xl text-white item-center">
+                <h1 className="flex text-2xl text-white item-center">
                   <IconContext.Provider
                     value={{ className: "mt-1 mr-2 w-4 h-4" }}
                   >
@@ -180,7 +180,7 @@ export default class IntroduceComponent extends Component {
                     모든것을 나의 것으로
                   </IconContext.Provider>
                 </h1>
-                <span class="text-sm text-gray-400 hidden lg:flex">
+                <span className="text-sm text-gray-400 hidden lg:flex">
                   이성은 이는 위하여, 천자만홍이 얼마나 내려온 이 아니다.
                   천자만홍이 대고, 없는 무엇이 산야에 끓는다. 피고, 청춘 온갖
                   붙잡아 것이다. 실현에 목숨이 고동을 노래하며 가지에 사랑의 곧
@@ -192,7 +192,7 @@ export default class IntroduceComponent extends Component {
           {/* copyright */}
           <div>
             <hr className="border-white" />
-            <h1 class="mt-3 text-sm text-white">
+            <h1 className="mt-3 text-sm text-white">
               Copyright 2021.TILog inc. all rights reserved.
             </h1>
           </div>
