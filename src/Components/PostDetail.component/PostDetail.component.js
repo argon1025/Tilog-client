@@ -10,7 +10,7 @@ import PostCommentComponent from "../PostComment.component/PostComment.component
 import { Tiptap } from "./slave.components/MarkdownViewer/MarkdownViewer.slave.component";
 
 export default function PostDetailComponent() {
-  const postData = useViewDetailPost(3);
+  const postData = useViewDetailPost(19);
   return (
     <div>
       {/* Nav */}
@@ -57,7 +57,7 @@ export default function PostDetailComponent() {
 
         {/* Markdown Content */}
         <div className="flex flex-col max-w-5xl w-full mt-10 ml-3">
-          <Tiptap contentData={!postData ? null : postData.markDownContent} />
+        {!postData ? <div></div> : <Tiptap contentData={postData.markDownContent} />}
         </div>
 
         <hr className="border-gray-200 w-full my-10" />
