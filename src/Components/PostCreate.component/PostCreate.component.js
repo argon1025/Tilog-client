@@ -18,6 +18,18 @@ export default class PostCreateComponent extends Component {
     categoryId: 0, // 카테고리 ID 0 -> 지정안됨
     isFetch: false, // API Fetch 유무
   };
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props) {
+    super(props);
+  }
+
+  async componentDidMount() {
+    // 비 로그인 접근시
+    if (!this.props.ISLOGIN) {
+      // 메인페이지로 이동한다
+      window.location.href = "/";
+    }
+  }
 
   /**
    * 추가정보입력 모달을 연다
@@ -76,13 +88,14 @@ export default class PostCreateComponent extends Component {
     this.setIsFetch(true);
     try {
       // 토스트 메시징
-      toast("게시물을 등록할께요!");
+      toast("게시물을 등록하고 있습니다.");
 
       // DTO Mapping
       const requestData = {
         categoryId: 1,
         title: this.state.title,
-        thumbNailUrl: "https://github.githubassets.com/images/mona-loading-default.gif",
+        thumbNailUrl:
+          "https://github.githubassets.com/images/mona-loading-default.gif",
         markDownContent: JSON.stringify(this.state.contentData),
         private: this.state.isPrivate ? 1 : 0,
       };

@@ -16,6 +16,14 @@ export default class UserBlogComponent extends Component {
     super(props);
      this.state.params = queryString.parse(window.location.search);
   }
+
+  /**
+   * 로고 클릭 이벤트
+   */
+  clickLogoButton = () => {
+    window.location.href = "/";
+  };
+
   render() {
     const title = `${this.state.params.username}.</>`;
     return (
@@ -24,7 +32,10 @@ export default class UserBlogComponent extends Component {
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
-            <div className="ml-5 mt-5 p-1 px-4 bg-black">
+            <div
+              className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
+              onClick={this.clickLogoButton}
+            >
               <h1 className="font-eng-sub-font-1 text-lg text-white">
                 {title}
               </h1>
@@ -49,7 +60,6 @@ export default class UserBlogComponent extends Component {
           <UserStatsComponent username={this.state.params.username} />
           {/* Top Language */}
           <UserTopLanguageComponent username={this.state.params.username}/>
-
 
           <hr className="w-full" />
 
