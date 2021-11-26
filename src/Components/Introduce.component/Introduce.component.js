@@ -21,22 +21,32 @@ export default class IntroduceComponent extends Component {
   }
   componentDidMount() {
     // 현재 로그인된 유저 정보 확인
-    this.props.getUserInfo()
+    this.props.getUserInfo();
   }
-  // 로그인로직
+  /**
+   * 로고 클릭 이벤트
+   */
+  clickLogoButton = () => {
+    window.location.href = "/";
+  };
+  /**
+   * 로그인 클릭 이벤트
+   */
   clickGithubLoginButton = () => {
     window.open(`${TILogServer}/auth/github`, "_self");
   };
-  // 로그아웃 로직
-  clickLogoutButton = async() => {
+  /**
+   * 로그아웃 이벤트
+   */
+  clickLogoutButton = async () => {
     try {
       await logout();
-      window.location.href = '/';
+      window.location.href = "/";
     } catch (error) {
       console.log("로그아웃 에러!");
       console.log(error);
     }
-  }
+  };
   render() {
     let title = "</>";
     return (
@@ -45,41 +55,42 @@ export default class IntroduceComponent extends Component {
         <div className="flex flex-col justify-center items-center bg-bg-1 bg-fixed bg-cover filter drop-shadow-md">
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
-            <div className="ml-5 mt-5 p-1 px-4 bg-white">
+            <div
+              className="ml-5 mt-5 p-1 px-4 bg-white cursor-pointer"
+              onClick={this.clickLogoButton}
+            >
               <h1 className="font-eng-sub-font-1 text-lg text-black">
                 {title}
               </h1>
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-              {
-                this.props.ISLOGIN 
-              ? 
-              // Logined
-              <button
-              type="button"
-              className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
-              onClick={this.clickLogoutButton}
-            >
-              <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-                <span className="text-sm">Logout</span>
-              </div>
-            </button>
-              :
-              // Un Logined
-              <button
-                type="button"
-                className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
-                onClick={this.clickGithubLoginButton}
-              >
-                <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-                  <span className="text-sm">Login with Github</span>
-                  <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
-                    <DiGithubBadge />
-                  </IconContext.Provider>
-                </div>
-              </button>
-              }
+              {this.props.ISLOGIN ? (
+                // Logined
+                <button
+                  type="button"
+                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+                  onClick={this.clickLogoutButton}
+                >
+                  <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
+                    <span className="text-sm">Logout</span>
+                  </div>
+                </button>
+              ) : (
+                // Un Logined
+                <button
+                  type="button"
+                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+                  onClick={this.clickGithubLoginButton}
+                >
+                  <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
+                    <span className="text-sm">Login with Github</span>
+                    <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
+                      <DiGithubBadge />
+                    </IconContext.Provider>
+                  </div>
+                </button>
+              )}
             </div>
           </div>
           {/* Banner */}

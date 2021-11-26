@@ -6,7 +6,7 @@ import UserTopLanguageComponent from "./slave.components/TopLanguage/UserTopLang
 import UserPinnedRepoCommponent from "./slave.components/PinnedRepo/UserPinnedRepo.slave.component";
 import RecentPostsComponent from "./slave.components/RecentPosts/RecentPosts.slave.component";
 
-const USERNAME = 'MINJE-98'
+const USERNAME = "MINJE-98";
 
 export default class UserBlogComponent extends Component {
   state = {};
@@ -14,6 +14,14 @@ export default class UserBlogComponent extends Component {
   constructor(props) {
     super(props);
   }
+
+  /**
+   * 로고 클릭 이벤트
+   */
+  clickLogoButton = () => {
+    window.location.href = "/";
+  };
+
   render() {
     const title = "</>";
     return (
@@ -22,7 +30,10 @@ export default class UserBlogComponent extends Component {
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
-            <div className="ml-5 mt-5 p-1 px-4 bg-black">
+            <div
+              className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
+              onClick={this.clickLogoButton}
+            >
               <h1 className="font-eng-sub-font-1 text-lg text-white">
                 {title}
               </h1>
@@ -46,8 +57,7 @@ export default class UserBlogComponent extends Component {
           {/* UserStats */}
           <UserStatsComponent username={USERNAME} />
           {/* Top Language */}
-          <UserTopLanguageComponent username={USERNAME}/>
-
+          <UserTopLanguageComponent username={USERNAME} />
 
           <hr className="w-full" />
 
