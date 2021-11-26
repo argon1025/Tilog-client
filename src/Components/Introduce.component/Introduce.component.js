@@ -13,6 +13,7 @@ import {
 import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
 import { TILogServer } from "../../utilities/server";
+import { ProfileDropdownComponent } from "..";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -65,32 +66,7 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-              {this.props.ISLOGIN ? (
-                // Logined
-                <button
-                  type="button"
-                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black dark:hover:bg-white focus:outline-none focus:shadow-outline"
-                  onClick={this.clickLogoutButton}
-                >
-                  <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-                    <span className="text-sm">Logout</span>
-                  </div>
-                </button>
-              ) : (
-                // Un Logined
-                <button
-                  type="button"
-                  className="border text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline"
-                  onClick={this.clickGithubLoginButton}
-                >
-                  <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-                    <span className="text-sm">Login with Github</span>
-                    <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
-                      <DiGithubBadge />
-                    </IconContext.Provider>
-                  </div>
-                </button>
-              )}
+              <ProfileDropdownComponent />
             </div>
           </div>
           {/* Banner */}
