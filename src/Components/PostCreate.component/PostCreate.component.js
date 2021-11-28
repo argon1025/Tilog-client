@@ -4,7 +4,11 @@ import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
 import { FaBookmark, FaHashtag } from "react-icons/fa";
-import { createCategory, createPost, searchCategory } from "../../utilities/api";
+import {
+  createCategory,
+  createPost,
+  searchCategory,
+} from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";
@@ -107,14 +111,12 @@ export default class PostCreateComponent extends Component {
   /**
    * 서비스에 카테고리 검색을 요청한다
    */
-  getCategoryRecommend = async(nowValue) => {
+  getCategoryRecommend = async (nowValue) => {
     try {
       const result = await searchCategory(nowValue);
-      this.setState({
-        categoryRecommend: result
-      })
+      this.setState({ ...this.state, categoryRecommend: result });
     } catch (error) {
-      toast.error("카테고리 검색 실패")
+      toast.error("카테고리 검색 실패");
     }
   };
 
@@ -190,6 +192,7 @@ export default class PostCreateComponent extends Component {
       <AddStepModal
         closeAddStepModal={this.closeAddStepModal}
         setCategoryInput={this.setCategoryInput}
+        categoryRecommend={this.state.categoryRecommend}
       />
     ) : (
       <div className="flex flex-col">
