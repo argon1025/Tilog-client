@@ -17,7 +17,9 @@ export default class AddStepModal extends Component {
         return (
           <li class="grid grid-cols-10 gap-4 justify-center items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-50">
             <div class="flex justify-center items-center">
-              <TechIconLoader iconName={listData.categoryName} color="gray" />
+              <div className="w-6 h-6">
+                <TechIconLoader iconName={listData.categoryName} color="gray" />
+              </div>
             </div>
             <div class="col-start-2 col-end-11 pl-8 border-l-2 border-solid border-gray">
               <h3 class="text-gray-900 font-medium text-md">
