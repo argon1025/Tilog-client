@@ -61,7 +61,8 @@ export default function Tiptap(props) {
     await props.setContent(editor.getJSON());
 
     // 등록 요청을 보낸다
-    await props.setPostRequest();
+    props.openAddStepModal();
+    // await props.setPostRequest();
   };
 
   return (
