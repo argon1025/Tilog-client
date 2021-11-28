@@ -15,7 +15,10 @@ export default class AddStepModal extends Component {
     if (this.props.categoryRecommend.length > 0) {
       recommendList = this.props.categoryRecommend.map((listData) => {
         return (
-          <li class="grid grid-cols-10 gap-4 justify-center items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-50">
+          <li
+            key={listData.id}
+            class="grid grid-cols-10 gap-4 justify-center items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-50"
+          >
             <div class="flex justify-center items-center">
               <div className="w-6 h-6">
                 <TechIconLoader iconName={listData.categoryName} color="gray" />
