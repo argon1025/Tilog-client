@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
-import { FaBookmark, FaHashtag } from "react-icons/fa";
+import { FaBookmark, FaHashtag, FaTrashAlt } from "react-icons/fa";
 import TechIconLoader from "../../Utility.components/techIconLoader";
 
 export default class AddStepModal extends Component {
@@ -16,8 +16,10 @@ export default class AddStepModal extends Component {
       recommendList = this.props.categoryRecommend.map((listData) => {
         return (
           <li
+            id={listData.id}
             key={listData.id}
             class="grid grid-cols-10 gap-4 justify-center items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-50"
+            onClick={this.props.setCategoryIdData}
           >
             <div class="flex justify-center items-center">
               <div className="w-6 h-6">
@@ -52,15 +54,45 @@ export default class AddStepModal extends Component {
                   <span className="text-xs">카테고리 등록</span>
                 </IconContext.Provider>
               </div>
-              <input
-                type="category"
-                name="category"
-                placeholder="원하는 카테고리를 입력하고 엔터!"
-                className="p-3 my-5 bg-white border border-gray-200 rounded shadow-sm focus:outline-none"
-                onChange={this.props.setCategoryInput}
-              />
+              {this.props.categoryIdData.id === 0 ? (
+                <input
+                  type="category"
+                  name="category"
+                  placeholder="관련있는 기술태그를 검색후 지정하세요"
+                  className="p-3 my-5 bg-white border border-gray-200 rounded shadow-sm focus:outline-none"
+                  onChange={this.props.setCategoryInput}
+                  autocomplete="off"
+                />
+              ) : (
+                <div className="w-full relative">
+                  <input
+                    type="category"
+                    name="category"
+                    placeholder={this.props.categoryIdData.name}
+                    value={this.props.categoryIdData.name}
+                    className="w-full p-3 my-5 bg-gray-200 border border-gray-400 cursor-default rounded shadow-sm"
+                    autocomplete="off"
+                    disabled
+                  />
+                  <div
+                    className="flex absolute right-3 top-9 cursor-pointer"
+                    onClick={this.props.removeCategoryData}
+                  >
+                    <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
+                      <FaTrashAlt />
+                      <span className="text-xs">삭제</span>
+                    </IconContext.Provider>
+                  </div>
+                </div>
+              )}
               {/* Recommend Categories */}
-              <div className="absolute  left-0 right-0 top-20">
+              <div
+                className={
+                  this.props.categoryRecommend.length > 0
+                    ? "absolute left-0 right-0 top-20"
+                    : "hidden"
+                }
+              >
                 <ul class="rounded-md shadow-md bg-white mt-3 p-3 w-full">
                   <li class="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
                     추천 카테고리
@@ -71,6 +103,26 @@ export default class AddStepModal extends Component {
               {/* Recommend Categories End */}
             </div>
             {/* Add Categories End */}
+          </div>
+          <div class="flex flex-row items-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
+            <p
+              onClick={this.props.closeAddStepModal}
+              class="font-semibold text-gray-600"
+            >
+              에디터로 돌아가기
+            </p>
+            <button
+              type="button"
+              className="border text-gray-400 px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+              onClick={this.openAddStepModal}
+            >
+              <div className="flex flex-row flex-nowrap align-middle justify-center items-center ">
+                <span className="text-sm">게시글 발행하기</span>
+                <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
+                  <FaTelegramPlane />
+                </IconContext.Provider>
+              </div>
+            </button>
           </div>
         </div>
       </div>
