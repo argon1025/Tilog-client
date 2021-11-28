@@ -4,15 +4,20 @@ import { IconContext } from "react-icons";
 import GitHubCalendar from "react-github-calendar";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { useWeeklyStats } from "../../../../utilities/hooks/github/useWeeklyStats";
 
 export default function UserActivityComponent({ username }) {
+  const weeklyStats = useWeeklyStats(username)
+  const PRCount = !weeklyStats ? 0 : weeklyStats.PRCount
+  const IssueCount = !weeklyStats ? 0 : weeklyStats.IssueCount
+  const commitCount = !weeklyStats ? 0 : weeklyStats.commitCount
   ChartJS.register(ArcElement, Tooltip, Legend);
   const USER_NAME = username;
   const data = {
-    labels: ["포스트 작성", "커밋", "풀리퀘스트", "이슈"],
+    labels: ["커밋", "풀리퀘스트", "이슈"],
     datasets: [
       {
-        data: [12, 19, 3, 5],
+        data: [commitCount, PRCount, IssueCount],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -95,7 +100,9 @@ export default function UserActivityComponent({ username }) {
             </h6>
           </div>
           <div className="px-5">
-            <GitHubCalendar
+            {
+              !weeklyStats ? <></> 
+              : <GitHubCalendar
               transformData={selectLastHalfYear}
               blockMargin={5}
               blockRadius={4}
@@ -129,6 +136,7 @@ export default function UserActivityComponent({ username }) {
                 weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
               }}
             />
+            }
           </div>
         </div>
       </div>

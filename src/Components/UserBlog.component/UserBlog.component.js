@@ -89,7 +89,7 @@ export default class UserBlogComponent extends Component {
                   <hr className="w-full dark:border-gray-900" />
 
                   {/* User Activity */}
-                  <UserActivityComponent username="argon1025" />
+                  <UserActivityComponent username={this.state.params.username} />
                 </Tab.Panel>
                 <Tab.Panel>
                   {/* Recent Posts component */}
