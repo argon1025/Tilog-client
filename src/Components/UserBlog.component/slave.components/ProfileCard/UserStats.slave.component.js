@@ -22,9 +22,9 @@ export default function UserStatsComponent({ username }) {
             <>{`${userStats.name}(${username})`}</>
           )}
         </p>
-        <p className="text-sm text-gray-400 dark:text-gray-200">
+        {/* <p className="text-sm text-gray-400 dark:text-gray-200">
           @Software Engineer
-        </p>
+        </p> */}
         {/* user gitInfo */}
         <div className="flex mt-3 items-center">
           <IconContext.Provider

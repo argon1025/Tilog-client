@@ -1,35 +1,23 @@
 import React from "react";
 import { IconContext } from "react-icons";
-import { GoBook } from "react-icons/go";
 import { FaRegThumbsUp, FaClock, FaLock, FaCheckDouble } from "react-icons/fa";
-import TechIconLoader from "../../../Utility.components/techIconLoader";
-import { useAllFindByUserID } from "../../../../utilities/hooks";
+import TechIconLoader from "../Utility.components/techIconLoader";
 import { formatDistance, subDays } from "date-fns";
+import { useTrendPosts } from "../../utilities/hooks/posts/useTrendPosts";
 
-export default function RecentPostsComponent({ username }) {
+export default function TrendPostsComponent({}) {
   let nextCursorNumber = 0;
-  let postList = useAllFindByUserID(username, nextCursorNumber);
+  const postList = useTrendPosts()
   const clickPostPage= (id) => {
     window.open(`/post?postid=${id}`, "_blank");
   };
   return (
     <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
-      {/* component title */}
-      <div className="flex mb-5">
-        <IconContext.Provider
-          value={{ className: "mr-2 w-4 h-4 dark:text-blue-500" }}
-        >
-          <GoBook />
-          <span className="text-xs dark:text-gray-200">
-            {username}'s Recent Posts
-          </span>
-        </IconContext.Provider>
-      </div>
       {/* Card Area */}
       {/* Card */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-5xl gap-5">
         {!postList ? (
-          <p className="text-sm text-gray-400 dark:text-gray-200">저희 서비스 회원이 아니에요.</p>
+          <></>
         ) : (
           postList.postListData.map((post) => (
             <div
@@ -77,7 +65,7 @@ export default function RecentPostsComponent({ username }) {
                     </IconContext.Provider>
                     <p className="text-gray-400 text-xs">
                       {formatDistance(
-                        subDays(new Date(post.posts_createdAt), 3),
+                        subDays(new Date(post.posts_createdAt), 1),
                         new Date(),
                         { addSuffix: true }
                       )}

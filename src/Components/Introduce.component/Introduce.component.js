@@ -14,6 +14,7 @@ import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
 import { TILogServer } from "../../utilities/server";
 import { ProfileDropdownComponent } from "..";
+import TrendPostsComponent from "./TrendPosts.slave.component";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -49,7 +50,7 @@ export default class IntroduceComponent extends Component {
     }
   };
   render() {
-    let title = "</>";
+    let title = "TILog";
     return (
       <div className="flex flex-col">
         {/* Nav */}
@@ -105,7 +106,7 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* content */}
             <div className="flex flex-row max-w-5xl w-full px-4">
-              <NotFoundContent />
+              <TrendPostsComponent />
             </div>
           </div>
         </div>

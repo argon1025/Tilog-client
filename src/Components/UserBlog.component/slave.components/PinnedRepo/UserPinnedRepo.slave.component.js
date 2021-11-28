@@ -6,6 +6,9 @@ import TechIconLoader from "../../../Utility.components/techIconLoader";
 
 export default function UserPinnedRepoCommponent({ username }) {
   const userpinnedrepo = usePinnedRepo(username);
+  const clickGithubRepo= (repo) => {
+    window.open(`https://www.github.com/${repo}`, "_blank");
+  };
   return (
     <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
       {/* component title */}
@@ -28,7 +31,8 @@ export default function UserPinnedRepoCommponent({ username }) {
           userpinnedrepo.map((repo) => (
             <div
               key={repo.id}
-              className="flex flex-col w-full h-44 border border-gray-200 rounded-3xl bg-white filter drop-shadow-2xl"
+              onClick={()=> clickGithubRepo(repo.nameWithOwner)}
+              className="flex flex-col w-full h-44 border border-gray-200 rounded-3xl bg-white filter drop-shadow-2xl cursor-pointer"
             >
               {/* Card title */}
               <div className="px-5 py-3">

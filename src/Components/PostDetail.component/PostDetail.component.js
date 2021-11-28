@@ -43,7 +43,6 @@ const clickLogoButton = (userName) => {
             </div>
         </div>
       </div>
-      {console.log(postData)}
       {/* Banner */}
       <PostBannerComponent
         thumbNailUrl={!postData ? null : postData.thumbNailUrl}
@@ -56,7 +55,6 @@ const clickLogoButton = (userName) => {
           title={!postData ? <>fetching...</> : postData.title}
           createdAt={!postData ? <>fetching...</> : postData.createdAt}
           viewCounts={!postData ? <>fetching...</> : postData.viewCounts}
-          likes={!postData ? <>fetching...</> : postData.likes}
           categoryName={!postData ? <>fetching...</> : postData.categoryName}
         />
 
@@ -74,6 +72,7 @@ const clickLogoButton = (userName) => {
         <hr className="border-gray-200 w-full my-10" />
         {/* like Button */}
         <PostLikeButtonComponent
+          postID={params}
           likes={!postData ? <>fetching...</> : postData.likes}
         />
         {/* Tags */}

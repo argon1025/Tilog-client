@@ -16,6 +16,14 @@ const getTopLanguage = (userName)  => {
     })
 }
 
+// 유저의 탑 언어를 5개 가져옵니다.
+const getWeeklyStats = (userName)  => {
+    return request({
+        url: `users/${userName}/weekly-stats`,
+        method: 'get'
+    })
+}
+
 // 유저 핀된 레포를 가져옵니다.
 const getPinnedRepo = (userName)  => {
     return request({
@@ -27,5 +35,6 @@ const getPinnedRepo = (userName)  => {
 export {
     getGithubStats,
     getTopLanguage,
-    getPinnedRepo
+    getPinnedRepo,
+    getWeeklyStats
 }

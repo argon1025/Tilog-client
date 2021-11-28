@@ -77,6 +77,18 @@ const  viewAllFindByUserID = (userID, nextCursorNumber) =>{
         withCredentials: true
     })
 }
+
+// 전체 맴버가 작성한 글중 좋아요가 가장 많은 게시글
+const  viewTrendPosts = () =>{
+    return request({
+        url: `/posts/trends/like`,
+        method: 'get',
+        params: {
+            searchScope: 'MONTH',
+            cursor: 0,
+        }
+    })
+}
 export {
     createPost,
     updatePost,
@@ -84,5 +96,6 @@ export {
     setLikePost,
     unSetLikePost,
     viewDetailPost,
-    viewAllFindByUserID
+    viewAllFindByUserID,
+    viewTrendPosts
 }

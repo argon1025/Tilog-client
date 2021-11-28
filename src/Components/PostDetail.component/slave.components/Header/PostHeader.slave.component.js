@@ -22,7 +22,11 @@ export default function PostHeaderComponent({ title, createdAt, viewCounts, like
         <div className="flex text-gray-600 mr-3">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
             <FaRegCalendarAlt />
-            <span className="text-xs">{createdAt}</span>
+            <span className="text-xs">
+                {new Date(createdAt).getFullYear()}-
+                {new Date(createdAt).getMonth()+1}-
+                {new Date(createdAt).getDay()}
+            </span>
             </IconContext.Provider>
         </div>
         <div className="flex text-gray-600  mr-3">
@@ -33,12 +37,12 @@ export default function PostHeaderComponent({ title, createdAt, viewCounts, like
             </span>
             </IconContext.Provider>
         </div>
-        <div className="flex text-gray-600  mr-3">
+        {/* <div className="flex text-gray-600  mr-3">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
             <FaRegLaughSquint />
             <span className="text-xs">{likes} likes</span>
             </IconContext.Provider>
-        </div>
+        </div> */}
         <div className="flex text-gray-600  mr-3">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
             <FaBookmark />
