@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
 import { FaBookmark, FaHashtag } from "react-icons/fa";
-import { createPost } from "../../utilities/api";
+import { createCategory, createPost, searchCategory } from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";
@@ -100,15 +100,22 @@ export default class PostCreateComponent extends Component {
 
     // 글자수 체크 후 검색 이벤트 발생
     if (beforeValue.length !== nowValue.length && nowValue.length > 0) {
-      this.getCategoryRecommend();
+      this.getCategoryRecommend(nowValue);
     }
   };
 
   /**
    * 서비스에 카테고리 검색을 요청한다
    */
-  getCategoryRecommend = () => {
-    console.log("검색 이벤트 발생!");
+  getCategoryRecommend = async(nowValue) => {
+    try {
+      const result = await searchCategory(nowValue);
+      this.setState({
+        categoryRecommend: result
+      })
+    } catch (error) {
+      toast.error("카테고리 검색 실패")
+    }
   };
 
   /**
