@@ -19,46 +19,6 @@ export default class AddStepModal extends Component {
           </div>
           {/* content */}
           <div class="flex flex-col px-6 py-5 bg-gray-50">
-            {/* Add Tags */}
-            <div className="flex flex-col text-gray-600  mr-3 relative">
-              <div className=" flex flex-row">
-                <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
-                  <FaHashtag />
-                  <span className="text-xs">태그 등록</span>
-                </IconContext.Provider>
-              </div>
-              <input
-                type="tag"
-                name="tag"
-                placeholder="원하는 태그를 입력하고 엔터!"
-                className="p-3 my-5 bg-white border border-gray-200 rounded shadow-sm focus:outline-none"
-              />
-              {/* Recommend Tags */}
-              <div className="absolute  left-0 right-0 top-20 z-50 hidden">
-                <ul class="rounded-md shadow-md bg-white mt-3 p-3 w-full">
-                  <li class="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
-                    추천 태그
-                  </li>
-                  <li class="grid grid-cols-10 gap-4 justify-center items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-50">
-                    <div class="flex justify-center items-center">
-                      <IconContext.Provider
-                        value={{ className: "mr-2 w-4 h-4" }}
-                      >
-                        <FaHashtag />
-                      </IconContext.Provider>
-                    </div>
-                    <div class="col-start-2 col-end-11 pl-8 border-l-2 border-solid border-gray">
-                      <h3 class="text-gray-700 font-medium text-md">
-                        Health Elixir
-                      </h3>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* Recommend Tags End */}
-            </div>
-            {/* Add Tags End */}
-            <hr />
             {/* Add Categories */}
             <div className="flex flex-col text-gray-600  mr-3 relative mt-3">
               <div className=" flex flex-row">
@@ -72,6 +32,7 @@ export default class AddStepModal extends Component {
                 name="category"
                 placeholder="원하는 카테고리를 입력하고 엔터!"
                 className="p-3 my-5 bg-white border border-gray-200 rounded shadow-sm focus:outline-none"
+                onChange={this.props.setCategoryInput}
               />
               {/* Recommend Categories */}
               <div className="absolute  left-0 right-0 top-20 hidden">

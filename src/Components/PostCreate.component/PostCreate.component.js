@@ -90,6 +90,33 @@ export default class PostCreateComponent extends Component {
   };
 
   /**
+   * 카테고리 검색박스 입력 이벤트
+   */
+  setCategoryInput = (event) => {
+    const nowValue = event.target.value;
+    const beforeValue = this.state.categoryInput;
+
+    this.setState({ ...this.state, categoryInput: nowValue });
+
+    // 글자수 체크 후 검색 이벤트 발생
+    if (beforeValue.length !== nowValue.length && nowValue.length > 0) {
+      this.getCategoryRecommend();
+    }
+  };
+
+  /**
+   * 서비스에 카테고리 검색을 요청한다
+   */
+  getCategoryRecommend = () => {
+    console.log("검색 이벤트 발생!");
+  };
+
+  /**
+   * 서비스에 카테고리 등록을 요청한다
+   */
+  setCategoryRequest = () => {};
+
+  /**
    * 서비스에 게시글 등록 요청을 시작한다
    */
   setPostRequest = async () => {
@@ -153,7 +180,10 @@ export default class PostCreateComponent extends Component {
 
   render() {
     return this.state.addStep ? (
-      <AddStepModal closeAddStepModal={this.closeAddStepModal} />
+      <AddStepModal
+        closeAddStepModal={this.closeAddStepModal}
+        setCategoryInput={this.setCategoryInput}
+      />
     ) : (
       <div className="flex flex-col">
         {/* Editor */}
