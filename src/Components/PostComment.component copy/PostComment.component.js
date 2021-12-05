@@ -4,7 +4,6 @@ import {
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import RenderComments from "./slave.components/RenderComments.slave.component";
-import InputComment from "./slave.components/InputComment.slave.component";
 
 
 export default class PostCommentComponent extends Component {
@@ -21,8 +20,7 @@ export default class PostCommentComponent extends Component {
         </div>
         {/* content */}
         <div className="w-full">
-          {/* <RenderComments postid={this.props.postid} /> */}
-          <InputComment />
+          <RenderComments postid={this.props.postid} />
         </div>
       </div>
     );

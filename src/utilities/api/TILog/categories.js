@@ -1,20 +1,28 @@
 import request from "./core"
 
-
-///////////////// 인가가 필요한 요청 /////////////////
-
 // 카테고리를 생성합니다.
-const  createTag = (body) =>{
-    request({
+const  createCategory = (categoryName) =>{
+    return request({
         url: '/categories',
         method: 'post',
         data: {
-            categoryName: body.categoryName
+            categoryName: categoryName,
+            iconUrl: ""
         },
         withCredential: true
     })
 }
-
+// 카테고리를 검색
+const  searchCategory = (categoryName) =>{
+    return request({
+        url: '/categories/search',
+        method: 'get',
+        params: {
+            categoryName: categoryName
+        }
+    })
+}
 export {
-    createTag
+    createCategory,
+    searchCategory
 }

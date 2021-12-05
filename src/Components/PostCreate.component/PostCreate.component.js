@@ -4,7 +4,11 @@ import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
 import { FaBookmark, FaHashtag } from "react-icons/fa";
-import { createPost } from "../../utilities/api";
+import {
+  createCategory,
+  createPost,
+  searchCategory,
+} from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";
@@ -22,7 +26,7 @@ export default class PostCreateComponent extends Component {
     tagListData: [], // 등록한 태그 리스트 데이터
     tagRecommend: [], // 태그 추천 리스트 데이터
     categoryInput: "", // 카테고리 라벨에 입력한 텍스트 데이터
-    categoryIdData: 0, // 등록한 카테고리 ID
+    categoryIdData: { id: 0, name: "" }, // 등록한 카테고리 ID
     categoryRecommend: [], // 카테고리 추천 리스트
   };
   // eslint-disable-next-line no-useless-constructor
@@ -90,6 +94,71 @@ export default class PostCreateComponent extends Component {
   };
 
   /**
+   * 카테고리 검색박스 입력 이벤트
+   */
+  setCategoryInput = async (event) => {
+    const nowValue = event.target.value;
+    const beforeValue = this.state.categoryInput;
+
+    await this.updateState({ ...this.state, categoryInput: nowValue });
+
+    // 글자수가 0일 경우 검색 결과 초기화
+    if (nowValue.length === 0) {
+      console.log("검색 기록 초기화");
+      this.setState({ ...this.state, categoryRecommend: [] });
+    }
+
+    // 글자수 체크 후 검색 이벤트 발생
+    if (beforeValue.length !== nowValue.length && nowValue.length > 0) {
+      console.log("검색 이벤트 발생");
+      this.getCategoryRecommend(nowValue);
+    }
+  };
+
+  /**
+   * 서비스에 카테고리 검색을 요청한다
+   */
+  getCategoryRecommend = async (nowValue) => {
+    try {
+      const result = await searchCategory(nowValue);
+      this.setState({ ...this.state, categoryRecommend: result });
+    } catch (error) {
+      toast.error("카테고리 검색 실패");
+    }
+  };
+
+  /**
+   * 카테고리 선택 이벤트
+   */
+  setCategoryIdData = async (event) => {
+    await this.updateState({
+      ...this.state,
+      categoryIdData: {
+        id: event.currentTarget.id,
+        name: event.currentTarget.textContent,
+      },
+    });
+    await this.updateState({ ...this.state, categoryRecommend: [] });
+    await this.updateState({ ...this.state, categoryInput: "" });
+    console.log(this.state);
+  };
+
+  /**
+   * 카테고리 선택 해제 이벤트
+   */
+  removeCategoryData = async () => {
+    await this.updateState({
+      ...this.state,
+      categoryIdData: { id: 0, name: "" },
+    });
+  };
+
+  /**
+   * 서비스에 카테고리 등록을 요청한다
+   */
+  setCategoryRequest = () => {};
+
+  /**
    * 서비스에 게시글 등록 요청을 시작한다
    */
   setPostRequest = async () => {
@@ -153,7 +222,14 @@ export default class PostCreateComponent extends Component {
 
   render() {
     return this.state.addStep ? (
-      <AddStepModal closeAddStepModal={this.closeAddStepModal} />
+      <AddStepModal
+        closeAddStepModal={this.closeAddStepModal}
+        setCategoryInput={this.setCategoryInput}
+        categoryRecommend={this.state.categoryRecommend}
+        setCategoryIdData={this.setCategoryIdData}
+        categoryIdData={this.state.categoryIdData}
+        removeCategoryData={this.removeCategoryData}
+      />
     ) : (
       <div className="flex flex-col">
         {/* Editor */}
