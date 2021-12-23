@@ -114,7 +114,7 @@ export default class AddStepModal extends Component {
             <button
               type="button"
               className="border text-gray-400 px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
-              onClick={this.openAddStepModal}
+              onClick={this.props.setPostRequest}
             >
               <div className="flex flex-row flex-nowrap align-middle justify-center items-center ">
                 <span className="text-sm">게시글 발행하기</span>

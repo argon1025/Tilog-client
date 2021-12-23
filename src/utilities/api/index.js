@@ -1,5 +1,5 @@
 //// TILOG
-export { createComment, viewAllComment, createCommentToComment,viewComment, updateComment, deleteComment, getCommentsWriteUsers } from "./TILog/comments"
+export { createComment, getComments, createReply, getComment, updateComment, deleteComment,restoreComment, getCommentsWriteUsers } from "./TILog/comments"
 export { createPost, updatePost, deletePost, viewDetailPost, viewAllFindByUserID, setLikePost, unSetLikePost, viewTrendPosts } from "./TILog/posts"
 export { fetchUserInfo, logout } from "./TILog/auth";
 export { uploadImage } from "./TILog/upload"

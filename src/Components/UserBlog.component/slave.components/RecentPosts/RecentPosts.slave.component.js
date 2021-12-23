@@ -77,7 +77,7 @@ export default function RecentPostsComponent({ username }) {
                     </IconContext.Provider>
                     <p className="text-gray-400 text-xs">
                       {formatDistance(
-                        subDays(new Date(post.posts_createdAt), 3),
+                        subDays(new Date(post.posts_createdAt), 1),
                         new Date(),
                         { addSuffix: true }
                       )}

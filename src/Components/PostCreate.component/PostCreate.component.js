@@ -228,6 +228,7 @@ export default class PostCreateComponent extends Component {
         categoryRecommend={this.state.categoryRecommend}
         setCategoryIdData={this.setCategoryIdData}
         categoryIdData={this.state.categoryIdData}
+        setPostRequest={this.setPostRequest}
         removeCategoryData={this.removeCategoryData}
       />
     ) : (
@@ -249,7 +250,6 @@ export default class PostCreateComponent extends Component {
             openAddStepModal={this.openAddStepModal}
             getContent={this.getContent}
             checkedPrivateBox={this.checkedPrivateBox}
-            setPostRequest={this.setPostRequest}
             isFetch={this.state.isFetch}
           />
         </div>
