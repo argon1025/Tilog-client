@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { DiGithubBadge } from "react-icons/di";
 import { IconContext } from "react-icons";
 import {
   FaHotjar,
@@ -106,7 +105,8 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* content */}
             <div className="flex flex-row max-w-5xl w-full px-4">
-              <TrendPostsComponent />
+              <NotFoundContent />
+              {/* <TrendPostsComponent /> */}
             </div>
           </div>
         </div>

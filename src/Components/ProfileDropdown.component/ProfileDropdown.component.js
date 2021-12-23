@@ -49,6 +49,7 @@ export default function ProfileDropdownComponent(){
 
   return (
     <div className="z-50 flex flex-col items-center filter drop-shadow-lg">
+      {console.log(session)}
       {!!session ? (
         // Logined
         <Menu as="div" className="relative inline-block text-left">
