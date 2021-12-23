@@ -1,7 +1,9 @@
 @media (prefers-color-scheme: dark) {
   /* 다크 모드에 적용할 스타일 정의 */
+  /* 임시 비활성화
   body {
     --tw-bg-opacity: 1;
     background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
   }
+  */
 }

@@ -49,7 +49,7 @@ export default class IntroduceComponent extends Component {
     }
   };
   render() {
-    let title = "TILog";
+    let title = "<TILog />";
     return (
       <div className="flex flex-col">
         {/* Nav */}
@@ -57,10 +57,10 @@ export default class IntroduceComponent extends Component {
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
             <div
-              className="ml-5 mt-5 p-1 px-4 bg-white dark:bg-gray-800 cursor-pointer"
+              className="ml-5 mt-5 p-1 px-4 bg-white cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-eng-sub-font-1 text-lg text-black dark:text-white">
+              <h1 className="font-eng-sub-font-1 text-lg text-black">
                 {title}
               </h1>
             </div>
@@ -97,7 +97,7 @@ export default class IntroduceComponent extends Component {
         <div className="flex flex-col justify-center items-center py-10">
           <div className="flex flex-col max-w-5xl w-full px-4">
             {/* title */}
-            <div className="flex text-gray-600 dark:text-gray-300">
+            <div className="flex text-gray-600">
               <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaHotjar />
                 <span className="text-xs">TRENDING ON TILOG</span>
@@ -111,13 +111,13 @@ export default class IntroduceComponent extends Component {
           </div>
         </div>
 
-        <hr className="border-gray-200 dark:border-gray-900" />
+        <hr className="border-gray-200" />
 
         {/* your Recommend */}
         <div className="flex flex-col justify-center items-center py-10">
           <div className="flex flex-col max-w-5xl w-full px-4">
             {/* title */}
-            <div className="flex text-gray-600 dark:text-gray-300">
+            <div className="flex text-gray-600">
               <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaWpexplorer />
                 <span className="text-xs">EXPLORE IN TILOG</span>
@@ -130,7 +130,7 @@ export default class IntroduceComponent extends Component {
           </div>
         </div>
 
-        <hr className="border-gray-200 dark:border-gray-900" />
+        <hr className="border-gray-200" />
 
         {/* Footer */}
         <div className="flex flex-col justify-center items-center mt-20 bg-gray-900 relative inset-x-0 bottom-0">
