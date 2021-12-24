@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function RenderInputComment({create}) {
+export default function RenderInputComment({createComment}) {
   const [commentData, setCommentData] = useState(null);
   return(
   <div>
@@ -19,7 +19,7 @@ export default function RenderInputComment({create}) {
         type="submit"
         onClick={()=> {
           setCommentData(null);
-          create(commentData)
+          createComment(commentData)
         }}
       >
         Submit

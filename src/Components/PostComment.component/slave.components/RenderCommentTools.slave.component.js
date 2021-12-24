@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import {
     FaTimes,
     FaRegEdit,
-    FaRegComments,
     FaCheck
   } from "react-icons/fa";
   import { IconContext } from "react-icons";

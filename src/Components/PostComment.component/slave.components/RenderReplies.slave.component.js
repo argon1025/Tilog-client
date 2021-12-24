@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   FaTimes,
   FaRegEdit,
-  FaRegComments,
   FaCheck
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -10,14 +9,13 @@ import { useSelector } from "react-redux";
 
 export default function RenderReplies({replies, createReply, updateReply, deleteReply, restoreReply}) {
   const [isUpdateMode, setIsUpdateMode] = useState(false);
-  const [isReplyMode, setIsReplyMode] = useState(false);
   const [commentData, setCommentData] = useState(null);
   const session = useSelector((store) => store.AuthReducer.USERINFO);
 
   return(
-    <div>
- {/* commentTree */}
- <div className="ml-7 pl-5 border-l-2">
+    <div key={replies.comments_id}>
+        {/* commentTree */}
+        <div className="ml-7 pl-5 border-l-2">
           <div className="flex flex-row items-center mt-3">
           <img
             class="rounded-full w-8 h-8"
@@ -64,7 +62,7 @@ export default function RenderReplies({replies, createReply, updateReply, delete
           {/** 댓글 내용 */}
           <div className="w-full">
             {/** 댓글이 삭제되었는가? */}
-            {!!replies.comments_deletedAt ?  <span>삭제된 댓글입니다.</span>
+            {!!replies.comments_deletedAt ?  <span>삭제된 답글입니다.</span>
             : <>
               {
                 // 수정 모드인가?
