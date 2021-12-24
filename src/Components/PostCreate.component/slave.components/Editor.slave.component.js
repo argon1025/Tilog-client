@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
+import { uploadImage } from "../../../utilities/api/TILog/upload";
+
 // src/Tiptap.jsx
 import { useEditor, EditorContent } from "@tiptap/react";
 import Document from "@tiptap/extension-document";
@@ -13,6 +16,8 @@ import TaskItem from "@tiptap/extension-task-item";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import Code from "@tiptap/extension-code";
 import LoadingComponent from "./Loading.slave.component";
+import Image from "@tiptap/extension-image";
+import Dropcursor from "@tiptap/extension-dropcursor";
 
 // load all highlight.js languages
 import lowlight from "lowlight";
@@ -23,6 +28,8 @@ import MenuBar from "./MenuBar.slave.component";
 
 export default function Tiptap(props) {
   const CONTENT_LIMIT = 10000;
+
+  // 에디터 초기화
   let editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -44,6 +51,8 @@ export default function Tiptap(props) {
         nested: true,
       }),
       Code,
+      Image,
+      Dropcursor,
     ],
     editorProps: {
       attributes: {
@@ -56,6 +65,24 @@ export default function Tiptap(props) {
     content: props.getContent(),
   });
 
+  // https://darrengwon.tistory.com/560
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      // Do something with the files
+      const formData = new FormData();
+
+      formData.append("file", acceptedFiles[0]);
+
+      const result = await uploadImage(formData);
+      console.log(result);
+      editor.chain().focus().setImage({ src: result.data }).run();
+    },
+    [editor]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  // 등록요청 버튼 이벤트
   const clickNextButton = async () => {
     // 상위 컴포넌트 메서드를 호출해 게시글 데이터를 동기화한다
     await props.setContent(editor.getJSON());
@@ -65,8 +92,12 @@ export default function Tiptap(props) {
     // await props.setPostRequest();
   };
 
+  const setImage = (rul) => {
+    editor.commands.setImage({ src: rul });
+  };
+
   return (
-    <div>
+    <div {...getRootProps()}>
       {props.isFetch ? <LoadingComponent /> : null}
       <MenuBar editor={editor} />
       <hr className="mt-2" />
