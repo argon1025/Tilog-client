@@ -7,10 +7,10 @@ import { Pie } from "react-chartjs-2";
 import { useWeeklyStats } from "../../../../utilities/hooks/github/useWeeklyStats";
 
 export default function UserActivityComponent({ username }) {
-  const weeklyStats = useWeeklyStats(username)
-  const PRCount = !weeklyStats ? 0 : weeklyStats.PRCount
-  const IssueCount = !weeklyStats ? 0 : weeklyStats.IssueCount
-  const commitCount = !weeklyStats ? 0 : weeklyStats.commitCount
+  const weeklyStats = useWeeklyStats(username);
+  const PRCount = !weeklyStats ? 0 : weeklyStats.PRCount;
+  const IssueCount = !weeklyStats ? 0 : weeklyStats.IssueCount;
+  const commitCount = !weeklyStats ? 0 : weeklyStats.commitCount;
   ChartJS.register(ArcElement, Tooltip, Legend);
   const USER_NAME = username;
   const data = {
@@ -56,16 +56,12 @@ export default function UserActivityComponent({ username }) {
   };
 
   return (
-    <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
+    <div className="flex flex-col max-w-5xl w-full bg-white">
       {/* component title */}
       <div className="flex mb-5">
-        <IconContext.Provider
-          value={{ className: "mr-2 w-4 h-4 dark:text-blue-500" }}
-        >
+        <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
           <GoTerminal />
-          <span className="text-xs dark:text-gray-200">
-            {USER_NAME}'s Activity
-          </span>
+          <span className="text-xs">{USER_NAME}'s Activity</span>
         </IconContext.Provider>
       </div>
       {/* content Card Area */}
@@ -100,43 +96,44 @@ export default function UserActivityComponent({ username }) {
             </h6>
           </div>
           <div className="px-5">
-            {
-              !weeklyStats ? <></> 
-              : <GitHubCalendar
-              transformData={selectLastHalfYear}
-              blockMargin={5}
-              blockRadius={4}
-              blockSize={12}
-              fontSize={12}
-              color="#10a3e8"
-              username={USER_NAME}
-              hideColorLegend={true}
-              style={{ color: "gray" }}
-              labels={{
-                legend: {
-                  less: "-",
-                  more: "+",
-                },
-                months: [
-                  "1월",
-                  "2월",
-                  "3월",
-                  "4월",
-                  "5월",
-                  "6월",
-                  "7월",
-                  "8월",
-                  "9월",
-                  "10월",
-                  "11월",
-                  "12월",
-                ],
-                totalCount:
-                  "오픈소스 생태계에 {{year}}년 최근 반년간 {{count}}회 기여",
-                weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-              }}
-            />
-            }
+            {!weeklyStats ? (
+              <></>
+            ) : (
+              <GitHubCalendar
+                transformData={selectLastHalfYear}
+                blockMargin={5}
+                blockRadius={4}
+                blockSize={12}
+                fontSize={12}
+                color="#10a3e8"
+                username={USER_NAME}
+                hideColorLegend={true}
+                style={{ color: "gray" }}
+                labels={{
+                  legend: {
+                    less: "-",
+                    more: "+",
+                  },
+                  months: [
+                    "1월",
+                    "2월",
+                    "3월",
+                    "4월",
+                    "5월",
+                    "6월",
+                    "7월",
+                    "8월",
+                    "9월",
+                    "10월",
+                    "11월",
+                    "12월",
+                  ],
+                  totalCount:
+                    "오픈소스 생태계에 {{year}}년 최근 반년간 {{count}}회 기여",
+                  weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -36,16 +36,16 @@ export default class UserBlogComponent extends Component {
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
             <div
-              className="ml-5 mt-5 p-1 px-4 bg-black dark:bg-white cursor-pointer"
+              className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-eng-sub-font-1 text-lg text-white dark:text-gray-800">
+              <h1 className="font-eng-sub-font-1 text-lg text-white">
                 {title}
               </h1>
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-            <ProfileDropdownComponent />
+              <ProfileDropdownComponent />
             </div>
           </div>
           {/* UserStats */}
@@ -79,17 +79,19 @@ export default class UserBlogComponent extends Component {
                     username={this.state.params.username}
                   />
 
-                  <hr className="w-full dark:border-gray-900" />
+                  <hr className="w-full" />
 
                   {/* Pinned Projects component */}
                   <UserPinnedRepoCommponent
                     username={this.state.params.username}
                   />
 
-                  <hr className="w-full dark:border-gray-900" />
+                  <hr className="w-full" />
 
                   {/* User Activity */}
-                  <UserActivityComponent username={this.state.params.username} />
+                  <UserActivityComponent
+                    username={this.state.params.username}
+                  />
                 </Tab.Panel>
                 <Tab.Panel>
                   {/* Recent Posts component */}
