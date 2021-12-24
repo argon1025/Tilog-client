@@ -6,7 +6,6 @@ import { CgChevronLeftO, CgChevronDownO } from "react-icons/cg";
 import { DiGithubBadge } from "react-icons/di";
 import { useSelector } from "react-redux";
 import { logout } from "../../utilities/api"
-import { TILogServer } from "../../utilities/server";
 
 
 export default function ProfileDropdownComponent(){
@@ -20,7 +19,7 @@ export default function ProfileDropdownComponent(){
   };
 
   const clickGithubLoginButton = () => {
-    window.open(`${TILogServer}/auth/github`, "_self");
+    window.open(`${process.env.REACT_APP_TILOG_SERVER}/auth/github`, "_self");
   };
   /**
    * 내 블로그
