@@ -13,6 +13,7 @@ import TaskItem from "@tiptap/extension-task-item";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import Code from "@tiptap/extension-code";
 import LoadingComponent from "./Loading.slave.component";
+import Image from "@tiptap/extension-image";
 
 // load all highlight.js languages
 import lowlight from "lowlight";
@@ -44,6 +45,7 @@ export default function Tiptap(props) {
         nested: true,
       }),
       Code,
+      Image,
     ],
     editorProps: {
       attributes: {
