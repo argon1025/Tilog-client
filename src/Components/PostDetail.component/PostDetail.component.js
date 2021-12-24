@@ -15,38 +15,39 @@ export default function PostDetailComponent() {
   const [params, setParams] = useState(null);
   const postData = useViewDetailPost(params);
 
-  useEffect(()=>{
+  useEffect(() => {
     const { postid } = queryString.parse(window.location.search);
-    setParams(postid)
-  },[])
+    setParams(postid);
+  }, []);
 
   /**
- * 로고 클릭 이벤트
- */
-const clickLogoButton = (userName) => {
-  window.location.href = `blog?username=${userName}`;
-}
+   * 로고 클릭 이벤트
+   */
+  const clickLogoButton = (userName) => {
+    window.location.href = `blog?username=${userName}`;
+  };
   return (
     <div>
       {/* Nav */}
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-row max-w-5xl w-full">
           {/* Logo */}
-          <div className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
-              onClick={() => clickLogoButton(!postData ? null : postData.userName)}
-            >
-            <h1 className="font-eng-sub-font-1 text-lg text-white">{!postData ? null : postData.userName}.log</h1>
+          <div
+            className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
+            onClick={() =>
+              clickLogoButton(!postData ? null : postData.userName)
+            }
+          >
+            <h1 className="font-eng-sub-font-1 text-lg text-white">
+              {!postData ? null : postData.userName}.log
+            </h1>
           </div>
           {/* Login Button */}
           <div className="ml-auto mr-5">
             <ProfileDropdownComponent />
-            </div>
+          </div>
         </div>
       </div>
-      {/* Banner */}
-      <PostBannerComponent
-        thumbNailUrl={!postData ? null : postData.thumbNailUrl}
-      />
 
       {/* Content */}
       <div className="mt-10 flex flex-col w-full justify-center items-center">
@@ -61,7 +62,7 @@ const clickLogoButton = (userName) => {
         <hr className="border-gray-200 w-full mt-10" />
 
         {/* Markdown Content */}
-        <div className="flex flex-col max-w-5xl w-full mt-10 ml-3">
+        <div className="flex flex-col max-w-4xl w-full mt-10 ml-3">
           {!postData ? (
             <div></div>
           ) : (
