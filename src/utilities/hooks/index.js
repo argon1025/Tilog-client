@@ -4,3 +4,4 @@ export { usePinnedRepo } from "./github/useUserPinnedRepo"
 export { useUserInfo } from "./users/useUserInfo"
 export { useAllFindByUserID } from "./posts/useAllFindByUserID"
 export { useViewDetailPost } from "./posts/useViewDetailPost"
+export { useReplies } from "./comments/useReplies";

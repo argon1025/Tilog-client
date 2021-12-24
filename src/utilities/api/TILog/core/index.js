@@ -1,9 +1,8 @@
 import axios from "axios";
-import { TILogServer } from "../../../server";
 
 // 인스턴스 설정
 const request = axios.create({
-    baseURL: TILogServer
+    baseURL: process.env.REACT_APP_TILOG_SERVER
 })
 // 타임아웃 
 request.defaults.timeout = 2500;

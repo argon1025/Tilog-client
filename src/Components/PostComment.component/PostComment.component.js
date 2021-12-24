@@ -5,8 +5,7 @@ import {
 import { IconContext } from "react-icons";
 import { useComments } from "../../utilities/hooks/comments/useComments";
 import RenderInputComment from "./slave.components/RenderInputComment.slave.component";
-import RenderComment from "./slave.components/RenderComment.slave.component";
-import RenderCommentTools from "./slave.components/RenderCommentTools.slave.component";
+import RenderComments from "./slave.components/RenderComments.slave.component";
 
 
 export default function PostCommentComponent({postid}){
@@ -24,7 +23,8 @@ export default function PostCommentComponent({postid}){
       <div className="w-full">
       {!comments ? <>fetching...</> : 
         comments.map(comment=>(
-        <RenderComment 
+        <RenderComments
+          postid={postid}
           comment={comment} 
           updateComment={updateComment}
           deleteComment={deleteComment} 

@@ -63,12 +63,21 @@ const  restoreComment = (commentId) =>{
 ///////////////// 인가가 필요없는 요청 /////////////////
 
 // 포스트의 모든 코멘트를 가져옵니다.
-const  getComments = (postID) =>{
+const  getComments = (postId) =>{
     return request({
-        url: `/posts/comments/${postID}`,
+        url: `/posts/comments/${postId}`,
         method: 'get',
     })
 }
+
+// 코멘트 모든 답글을 가져옵니다.
+const  getReplies = (commentid) =>{
+    return request({
+        url: `/comments/replies/${commentid}`,
+        method: 'get',
+    })
+}
+
 const getCommentsWriteUsers = (postID) => {
     return request({
         url: `/comments/writeusers/post/${postID}`,
@@ -91,6 +100,7 @@ export {
     updateComment,
     getComments,
     getComment,
+    getReplies,
     getCommentsWriteUsers,
     restoreComment
 }

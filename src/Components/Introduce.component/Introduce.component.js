@@ -11,7 +11,6 @@ import {
 
 import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
-import { TILogServer } from "../../utilities/server";
 import { ProfileDropdownComponent } from "..";
 import TrendPostsComponent from "./TrendPosts.slave.component";
 
@@ -34,7 +33,7 @@ export default class IntroduceComponent extends Component {
    * 로그인 클릭 이벤트
    */
   clickGithubLoginButton = () => {
-    window.open(`${TILogServer}/auth/github`, "_self");
+    window.open(`${process.env.REACT_APP_TILOG_SERVER}/auth/github`, "_self");
   };
   /**
    * 로그아웃 이벤트
