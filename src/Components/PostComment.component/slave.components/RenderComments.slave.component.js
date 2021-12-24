@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   FaTimes,
   FaRegEdit,
-  FaRegComments,
   FaCheck
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -14,20 +13,18 @@ import RenderInputReply from "./RenderInputReply.slave.component";
 export default function RenderComments({ postid, comment, deleteComment, restoreComment, updateComment }) {
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [replies, getReply, createReply, updateReply, deleteReply, restoreReply] = useReplies(postid);
-  const [isReplyMode, setIsReplyMode] = useState(false);
   const [commentData, setCommentData] = useState(null);
   const session = useSelector((store) => store.AuthReducer.USERINFO);
 
   return(
-    <div>
-          <div key={comment.comments_id}>
+    <div key={comment.comments_id}>
+          <div>
           <div className="flex flex-row items-center">
           <img
             class="rounded-full w-8 h-8"
             src={comment.users_proFileImageURL}
             alt=""
           />
-          {comment.comments_id}
           <span class="ml-2 font-medium text-gray-800">{comment.users_userName}</span>
           <span class="ml-1 text-xs text-gray-400">{comment.comments_createdAt.slice(0,10)}</span>
           <div className="ml-auto">
