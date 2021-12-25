@@ -26,6 +26,34 @@ import { IconContext } from "react-icons";
 import { FaRegHandPointRight, FaPaperPlane } from "react-icons/fa";
 import MenuBar from "./MenuBar.slave.component";
 
+// DataURL to fileData
+function blobCreationFromURL(inputURI) {
+  var binaryVal;
+
+  // mime extension extraction
+  var inputMIME = inputURI.split(",")[0].split(":")[1].split(";")[0];
+
+  // Extract remaining part of URL and convert it to binary value
+  if (inputURI.split(",")[0].indexOf("base64") >= 0)
+    binaryVal = atob(inputURI.split(",")[1]);
+  // Decoding of base64 encoded string
+  else binaryVal = unescape(inputURI.split(",")[1]);
+
+  // Computation of new string in which hexadecimal
+  // escape sequences are replaced by the character
+  // it represents
+
+  // Store the bytes of the string to a typed array
+  var blobArray = [];
+  for (var index = 0; index < binaryVal.length; index++) {
+    blobArray.push(binaryVal.charCodeAt(index));
+  }
+
+  return new Blob([blobArray], {
+    type: inputMIME,
+  });
+}
+
 export default function Tiptap(props) {
   const CONTENT_LIMIT = 10000;
 
@@ -57,7 +85,22 @@ export default function Tiptap(props) {
     editorProps: {
       attributes: {
         class:
-          "w-full h-full p-4 prose prose-sm max-w-none focus:outline-none overflow-y-auto",
+          "w-full h-full p-4 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200",
+      },
+      transformPasted: (slice) => {
+        console.log(slice);
+        const result = slice.content.content.map((node) => {
+          if (node.type.name === "image" && node.attrs.src.includes("data:")) {
+            node.attrs.src =
+              "https://cdn.dribbble.com/users/4841378/screenshots/13921868/media/cea5408c3416011ae98e7c16658664df.png";
+            return node;
+          } else {
+            return node;
+          }
+        });
+        slice.content.content = result;
+        console.log(slice);
+        return slice;
       },
     },
     autofocus: true,
@@ -65,17 +108,12 @@ export default function Tiptap(props) {
     content: props.getContent(),
   });
 
-  // https://darrengwon.tistory.com/560
+  // 드래그 드롭 이미지 업로드 이벤트
   const onDrop = useCallback(
     async (acceptedFiles) => {
-      // Do something with the files
-      const formData = new FormData();
+      const result = await props.imageUpload(acceptedFiles);
 
-      formData.append("file", acceptedFiles[0]);
-
-      const result = await uploadImage(formData);
-      console.log(result);
-      editor.chain().focus().setImage({ src: result.data }).run();
+      editor.chain().focus().setImage({ src: result }).run();
     },
     [editor]
   );
@@ -101,7 +139,9 @@ export default function Tiptap(props) {
       {props.isFetch ? <LoadingComponent /> : null}
       <MenuBar editor={editor} />
       <hr className="mt-2" />
-      <EditorContent className="w-full h-full" editor={editor} />
+      <div className="mt-10 flex flex-col w-full justify-center items-center">
+        <EditorContent className="max-w-4xl w-full h-full" editor={editor} />
+      </div>
       {/* content Limit alert 
       <div className="text-sm text-gray-300">
         {editor.getCharacterCount()} / {CONTENT_LIMIT} 자
