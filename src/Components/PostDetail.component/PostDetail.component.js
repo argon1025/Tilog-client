@@ -77,8 +77,6 @@ export default function PostDetailComponent() {
           categoryName={!postData ? <>fetching...</> : postData.categoryName}
         />
 
-        <hr className="border-gray-200 w-full mt-10" />
-
         {/* Markdown Content */}
         <div className="flex flex-col max-w-4xl w-full mt-10 ml-3">
           {!postData ? (

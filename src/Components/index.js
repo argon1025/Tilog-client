@@ -5,6 +5,7 @@ import PostCommentComponent from "./PostComment.component/PostComment.component"
 import PostCreateComponent from "./PostCreate.component/PostCreate.component";
 import UserBlogComponent from "./UserBlog.component/UserBlog.component";
 import ProfileDropdownComponent from "./ProfileDropdown.component/ProfileDropdown.component";
+import TechIconLoader from "./Utility.components/techIconLoader";
 
 export {
   TestComponent,
@@ -14,4 +15,5 @@ export {
   PostCreateComponent,
   UserBlogComponent,
   ProfileDropdownComponent,
+  TechIconLoader,
 };
