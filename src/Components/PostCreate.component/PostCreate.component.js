@@ -8,6 +8,7 @@ import {
   createCategory,
   createPost,
   searchCategory,
+  uploadImage,
 } from "../../utilities/api";
 
 // Toaster
@@ -168,6 +169,8 @@ export default class PostCreateComponent extends Component {
       // 토스트 메시징
       toast("게시물을 등록하고 있습니다.");
 
+      console.log(this.state.contentData);
+
       // DTO Mapping
       const requestData = {
         categoryId: 1,
@@ -201,6 +204,37 @@ export default class PostCreateComponent extends Component {
 
       // 상태를 변경하고 종료한다
       this.setIsFetch(false);
+    }
+  };
+
+  /**
+   * 이미지 업로드를 요청한다
+   */
+  imageUpload = async (acceptedFiles) => {
+    // 피칭 상태 설정
+    this.setIsFetch(true);
+    try {
+      // 토스트 메시징
+      toast("이미지를 업로드하고 있습니다.");
+
+      const formData = new FormData();
+
+      formData.append("file", acceptedFiles[0]);
+
+      const result = await uploadImage(formData);
+
+      // 토스트 메시징
+      toast.success("이미지를 업로드했습니다");
+
+      // 상태를 변경하고 종료한다
+      this.setIsFetch(false);
+
+      return result?.data;
+    } catch (error) {
+      // 토스트 메시징
+      toast.error(
+        "업로드에 실패했습니다 10메가 이하의 이미지만 등록할 수 있습니다"
+      );
     }
   };
 
@@ -251,6 +285,7 @@ export default class PostCreateComponent extends Component {
             getContent={this.getContent}
             checkedPrivateBox={this.checkedPrivateBox}
             isFetch={this.state.isFetch}
+            imageUpload={this.imageUpload}
           />
         </div>
       </div>

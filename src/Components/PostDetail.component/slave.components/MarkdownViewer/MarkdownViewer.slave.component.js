@@ -51,7 +51,7 @@ export default function Tiptap(contentData) {
     editorProps: {
       attributes: {
         class:
-          "w-full h-full p-4 prose prose-sm max-w-none focus:outline-none overflow-y-auto",
+          "w-full h-full p-4 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200",
       },
     },
     autofocus: true,
