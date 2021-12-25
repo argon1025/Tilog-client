@@ -23,27 +23,45 @@ export default function PostDetailComponent() {
   /**
    * 로고 클릭 이벤트
    */
-  const clickLogoButton = (userName) => {
+  const clickUserLogoButton = (userName) => {
     window.location.href = `blog?username=${userName}`;
+  };
+  /**
+   * 메인 로고 클릭 이벤트
+   */
+  const clickLogoButton = () => {
+    window.location.href = "/";
   };
   return (
     <div>
       {/* Nav */}
       <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-row max-w-5xl w-full">
+        <div className="flex flex-row max-w-4xl w-full items-center">
           {/* Logo */}
-          <div
-            className="ml-5 mt-5 p-1 px-4 bg-black cursor-pointer"
-            onClick={() =>
-              clickLogoButton(!postData ? null : postData.userName)
-            }
-          >
-            <h1 className="font-eng-sub-font-1 text-lg text-white">
+          <div className="flex cursor-pointer">
+            <h1
+              onClick={clickLogoButton}
+              className="font-eng-sub-font-2 text-2xl text-gray-700  transition ease-in-out duration-300 hover:text-sky-500 hover:drop-shadow-2xl"
+            >
+              {"#"}
+            </h1>
+            <h1 className="font-eng-sub-font-2 text-2xl text-blue-600/70">
+              {">"}
+            </h1>
+            <h1
+              onClick={() =>
+                clickUserLogoButton(!postData ? null : postData.userName)
+              }
+              className="font-bold font-eng-sub-font-2 text-xl text-gray-800 underline decoration-gray-500 transition ease-in-out duration-700 hover:text-sky-500 hover:drop-shadow-2xl hover:decoration-sky-500"
+            >
               {!postData ? null : postData.userName}.log
+            </h1>
+            <h1 className="font-bold font-eng-sub-font-2 text-xl text-gray-800  transition ease-in-out duration-700 hover:text-sky-500 hover:drop-shadow-2xl">
+              /{!postData ? <>fetching...</> : postData.title}
             </h1>
           </div>
           {/* Login Button */}
-          <div className="ml-auto mr-5">
+          <div className="ml-auto">
             <ProfileDropdownComponent />
           </div>
         </div>
