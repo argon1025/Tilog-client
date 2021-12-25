@@ -69,23 +69,12 @@ export default class IntroduceComponent extends Component {
             </div>
           </div>
           {/* Banner */}
-          <div className="flex flex-row max-w-5xl w-full py-10">
-            <div className="px-4 grid grid-cols-12">
-              <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-8 xxl:col-span-12">
-                <div className="w-full">
-                  <h1 className="text-7xl sm:text-8xl lg:text-8xl xl:text-9xl text-white font-bold my-8">
-                    Bring Your
-                    <br />
-                    Ideas to
-                    <span className="flex text-white bg-bg-2">
-                      Life
-                      <IconContext.Provider value={{ className: "ml-5" }}>
-                        <FaKiwiBird />
-                      </IconContext.Provider>
-                    </span>
-                  </h1>
-                </div>
-              </div>
+          <div className="flex flex-row max-w-5xl w-full py-10 px-5">
+            <div className="flex flex-col w-full text-7xl sm:text-8xl lg:text-8xl xl:text-8xl text-white font-bold my-8">
+              Travel to
+              <h1 className="font-bold font-eng-sub-font-2  underline decoration-sky-500">
+                {title}
+              </h1>
             </div>
           </div>
         </div>
