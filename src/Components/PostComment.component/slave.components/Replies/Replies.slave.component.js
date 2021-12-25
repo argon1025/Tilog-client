@@ -19,8 +19,6 @@ export default function Replies({replies, commentId, updateReply, deleteReply, r
             src={replies.users_proFileImageURL}
             alt=""
           />
-          <span>코멘트{commentId}</span>
-          <span>답글{replies.comments_id}</span>
           <span class="ml-2 font-medium text-gray-800">{replies.users_userName}</span>
           <span class="ml-1 text-xs text-gray-400">{replies.comments_createdAt.slice(0,10)}</span>
           <div className="ml-auto">
