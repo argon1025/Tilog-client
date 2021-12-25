@@ -28,7 +28,7 @@ export function useComments(postsId) {
     } catch (error) {
       console.log(error);
     }
-  })
+  },[postsId])
   // 코멘트 수정
   const fetchUpdateComment = useCallback(async(commentId, htmlContent)=>{
     try {
@@ -38,7 +38,7 @@ export function useComments(postsId) {
     } catch (error) { 
       console.log(error);
     }
-  })
+  },[postsId])
   // 코멘트 삭제
   const fetchDeleteComment = useCallback(async(commentId)=>{
     try {
@@ -48,7 +48,7 @@ export function useComments(postsId) {
     } catch (error) { 
       console.log(error);
     }
-  })
+  },[postsId])
   // 코멘트 복구
   const fetchRestoreComment = useCallback(async(commentId)=>{
     try {
@@ -58,7 +58,7 @@ export function useComments(postsId) {
     } catch (error) { 
       console.log(error);
     }
-  })
+  },[postsId])
   // 답글 작성
     return [commentList, fetchWriteComment, fetchUpdateComment, fetchDeleteComment, fetchRestoreComment]
 }
