@@ -6,6 +6,8 @@ module.exports = {
     extend: {
       fontFamily: {
         "eng-sub-font-1": ["Literata", "sans-serif"],
+        "eng-sub-font-2": ["Poppins", "sans-serif"],
+        "eng-sub-font-3": ["Raleway", "sans-serif"],
       },
       backgroundImage: {
         "bg-1": "url('./Resource/bg1.jpg')",

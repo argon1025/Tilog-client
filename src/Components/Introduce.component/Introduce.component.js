@@ -56,10 +56,10 @@ export default class IntroduceComponent extends Component {
           <div className="flex flex-row max-w-5xl w-full">
             {/* Logo */}
             <div
-              className="ml-5 mt-5 p-1 px-4 bg-white cursor-pointer"
+              className="ml-5 mt-5 p-1 px-4 cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-eng-sub-font-1 text-lg text-black">
+              <h1 className="font-bold font-eng-sub-font-2 text-2xl text-gray-200 underline decoration-sky-500">
                 {title}
               </h1>
             </div>

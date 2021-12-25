@@ -1,5 +1,3 @@
-
-   
 import React, { Component } from "react";
 import iconList from "./TechIconList";
 import { IconContext } from "react-icons";
@@ -17,7 +15,9 @@ export default class TechIconLoader extends Component {
     /**
      * 컴포넌트에서 받아오는 인자 처리
      */
-    this.state.iconName = !props.iconName ? null : props.iconName.toUpperCase();
+    this.state.iconName = !props.iconName
+      ? null
+      : props.iconName.toUpperCase() || "noIcon";
     this.state.originalName = !props.iconName ? null : props.iconName;
     this.state.color = !props.color ? null : props.color;
     this.state.customUrl = !props.customUrl ? null : props.customUrl;
