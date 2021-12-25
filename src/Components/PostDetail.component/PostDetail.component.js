@@ -87,11 +87,12 @@ export default function PostDetailComponent() {
         </div>
 
         <hr className="border-gray-200 w-full my-10" />
-        {/* like Button */}
+        {/*
         <PostLikeButtonComponent
           postID={params}
           likes={!postData ? <>fetching...</> : postData.likes}
         />
+        */}
         {/* Tags */}
         <PostTagsComponent tags={!postData ? [] : postData.TagData} />
 
