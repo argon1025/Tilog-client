@@ -5,3 +5,4 @@ export { useUserInfo } from "./users/useUserInfo"
 export { useAllFindByUserID } from "./posts/useAllFindByUserID"
 export { useViewDetailPost } from "./posts/useViewDetailPost"
 export { useReplies } from "./comments/useReplies";
+export { useComments } from "./comments/useComments"

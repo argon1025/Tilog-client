@@ -1,11 +1,16 @@
 import React from "react";
+// Icons
 import {
   FaRegComment,
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { useComments } from "../../utilities/hooks/comments/useComments";
-import RenderInputComment from "./slave.components/RenderInputComment.slave.component";
-import RenderComments from "./slave.components/RenderComments.slave.component";
+
+// Hooks
+import { useComments } from "../../utilities/hooks"
+
+// Components
+import Comments from "./slave.components/Comments/Comments.slave.component";
+import InputComment from "./slave.components/Comments/InputComment.slave.component";
 
 
 export default function PostCommentComponent({postid}){
@@ -23,14 +28,15 @@ export default function PostCommentComponent({postid}){
       <div className="w-full">
       {!comments ? <>fetching...</> : 
         comments.map(comment=>(
-        <RenderComments
+        <Comments
+          key={comment.comments_id}
           postid={postid}
           comment={comment} 
           updateComment={updateComment}
           deleteComment={deleteComment} 
           restoreComment={restoreComment}
         />))}
-        <RenderInputComment createComment={createComment}/>
+        <InputComment createComment={createComment}/>
       </div>
     </div>
   );
