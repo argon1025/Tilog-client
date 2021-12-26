@@ -192,7 +192,7 @@ export default class PostCreateComponent extends Component {
         title: this.state.title,
         thumbNailUrl:
           thumbNailUrl?.attrs?.src ||
-          "https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png",
+          "https://tilog-file-service-s3.s3.ap-northeast-2.amazonaws.com/1zm9rmmbir42021-12-26+12%3A37%3A18.png",
         markDownContent: JSON.stringify(this.state.contentData),
         private: this.state.isPrivate ? 1 : 0,
       };
