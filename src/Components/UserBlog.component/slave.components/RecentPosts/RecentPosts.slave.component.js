@@ -70,7 +70,7 @@ export default function RecentPostsComponent({ username }) {
                 </div>
                 <div className="ml-auto">
                   <img
-                    class="rounded-t-lg h-32 w-48 object-cover"
+                    className="rounded h-32 w-48 object-cover"
                     src={post.posts_thumbNailURL}
                     alt=""
                   />

@@ -5,7 +5,7 @@ import { FaSignOutAlt, FaCaretRight } from "react-icons/fa";
 import { CgChevronLeftO, CgChevronDownO } from "react-icons/cg";
 import { DiGithubBadge } from "react-icons/di";
 import { useSelector } from "react-redux";
-import { logout } from "../../utilities/api"
+import { logout } from "../../utilities/api";
 
 export default function ProfileDropdownComponent() {
   const session = useSelector((store) => store.AuthReducer.USERINFO);
@@ -61,7 +61,7 @@ export default function ProfileDropdownComponent() {
                 <img
                   src={session.proFileImageUrl}
                   alt="profile"
-                  class=" w-12 h-12 object-cover rounded-full"
+                  className=" w-12 h-12 object-cover rounded-full"
                 />
                 {open ? <CgChevronDownO /> : <CgChevronLeftO />}
               </IconContext.Provider>

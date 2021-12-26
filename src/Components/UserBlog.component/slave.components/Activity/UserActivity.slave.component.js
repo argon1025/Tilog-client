@@ -68,8 +68,10 @@ export default function UserActivityComponent({ username }) {
       <div className="lg:flex lg:flex-row flex-col justify-center items-center relative">
         <div className="flex flex-col items-center lg:w-2/5 lg:mr-5 h-72 rounded-xl border border-gray-200 bg-white">
           <div className="justify-start items-start w-full p-5">
-            <h2 class="text-gray-800 text-xl font-semibold">Total Activity</h2>
-            <h6 class="text-gray-400 text-xs font-semibold">
+            <h2 className="text-gray-800 text-xl font-semibold">
+              Total Activity
+            </h2>
+            <h6 className="text-gray-400 text-xs font-semibold">
               최근 15일간 활동 통계
             </h6>
           </div>
@@ -90,8 +92,10 @@ export default function UserActivityComponent({ username }) {
         </div>
         <div className="flex flex-col h-72 lg:w-3/5 mt-5 lg:mt-0 items-center rounded-lg border border-gray-200 bg-white">
           <div className="justify-start items-start w-full p-5">
-            <h2 class="text-gray-800 text-xl font-semibold">Git Activity</h2>
-            <h6 class="text-gray-400 text-xs font-semibold">
+            <h2 className="text-gray-800 text-xl font-semibold">
+              Git Activity
+            </h2>
+            <h6 className="text-gray-400 text-xs font-semibold">
               반년간의 깃허브 기여 기록
             </h6>
           </div>
