@@ -10,10 +10,11 @@ import Replies from "../Replies/Replies.slave.component";
 import InputReply from "../Replies/InputReply.slave.component";
 import CommentIcons from "../Icons/CommentIcons.slave.component";
 
+// Toast
+import { toast } from "react-hot-toast";
+
 /**
- * @Todo 세션만료 이벤트
- * @Todo 각 이벤트 토스트
- * @Todo 스켈레톤 로딩, 수정 로딩
+ * @Todo 스켈레톤 로딩
  */
 export default function Comments({
   postid,
@@ -100,7 +101,7 @@ export default function Comments({
                     type="submit"
                     onClick={() => {
                       setIsUpdateMode(!isUpdateMode);
-                      updateComment(comment.comments_id, commentData);
+                      updateComment(comment.comments_id, commentData, toast);
                     }}
                   >
                     확인

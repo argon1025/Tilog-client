@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 // Component
 import IsDeletedComments from "../Icons/CommentIcons.slave.component";
+// Toast
+import { toast } from "react-hot-toast";
 
 export default function Replies({
   replies,
@@ -79,7 +81,8 @@ export default function Replies({
                         updateReply(
                           commentId,
                           replies.comments_id,
-                          commentData
+                          commentData,
+                          toast
                         );
                       }}
                     >

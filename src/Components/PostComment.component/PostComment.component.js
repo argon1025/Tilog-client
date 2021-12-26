@@ -10,6 +10,9 @@ import { useComments } from "../../utilities/hooks";
 import Comments from "./slave.components/Comments/Comments.slave.component";
 import InputComment from "./slave.components/Comments/InputComment.slave.component";
 
+/**
+ * @Todo 스켈레톤 로딩
+ */
 export default function PostCommentComponent({ postid }) {
   const [
     comments,
@@ -30,7 +33,7 @@ export default function PostCommentComponent({ postid }) {
       {/* content */}
       <div className="w-full">
         {!comments ? (
-          <>fetching...</>
+          <>스켈레톤</>
         ) : (
           comments.map((comment) => (
             <Comments
