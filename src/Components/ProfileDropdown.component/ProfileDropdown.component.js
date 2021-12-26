@@ -1,15 +1,22 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { IconContext } from "react-icons";
 import { FaSignOutAlt, FaCaretRight } from "react-icons/fa";
 import { CgChevronLeftO, CgChevronDownO } from "react-icons/cg";
 import { DiGithubBadge } from "react-icons/di";
-import { useSelector } from "react-redux";
-import { logout } from "../../utilities/api";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../utilities/api"
+import { getUserInfo } from "../../Redux/action";
 
 export default function ProfileDropdownComponent() {
   const session = useSelector((store) => store.AuthReducer.USERINFO);
-
+  const dispatch = useDispatch();
+  const setUserInfo = () =>{
+    dispatch(getUserInfo());
+  }
+  useEffect(()=>{
+    setUserInfo()
+  },[])
   /**
    * 새 포스트
    */
@@ -38,7 +45,7 @@ export default function ProfileDropdownComponent() {
   const onClickLogout = async () => {
     try {
       await logout();
-      window.location.href = "/";
+      setUserInfo();
     } catch (error) {
       console.log("로그아웃 에러!");
       console.log(error);
@@ -47,7 +54,6 @@ export default function ProfileDropdownComponent() {
 
   return (
     <div className="z-50 flex flex-col items-center filter drop-shadow-lg">
-      {console.log(session)}
       {!!session ? (
         // Logined
         <Menu as="div" className="relative inline-block text-left">
