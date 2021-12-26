@@ -68,7 +68,7 @@ export default function UserPinnedRepoCommponent({ username }) {
               {/* desc content */}
               <div className="flex mx-5">
                 <div>
-                  <p class="text-gray-400 text-xs font-medium">
+                  <p className="text-gray-400 text-xs font-medium">
                     #Project Manager
                   </p>
                 </div>

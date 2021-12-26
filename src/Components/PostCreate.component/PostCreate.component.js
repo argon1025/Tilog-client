@@ -21,13 +21,13 @@ export default class PostCreateComponent extends Component {
     contentData: {}, // 게시글 내용
     isPrivate: false, // 비밀글 여부
     addStep: false, // 추가정보 입력모달 출력 여부
-    categoryId: 0, // 카테고리 ID 0 -> 지정안됨
     isFetch: false, // API Fetch 유무
     tagInput: "", // 태그 라벨에 입력한 텍스트 데이터
     tagListData: [], // 등록한 태그 리스트 데이터
     tagRecommend: [], // 태그 추천 리스트 데이터
+    categoryId: 1, // 카테고리가 지정되지 않았을 경우에 사용할 수 있는 태그의 기본값 입니다
     categoryInput: "", // 카테고리 라벨에 입력한 텍스트 데이터
-    categoryIdData: { id: 0, name: "" }, // 등록한 카테고리 ID
+    categoryIdData: { id: undefined, name: "" }, // 등록한 카테고리 ID
     categoryRecommend: [], // 카테고리 추천 리스트
   };
   // eslint-disable-next-line no-useless-constructor
@@ -49,6 +49,7 @@ export default class PostCreateComponent extends Component {
    * 추가정보입력 모달을 연다
    */
   openAddStepModal = () => {
+    console.log(this.state.contentData);
     this.setState({ ...this.state, addStep: true });
   };
 
@@ -132,13 +133,17 @@ export default class PostCreateComponent extends Component {
    * 카테고리 선택 이벤트
    */
   setCategoryIdData = async (event) => {
+    const id = event.currentTarget?.id || this.state.categoryId; // 카테고리 아이디를 만약 가져올 수 없을 경우 기본 아이디로 대체한다
+    const textContent = event.currentTarget?.textContent || ""; // 카테고리 아이디를 만약 가져올 수 없을 경우 기본값으로 대체한다
+
     await this.updateState({
       ...this.state,
       categoryIdData: {
-        id: event.currentTarget.id,
-        name: event.currentTarget.textContent,
+        id: +id,
+        name: textContent,
       },
     });
+    // 카테고리 추천 팝업 삭제
     await this.updateState({ ...this.state, categoryRecommend: [] });
     await this.updateState({ ...this.state, categoryInput: "" });
     console.log(this.state);
@@ -150,7 +155,7 @@ export default class PostCreateComponent extends Component {
   removeCategoryData = async () => {
     await this.updateState({
       ...this.state,
-      categoryIdData: { id: 0, name: "" },
+      categoryIdData: { id: undefined, name: "" },
     });
   };
 
@@ -165,21 +170,34 @@ export default class PostCreateComponent extends Component {
   setPostRequest = async () => {
     // 피칭 상태 설정
     this.setIsFetch(true);
+
     try {
       // 토스트 메시징
       toast("게시물을 등록하고 있습니다.");
 
-      console.log(this.state.contentData);
+      // 썸네일
+      const thumbNailUrl = this.state.contentData?.content.find((content) => {
+        console.log(content);
+        if (content.type === "image") {
+          return true;
+        } else {
+          return false;
+        }
+      });
 
       // DTO Mapping
       const requestData = {
-        categoryId: 1,
+        // 카테고리 아이디를 가져올 수 없을 경우 기본 카테고리로 대체한다
+        categoryId: this.state.categoryIdData.id || this.state.categoryId,
         title: this.state.title,
         thumbNailUrl:
-          "https://github.githubassets.com/images/mona-loading-default.gif",
+          thumbNailUrl?.attrs?.src ||
+          "https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png",
         markDownContent: JSON.stringify(this.state.contentData),
         private: this.state.isPrivate ? 1 : 0,
       };
+
+      console.log(requestData);
       // 포스트 등록을 요청한다
       await createPost(requestData);
 
@@ -264,6 +282,7 @@ export default class PostCreateComponent extends Component {
         categoryIdData={this.state.categoryIdData}
         setPostRequest={this.setPostRequest}
         removeCategoryData={this.removeCategoryData}
+        categoryId={this.state.categoryId}
       />
     ) : (
       <div className="flex flex-col">
