@@ -19,10 +19,6 @@ export default class IntroduceComponent extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    // 현재 로그인된 유저 정보 확인
-    this.props.getUserInfo();
-  }
   /**
    * 로고 클릭 이벤트
    */

@@ -35,6 +35,7 @@ export default function Replies({
           </span>
           <div className="ml-auto">
             {
+              !session ? <></> : 
               // 로컬에 저장된 세션과 댓글 작성자가 일치한다면
               session.id !== replies.users_id ? (
                 <></>

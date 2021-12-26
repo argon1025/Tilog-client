@@ -12,6 +12,7 @@ import InputComment from "./slave.components/Comments/InputComment.slave.compone
 
 /**
  * @Todo 스켈레톤 로딩
+ * @Todo 로그인 안한 유저
  */
 export default function PostCommentComponent({ postid }) {
   const [
