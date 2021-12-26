@@ -6,57 +6,72 @@ import { createComment, deleteComment, getComments, restoreComment, updateCommen
 
 export function useComments(postsId) {
   const [commentList, setCommentList] = useState(null);
+  const lazyLoding = (postsId) => {
+    setTimeout(async() => {
+      const result = await getComments(postsId); 
+      setCommentList(result);
+    }, 1000);
+  }
   // 훅이 처음 호출되었을때.
   useEffect(()=>{
     const fetchComments = async () => {
       try {
         // 댓글 피칭
-        const result = await getComments(postsId); 
-        setCommentList(result);
+        lazyLoding(postsId)
       } catch (error) {
         console.log(error)
       }
     }
-    fetchComments()
+    // 1초 대기.
+    setTimeout(() => {
+      fetchComments()
+      }, 1000);
   },[postsId])
   // 새로운 코멘트 작성
-  const fetchWriteComment  = useCallback(async(htmlContent)=>{
+  const fetchWriteComment  = useCallback(async(htmlContent, toast)=>{
     try {
       await createComment(postsId, htmlContent)
       const result = await getComments(postsId); 
       setCommentList(result);
     } catch (error) {
       console.log(error);
+      toast.error(error.message.kr)
     }
   },[postsId])
   // 코멘트 수정
-  const fetchUpdateComment = useCallback(async(commentId, htmlContent)=>{
+  const fetchUpdateComment = useCallback(async(commentId, htmlContent, toast)=>{
     try {
       await updateComment(commentId, htmlContent)
       const result = await getComments(postsId); 
       setCommentList(result);
+      toast.success("댓글이 수정되었습니다.")
     } catch (error) { 
       console.log(error);
+      toast.error(error.message.kr)
     }
   },[postsId])
   // 코멘트 삭제
-  const fetchDeleteComment = useCallback(async(commentId)=>{
+  const fetchDeleteComment = useCallback(async(commentId, toast)=>{
     try {
       await deleteComment(commentId)
       const result = await getComments(postsId); 
       setCommentList(result);
+      toast.success("댓글이 삭제되었습니다.")
     } catch (error) { 
       console.log(error);
+      toast.error(error.message.kr)
     }
   },[postsId])
   // 코멘트 복구
-  const fetchRestoreComment = useCallback(async(commentId)=>{
+  const fetchRestoreComment = useCallback(async(commentId, toast)=>{
     try {
       await restoreComment(commentId)
       const result = await getComments(postsId); 
       setCommentList(result);
+      toast.success("댓글이 복구되었습니다.")
     } catch (error) { 
       console.log(error);
+      toast.error(error.message.kr)
     }
   },[postsId])
   // 답글 작성
