@@ -67,7 +67,7 @@ export default function ProfileDropdownComponent() {
                 <img
                   src={session.proFileImageUrl}
                   alt="profile"
-                  class=" w-12 h-12 object-cover rounded-full"
+                  className=" w-12 h-12 object-cover rounded-full"
                 />
                 {open ? <CgChevronDownO /> : <CgChevronLeftO />}
               </IconContext.Provider>
