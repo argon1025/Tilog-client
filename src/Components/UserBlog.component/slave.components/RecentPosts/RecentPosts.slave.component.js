@@ -23,76 +23,60 @@ export default function RecentPostsComponent({ username }) {
       </div>
       {/* Card Area */}
       {/* Card */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-5xl gap-5">
+      <div className="flex flex-col w-full lg:max-w-5xl">
         {!postList ? (
           <p className="text-sm text-gray-400">저희 서비스 회원이 아니에요.</p>
         ) : (
           postList.postListData.map((post) => (
             <div
               key={post.posts_id}
-              className="rounded-lg w-full h-72 bg-white shadow-lg cursor-pointer"
+              className="flex flex-col w-full cursor-pointer"
               onClick={() => clickPostPage(post.posts_id)}
             >
-              {/* Category Icon */}
-              <div className="absolute m-3 bg-white flex items-center justify-center w-9 h-9 rounded-xl shadow-lg">
-                <TechIconLoader
-                  iconName={post.category_categoryName}
-                  color="#393939"
-                />
-              </div>
-              {/* Image */}
-              <img
-                class="rounded-t-lg h-44 w-full object-cover"
-                src={post.posts_thumbNailURL}
-                alt=""
-              />
-              {/* Card content */}
-              <div>
-                {/* title */}
-                <div className="relative p-3">
-                  <h5 class="text-gray-800 font-bold text-base tracking-tight w-full h-12 truncate">
-                    {post.posts_title}
-                  </h5>
+              {/* Category */}
+              <div className="flex flex-row items-center">
+                {/* Category Icon */}
+                <div className="flex h-3">
+                  <TechIconLoader
+                    iconName={post.category_categoryName}
+                    color="#393939"
+                  />
                 </div>
-                <hr className="w-full" />
-                {/* Info */}
-                <div className="flex items-center mt-3 mx-3">
-                  <div className="flex items-center mr-auto">
-                    <IconContext.Provider
-                      value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                    >
-                      <FaRegThumbsUp />
-                    </IconContext.Provider>
-                    <p className="text-gray-400 text-xs">{post.posts_likes}</p>
-                  </div>
-                  <div className="flex mr-3 items-center">
-                    <IconContext.Provider
-                      value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                    >
-                      <FaClock />
-                    </IconContext.Provider>
-                    <p className="text-gray-400 text-xs">
+                {/* Category Name */}
+                <div className="flex ml-1">
+                  <span className="text-xs">{post.category_categoryName}</span>
+                </div>
+              </div>
+              {/* Category End */}
+              {/* Post Info */}
+              <div className="flex flex-row mt-2 items-center">
+                <div className="flex flex-col">
+                  <h1 className="text-3xl font-bold text-gray-800">
+                    {post.posts_title}
+                  </h1>
+                  <div>
+                    <span className="text-gray-500 text-xs">
                       {formatDistance(
                         subDays(new Date(post.posts_createdAt), 1),
                         new Date(),
                         { addSuffix: true }
-                      )}
-                    </p>
+                      ) + " "}
+                      ·{" "}
+                    </span>
+                    <span className="text-gray-500 text-xs">
+                      {post.posts_likes} Read
+                    </span>
                   </div>
-                  {post.posts_private === 0 ? (
-                    <></>
-                  ) : (
-                    <div className="flex items-center">
-                      <IconContext.Provider
-                        value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                      >
-                        <FaLock />
-                      </IconContext.Provider>
-                      <p className="text-gray-400 text-xs">Locked</p>
-                    </div>
-                  )}
+                </div>
+                <div className="ml-auto">
+                  <img
+                    class="rounded-t-lg h-32 w-48 object-cover"
+                    src={post.posts_thumbNailURL}
+                    alt=""
+                  />
                 </div>
               </div>
+              <hr className="border-gray-200 w-full my-10" />
             </div>
           ))
         )}
