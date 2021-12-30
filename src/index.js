@@ -46,13 +46,13 @@ ReactDOM.render(
             {/* 포스트 디테일 뷰어 컨테이너 */}
             <Route
               path="/post"
-              element={<Containers.PostDetailContainer />}
+              element={<Containers.PostDetailContainer  />}
             />
             <Route
               path="/post/editor"
               element={<Containers.PostCreateContainer />}
             />
-            <Route path="/blog" element={<Containers.UserBlogContainer />} />
+            <Route path="/blog/:username" element={<Containers.UserBlogContainer />} />
           </Routes>
         </PersistGate>
       </Provider>

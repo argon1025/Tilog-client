@@ -6,17 +6,16 @@ import { CgChevronLeftO, CgChevronDownO } from "react-icons/cg";
 import { DiGithubBadge } from "react-icons/di";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../utilities/api"
-import { getUserInfo } from "../../Redux/action";
+import { expiredUserSession, getUserInfo } from "../../Redux/action";
 
 export default function ProfileDropdownComponent() {
   const session = useSelector((store) => store.AuthReducer.USERINFO);
+  const islogin = useSelector((store) => store.AuthReducer.ISLOGIN);
+  // useSelector((store) => console.log(store));
   const dispatch = useDispatch();
-  const setUserInfo = () =>{
-    dispatch(getUserInfo());
-  }
   useEffect(()=>{
-    setUserInfo()
-  },[])
+    dispatch(getUserInfo());
+  },[dispatch])
   /**
    * 새 포스트
    */
@@ -24,14 +23,15 @@ export default function ProfileDropdownComponent() {
     window.location.href = "/post/editor";
   };
 
-  const clickGithubLoginButton = () => {
+  const onClickGithubLoginButton = () => {
+    // dispatch(setUserSession());
     window.open(`${process.env.REACT_APP_TILOG_SERVER}/auth/github`, "_self");
   };
   /**
    * 내 블로그
    */
   const onClickMyBlog = () => {
-    window.location.href = `blog?username=${session.userName}`;
+    window.location.href = `blog/${session.userName}`;
   };
 
   /**
@@ -45,16 +45,15 @@ export default function ProfileDropdownComponent() {
   const onClickLogout = async () => {
     try {
       await logout();
-      setUserInfo();
+      dispatch(expiredUserSession());
     } catch (error) {
       console.log("로그아웃 에러!");
-      console.log(error);
     }
   };
 
   return (
     <div className="z-50 flex flex-col items-center filter drop-shadow-lg">
-      {!!session ? (
+      {islogin ? (
         // Logined
         <Menu as="div" className="relative inline-block text-left">
           <Menu.Button className="inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-white rounded-md transition duration-500 hover:bg-black hover:bg-opacity-10">
@@ -220,7 +219,7 @@ export default function ProfileDropdownComponent() {
         <button
           type="button"
           className="border bg-black text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline"
-          onClick={clickGithubLoginButton}
+          onClick={onClickGithubLoginButton}
         >
           <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
             <span className="text-sm">Login with Github</span>
