@@ -1,10 +1,10 @@
 //// TILOG
 export { createComment, getComments, createReply, getReplies, updateComment, deleteComment,restoreComment, getCommentsWriteUsers } from "./TILog/comments"
-export { createPost, updatePost, deletePost, viewDetailPost, viewAllFindByUserID, setLikePost, unSetLikePost, viewTrendPosts } from "./TILog/posts"
-export { fetchUserInfo, logout } from "./TILog/auth";
+export { createPost, updatePost, deletePost, viewDetailPost, viewCursorPost, setLikePost, unSetLikePost, viewTrendPosts } from "./TILog/posts"
+export { fetchUserInfo, logout, setUserinfo } from "./TILog/auth";
 export { uploadImage } from "./TILog/upload"
 export { createUserBlogCustomization, updateUserBlogCustomization, deleteUserBlogCustomization, getUserBlogCustomization } from "./TILog/userBlogCustomization"
-export { fetchUserInfoFromUserName } from "./TILog/users"
+export { getUserInfoToUserName } from "./TILog/users"
 export { searchCategory, createCategory } from "./TILog/categories"
 
 //// github-stats

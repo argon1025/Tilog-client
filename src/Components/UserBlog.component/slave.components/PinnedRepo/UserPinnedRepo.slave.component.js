@@ -1,12 +1,10 @@
 import React from "react";
 import { IconContext } from "react-icons";
 import { GoStar, GoRepo, GoLink } from "react-icons/go";
-import { usePinnedRepo } from "../../../../utilities/hooks";
 import TechIconLoader from "../../../Utility.components/techIconLoader";
 
-export default function UserPinnedRepoCommponent({ username }) {
-  const userpinnedrepo = usePinnedRepo(username);
-  const clickGithubRepo = (repo) => {
+export default function UserPinnedRepoCommponent({ username, pinnedrepo }) {
+  const onClickGithubRepo = (repo) => {
     window.open(`https://www.github.com/${repo}`, "_blank");
   };
   return (
@@ -21,13 +19,11 @@ export default function UserPinnedRepoCommponent({ username }) {
       {/* content Card Area */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-center items-center">
         {/* Card */}
-        {!userpinnedrepo ? (
-          <>fetching...</>
-        ) : (
-          userpinnedrepo.map((repo) => (
+        {
+          pinnedrepo.map((repo) => (
             <div
               key={repo.id}
-              onClick={() => clickGithubRepo(repo.nameWithOwner)}
+              onClick={() => onClickGithubRepo(repo.nameWithOwner)}
               className="flex flex-col w-full h-44 border border-gray-200 rounded-3xl bg-white filter drop-shadow-2xl cursor-pointer"
             >
               {/* Card title */}
@@ -86,8 +82,7 @@ export default function UserPinnedRepoCommponent({ username }) {
                 </div>
               </div>
             </div>
-          ))
-        )}
+          ))}
         {/* Card End */}
       </div>
     </div>

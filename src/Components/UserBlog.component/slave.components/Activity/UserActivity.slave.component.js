@@ -57,8 +57,10 @@ export default function UserActivityComponent({ username }) {
 
   return (
     <div className="flex flex-col max-w-5xl w-full bg-white">
-      {/* component title */}
-      <div className="flex mb-5">
+      {!weeklyStats ? <>스캘레톤</> : 
+      <>
+        {/* component title */}
+        <div className="flex mb-5">
         <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
           <GoTerminal />
           <span className="text-xs">{USER_NAME}'s Activity</span>
@@ -141,6 +143,8 @@ export default function UserActivityComponent({ username }) {
           </div>
         </div>
       </div>
-    </div>
+      </>
+    }
+      </div>
   );
 }

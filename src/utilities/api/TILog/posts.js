@@ -70,7 +70,7 @@ const  viewDetailPost = (postID) =>{
     })
 }
 // 특정 유저가 작성한 게시글 리스트를 요청합니다.
-const  viewAllFindByUserID = (userID, nextCursorNumber) =>{
+const  viewCursorPost = (userID, nextCursorNumber) =>{
     return request({
         url: `/users/${userID}/posts?cursor=${nextCursorNumber}`,
         method: 'get',
@@ -96,6 +96,6 @@ export {
     setLikePost,
     unSetLikePost,
     viewDetailPost,
-    viewAllFindByUserID,
+    viewCursorPost,
     viewTrendPosts
 }

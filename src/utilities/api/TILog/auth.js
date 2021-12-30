@@ -1,5 +1,10 @@
 import request from "./core";
-
+const setUserinfo = () => {
+    const xhr = new XMLHttpRequest();
+    const url = 'http://localhost:3000/auth/github/';
+    xhr.open('GET', url);
+    xhr.send();
+}
 
 ///////////////// 인가가 필요한 요청 /////////////////
 
@@ -22,5 +27,6 @@ const logout = () => {
 
 export {
     fetchUserInfo,
-    logout
+    logout,
+    setUserinfo
 }

@@ -7,8 +7,10 @@ export function useWeeklyStats(username) {
     useEffect(()=>{
         const fetchData = async () => {
             try {
-              const response = await getWeeklyStats(username)
-              setWeeklyStats(response)
+              setTimeout(async() => {
+                const response = await getWeeklyStats(username);
+                setWeeklyStats(response);
+              }, 1000);
             } catch (error) {
               console.error(error)
             }
