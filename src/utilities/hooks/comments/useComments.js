@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
+import { useDispatch } from "react-redux";
+import { expiredUserSession } from "../../../Redux/action";
 import { createComment, deleteComment, getComments, restoreComment, updateComment } from "../../api";
 
 // 1. 댓글 가져오기
@@ -6,26 +8,23 @@ import { createComment, deleteComment, getComments, restoreComment, updateCommen
 
 export function useComments(postsId) {
   const [commentList, setCommentList] = useState(null);
-  const lazyLoding = (postsId) => {
-    setTimeout(async() => {
-      const result = await getComments(postsId); 
-      setCommentList(result);
-    }, 1000);
-  }
+  const dispatch = useDispatch();
+
   // 훅이 처음 호출되었을때.
   useEffect(()=>{
-    const fetchComments = async () => {
+    // 1초 대기
+    const fetchComments = setTimeout(async () => {
       try {
         // 댓글 피칭
-        lazyLoding(postsId)
+        const result = await getComments(postsId); 
+        setCommentList(result);
       } catch (error) {
         console.log(error)
       }
-    }
-    // 1초 대기.
-    setTimeout(() => {
-      fetchComments()
-      }, 1000);
+    }, 1000)
+
+    // setTimeout cleanup!
+    return ()=> clearTimeout(fetchComments);
   },[postsId])
   // 새로운 코멘트 작성
   const fetchWriteComment  = useCallback(async(htmlContent, toast)=>{
@@ -46,10 +45,10 @@ export function useComments(postsId) {
       setCommentList(result);
       toast.success("댓글이 수정되었습니다.")
     } catch (error) { 
-      console.log(error);
+      if(error.statusCode === 403) dispatch(expiredUserSession());
       toast.error(error.message.kr)
     }
-  },[postsId])
+  },[dispatch, postsId])
   // 코멘트 삭제
   const fetchDeleteComment = useCallback(async(commentId, toast)=>{
     try {
