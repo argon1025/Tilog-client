@@ -5,7 +5,10 @@ import {
 import { IconContext } from "react-icons";
 import { setLikePost } from "../../../../utilities/api";
 
-export default function PostLikeButtonComponent({ postID, likes }) {
+/**
+ * @TODO BackEnd 작업 끝나고 라이크 시작.
+ */
+export default function LikeButtonComponent({ postID, likes }) {
     const [like, setlike] = useState(0)
     useEffect(()=>{
         setlike(likes)

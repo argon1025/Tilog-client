@@ -1,11 +1,15 @@
 import React  from "react";
-import UserStatsComponent from "./slave.components/ProfileCard/UserStats.slave.component";
+// Dom-Router
+import { useParams } from "react-router-dom";
+// Components
 import UserTopLanguageComponent from "./slave.components/TopLanguage/UserTopLanguage.slave.component";
 import UserPinnedRepoCommponent from "./slave.components/PinnedRepo/UserPinnedRepo.slave.component";
 import RecentPostsComponent from "./slave.components/RecentPosts/RecentPosts.slave.component";
-import ProfileDropdownComponent from "../ProfileDropdown.component/ProfileDropdown.component";
+import UserStatsComponent from "./slave.components/ProfileCard/UserStats.slave.component";
+import HeaderComponent from "../Header.component/Header.component";
+// Hooks
 import { useUserInfoToUserName, usePinnedRepo, useUserStats, useUserTopLanguage, useViewCursorPost } from "../../utilities/hooks";
-import { useParams } from "react-router-dom";
+// Icons
 import { IconContext } from "react-icons";
 import { GoBook } from "react-icons/go";
 import { FaCheckDouble } from "react-icons/fa";
@@ -17,13 +21,6 @@ export default function UserBlogComponent() {
   const [topLang, topLangError, topLangStatusCode] = useUserTopLanguage(username);
   const [pinnedRepo, pinnedRepoError, pinnedRepoStatusCode] = usePinnedRepo(username);
   const [postList, postListError, postListStatusCode, getNextPostList] = useViewCursorPost(username);
-  /**
-   * 1. 우리 회원인지 확인
-   * 2. 깃허브 정보 보여주기
-   */
-  const onClickLogoButton = () => {
-    window.location.href = "/";
-  };
 
   const RenderUserStats = ({childComponent}) => {
     // Fetching...
@@ -38,29 +35,9 @@ export default function UserBlogComponent() {
 
   return (
     <div className="flex flex-col">
-      {/* Nav */}
       <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-row max-w-5xl w-full items-center">
-          {/* Logo */}
-          <div className="flex cursor-pointer">
-            <h1
-              onClick={onClickLogoButton}
-              className="font-eng-sub-font-2 text-2xl text-gray-700 transition ease-in-out duration-300 hover:text-sky-500 hover:drop-shadow-2xl"
-            >
-              {"#"}
-            </h1>
-            <h1 className="font-eng-sub-font-2 text-2xl text-blue-600/70">
-              {">"}
-            </h1>
-            <h1 className="font-bold font-eng-sub-font-2 text-xl text-gray-800 underline decoration-gray-300 transition ease-in-out duration-700 hover:text-sky-500 hover:drop-shadow-2xl hover:decoration-sky-500">
-              {username}.log
-            </h1>
-          </div>
-          {/* Login Button */}
-          <div className="ml-auto mr-5">
-            <ProfileDropdownComponent />
-          </div>
-        </div>
+        {/* Nav */}
+        <HeaderComponent navitype="UserBlog" username={username}/>
         <RenderUserStats 
           childComponent=
         {
@@ -87,7 +64,6 @@ export default function UserBlogComponent() {
                 <span className="text-xs">{username}'s Recent Posts</span>
               </IconContext.Provider>
             </div>
-            {console.log(postList)}
             {/** post Card */}
               {
               // 포스트가 없을시
@@ -111,5 +87,5 @@ export default function UserBlogComponent() {
         } />
       </div>
     </div>
-  );
+  )
 }

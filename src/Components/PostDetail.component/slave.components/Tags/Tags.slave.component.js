@@ -1,18 +1,20 @@
-import React from "react";
+// Icons
 import {
   FaHashtag,
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
-export default function PostTagsComponent({ tags }) {
+export default function TagsComponent({ tags }) {
     return (
         <div className="flex flex-col w-full max-w-5xl justify-start items-start ml-3">
+            {/* Tag */}
             <div className="flex text-gray-600  mr-3">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
                 <FaHashtag />
                 <span className="text-xs">Tags</span>
             </IconContext.Provider>
             </div>
+            {/* Rendering Tags */}
             <div>
                 {
                     tags.map(tag=>(

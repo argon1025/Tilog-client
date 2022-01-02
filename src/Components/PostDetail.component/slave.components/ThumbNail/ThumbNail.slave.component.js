@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function PostBannerComponent({ thumbNailUrl }) {
+export default function ThumbNailComponent({ thumbNailUrl }) {
   if (!thumbNailUrl) {
     return null;
   } else {

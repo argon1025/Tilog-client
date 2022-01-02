@@ -1,8 +1,8 @@
 import React from "react";
 
-import { TechIconLoader } from "../../../";
+import { TechIconLoader } from "../../..";
 
-export default function PostHeaderComponent({
+export default function TitleComponent({
   title,
   createdAt,
   viewCounts,
@@ -19,7 +19,7 @@ export default function PostHeaderComponent({
         </div>
         <h1 className="text-5xl font-bold text-gray-800">{title}</h1>
       </div>
-      {/* header Info */}
+      {/* Info */}
       <div className="flex flex-row my-10">
         <div className="flex text-gray-600 mr-3">
           <span className="text-xs">

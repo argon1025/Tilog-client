@@ -45,14 +45,16 @@ ReactDOM.render(
             <Route path="/" element={<Containers.IntroduceContainer />} />
             {/* 포스트 디테일 뷰어 컨테이너 */}
             <Route
-              path="/post"
+              path="/:username/:postid"
               element={<Containers.PostDetailContainer  />}
             />
+            {/* 포스트 작성기 */}
             <Route
               path="/post/editor"
               element={<Containers.PostCreateContainer />}
             />
-            <Route path="/blog/:username" element={<Containers.UserBlogContainer />} />
+            {/* 유저 블로그 */}
+            <Route path="/:username" element={<Containers.UserBlogContainer />} />
           </Routes>
         </PersistGate>
       </Provider>

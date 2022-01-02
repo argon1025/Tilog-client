@@ -1,6 +1,7 @@
-import React from "react";
+// Icons
 import { GoTerminal } from "react-icons/go";
 import { IconContext } from "react-icons";
+// Icons Image
 import TechIconLoader from "../../../Utility.components/techIconLoader";
 
 export default function UserTopLanguageComponent({ username, toplanguage }) {
