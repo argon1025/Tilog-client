@@ -1,17 +1,14 @@
-import React from "react";
-import { IconContext } from "react-icons";
-import { GoBook } from "react-icons/go";
-import { FaRegThumbsUp, FaClock, FaLock, FaCheckDouble } from "react-icons/fa";
-import TechIconLoader from "../../../Utility.components/techIconLoader";
-import { useViewCursorPost } from "../../../../utilities/hooks";
+// Date
 import { formatDistance, subDays } from "date-fns";
+// Icons Image
+import TechIconLoader from "../../../Utility.components/techIconLoader";
 
-export default function RecentPostsComponent({post}) {
-  const clickPostPage = (id) => {
-    window.open(`/post?postid=${post.posts_id}`, "_blank");
+export default function RecentPostsComponent({ username, post}) {
+  const clickPostPage = (username, id) => {
+    window.open(`/${username}/${id}`, "_blank");
   };
   return (
-    <div className="flex flex-col w-full lg:max-w-5xl" onClick={clickPostPage}>
+    <div className="flex flex-col w-full lg:max-w-5xl" onClick={()=> clickPostPage(username, post.id)}>
       {/* Category */}
       <div className="flex flex-row items-center">
         {/* Category Icon */}
