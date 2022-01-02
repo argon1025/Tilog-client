@@ -1,6 +1,7 @@
-import React from "react";
+// Icons
 import { IconContext } from "react-icons";
 import { GoStar, GoRepo, GoLink } from "react-icons/go";
+// Icon Image
 import TechIconLoader from "../../../Utility.components/techIconLoader";
 
 export default function UserPinnedRepoCommponent({ username, pinnedrepo }) {

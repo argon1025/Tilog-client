@@ -1,4 +1,4 @@
-import React from "react";
+// Icons
 import { IconContext } from "react-icons";
 import { GoGitPullRequest, GoGitCommit, GoStar } from "react-icons/go";
 

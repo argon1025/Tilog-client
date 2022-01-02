@@ -31,7 +31,7 @@ export default function ProfileDropdownComponent() {
    * 내 블로그
    */
   const onClickMyBlog = () => {
-    window.location.href = `blog/${session.userName}`;
+    window.location.href = `/${session.userName}`;
   };
 
   /**
