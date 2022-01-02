@@ -13,11 +13,11 @@ export default function PostDetailComponent() {
   // Fetching Post Detail
   const [postData, error, statusCode] = useViewDetailPost(postid);
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       {/* Navigationbar & UserProfile */}    
       <HeaderComponent navitype="PostDetail" username={username} postdata={postData}  />
       {/* Article */}
       <ArticleComponent postid={postid} error={error} statusCode={statusCode} postData={postData} />
-    </>
+      </div>
   );
 }
