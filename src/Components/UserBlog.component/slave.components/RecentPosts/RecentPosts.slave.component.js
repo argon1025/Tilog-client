@@ -3,12 +3,16 @@ import { formatDistance, subDays } from "date-fns";
 // Icons Image
 import TechIconLoader from "../../../Utility.components/techIconLoader";
 
-export default function RecentPostsComponent({ username, post}) {
+export default function RecentPostsComponent({ username, post }) {
   const clickPostPage = (username, id) => {
     window.open(`/${username}/${id}`, "_blank");
   };
+  console.log(post);
   return (
-    <div className="flex flex-col w-full lg:max-w-5xl" onClick={()=> clickPostPage(username, post.id)}>
+    <div
+      className="flex flex-col w-full lg:max-w-5xl"
+      onClick={() => clickPostPage(username, post.id)}
+    >
       {/* Category */}
       <div className="flex flex-row items-center">
         {/* Category Icon */}
@@ -16,7 +20,7 @@ export default function RecentPostsComponent({ username, post}) {
           <TechIconLoader
             iconName={post.category.categoryName}
             color="#393939"
-            />
+          />
         </div>
         {/* Category Name */}
         <div className="flex ml-1">
@@ -27,8 +31,8 @@ export default function RecentPostsComponent({ username, post}) {
       {/* Post Info */}
       <div className="flex flex-row mt-2 items-center">
         <div className="flex flex-col">
-          <h1 className="text-3xl font-bold text-gray-800">
-            {post.posts_title}
+          <h1 className="text-3xl font-bold text-gray-800 cursor-pointer">
+            {post.title}
           </h1>
           <div>
             <span className="text-gray-500 text-xs">
@@ -36,24 +40,21 @@ export default function RecentPostsComponent({ username, post}) {
                 subDays(new Date(post.createdAt), 1),
                 new Date(),
                 { addSuffix: true }
-                ) + " "}
+              ) + " "}
               ·{" "}
             </span>
-            <span className="text-gray-500 text-xs">
-              {post.ikes} Likes
-            </span>
+            <span className="text-gray-500 text-xs">{post.likes} Likes</span>
           </div>
         </div>
         <div className="ml-auto">
           <img
             className="rounded h-32 w-48 object-cover"
-            src={post.thumbNailURL}
+            src={post.thumbNailUrl}
             alt=""
-            />
+          />
         </div>
       </div>
       <hr className="border-gray-200 w-full my-10" />
-</div> 
+    </div>
   );
 }
-
