@@ -280,28 +280,25 @@ export default class PostCreateComponent extends Component {
         categoryId={this.state.categoryId}
       />
     ) : (
-      <div className="flex flex-col">
-        {/* Editor */}
-        <div className="flex flex-col m-10">
-          {/* title */}
-          <input
-            type="title"
-            name="title"
-            placeholder="제목"
-            onChange={this.titleFromChange}
-            className="bg-white h-10 px-5 rounded-full text-4xl text-gray-700 focus:outline-none"
-          />
-          <hr className="mt-2" />
-          {/* Editor Tiptap */}
-          <Tiptap
-            setContent={this.setContent}
-            openAddStepModal={this.openAddStepModal}
-            getContent={this.getContent}
-            checkedPrivateBox={this.checkedPrivateBox}
-            isFetch={this.state.isFetch}
-            imageUpload={this.imageUpload}
-          />
-        </div>
+      <div className="flex flex-col w-full h-full">
+        {/* title */}
+        <input
+          type="title"
+          name="title"
+          placeholder="제목"
+          onChange={this.titleFromChange}
+          className="h-10 px-5 text-4xl text-gray-700 focus:outline-none m-5"
+        />
+        <hr className="mt-2" />
+        {/* Editor Tiptap */}
+        <Tiptap
+          setContent={this.setContent}
+          openAddStepModal={this.openAddStepModal}
+          getContent={this.getContent}
+          checkedPrivateBox={this.checkedPrivateBox}
+          isFetch={this.state.isFetch}
+          imageUpload={this.imageUpload}
+        />
       </div>
     );
   }
