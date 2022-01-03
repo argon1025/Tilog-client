@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 function reduxStateToReactProps(state) {
   return {
     ISLOGIN: state.AuthReducer.ISLOGIN,
+    USERINFO: state.AuthReducer.USERINFO,
   };
 }
 /**

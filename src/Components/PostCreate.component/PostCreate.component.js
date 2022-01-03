@@ -37,12 +37,10 @@ export default class PostCreateComponent extends Component {
 
   async componentDidMount() {
     // 비 로그인 접근시
-    /*
     if (!this.props.ISLOGIN) {
       // 메인페이지로 이동한다
       window.location.href = "/";
     }
-    */
   }
 
   /**
@@ -177,7 +175,6 @@ export default class PostCreateComponent extends Component {
 
       // 썸네일
       const thumbNailUrl = this.state.contentData?.content.find((content) => {
-        console.log(content);
         if (content.type === "image") {
           return true;
         } else {
@@ -197,12 +194,8 @@ export default class PostCreateComponent extends Component {
         private: this.state.isPrivate ? 1 : 0,
       };
 
-      console.log(requestData);
       // 포스트 등록을 요청한다
-      await createPost(requestData);
-
-      // 포스트 등록이 완료되더라도 1초 대기한다
-      await this.waitTime(3000);
+      const requestResult = await createPost(requestData);
 
       // 상태를 변경하고 종료한다
       this.setIsFetch(false);
@@ -210,15 +203,17 @@ export default class PostCreateComponent extends Component {
       // 토스트 메시징
       toast.success("게시글을 발행했습니다!");
 
-      // 뒤로 이동
-      window.history.back();
-    } catch (error) {
-      console.log(error);
-      // 포스트 등록에 실패하더라도 1초 대기한다
-      await this.waitTime(1000);
+      // 포스트 등록이 완료되더라도 대기한다
+      await this.waitTime(3000);
 
+      // 작성된 게시글로 이동 한다
+      window.location.href = `/${this.props.USERINFO.userName}/${requestResult.data.postId}`;
+    } catch (error) {
       // 토스트 메시징
       toast.error("게시글 등록에 실패했습니다..");
+
+      // 포스트 등록에 실패하더라도 1초 대기한다
+      await this.waitTime(1000);
 
       // 상태를 변경하고 종료한다
       this.setIsFetch(false);
