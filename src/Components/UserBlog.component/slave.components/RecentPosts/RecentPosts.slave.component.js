@@ -5,9 +5,8 @@ import TechIconLoader from "../../../Utility.components/techIconLoader";
 
 export default function RecentPostsComponent({ username, post }) {
   const clickPostPage = (username, id) => {
-    window.open(`/${username}/${id}`, "_blank");
+    window.location.href = `/${username}/${id}`;
   };
-  console.log(post);
   return (
     <div
       className="flex flex-col w-full lg:max-w-5xl"

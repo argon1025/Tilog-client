@@ -37,12 +37,10 @@ export default class PostCreateComponent extends Component {
 
   async componentDidMount() {
     // 비 로그인 접근시
-    /*
     if (!this.props.ISLOGIN) {
       // 메인페이지로 이동한다
       window.location.href = "/";
     }
-    */
   }
 
   /**
@@ -177,7 +175,6 @@ export default class PostCreateComponent extends Component {
 
       // 썸네일
       const thumbNailUrl = this.state.contentData?.content.find((content) => {
-        console.log(content);
         if (content.type === "image") {
           return true;
         } else {
@@ -197,12 +194,8 @@ export default class PostCreateComponent extends Component {
         private: this.state.isPrivate ? 1 : 0,
       };
 
-      console.log(requestData);
       // 포스트 등록을 요청한다
-      await createPost(requestData);
-
-      // 포스트 등록이 완료되더라도 1초 대기한다
-      await this.waitTime(3000);
+      const requestResult = await createPost(requestData);
 
       // 상태를 변경하고 종료한다
       this.setIsFetch(false);
@@ -210,15 +203,17 @@ export default class PostCreateComponent extends Component {
       // 토스트 메시징
       toast.success("게시글을 발행했습니다!");
 
-      // 뒤로 이동
-      window.history.back();
-    } catch (error) {
-      console.log(error);
-      // 포스트 등록에 실패하더라도 1초 대기한다
-      await this.waitTime(1000);
+      // 포스트 등록이 완료되더라도 대기한다
+      await this.waitTime(3000);
 
+      // 작성된 게시글로 이동 한다
+      window.location.href = `/${this.props.USERINFO.userName}/${requestResult.data.postId}`;
+    } catch (error) {
       // 토스트 메시징
       toast.error("게시글 등록에 실패했습니다..");
+
+      // 포스트 등록에 실패하더라도 1초 대기한다
+      await this.waitTime(1000);
 
       // 상태를 변경하고 종료한다
       this.setIsFetch(false);
@@ -285,28 +280,25 @@ export default class PostCreateComponent extends Component {
         categoryId={this.state.categoryId}
       />
     ) : (
-      <div className="flex flex-col">
-        {/* Editor */}
-        <div className="flex flex-col m-10">
-          {/* title */}
-          <input
-            type="title"
-            name="title"
-            placeholder="제목"
-            onChange={this.titleFromChange}
-            className="bg-white h-10 px-5 rounded-full text-4xl text-gray-700 focus:outline-none"
-          />
-          <hr className="mt-2" />
-          {/* Editor Tiptap */}
-          <Tiptap
-            setContent={this.setContent}
-            openAddStepModal={this.openAddStepModal}
-            getContent={this.getContent}
-            checkedPrivateBox={this.checkedPrivateBox}
-            isFetch={this.state.isFetch}
-            imageUpload={this.imageUpload}
-          />
-        </div>
+      <div className="flex flex-col w-full h-full">
+        {/* title */}
+        <input
+          type="title"
+          name="title"
+          placeholder="제목"
+          onChange={this.titleFromChange}
+          className="h-10 px-5 text-4xl text-gray-700 focus:outline-none m-5"
+        />
+        <hr className="mt-2" />
+        {/* Editor Tiptap */}
+        <Tiptap
+          setContent={this.setContent}
+          openAddStepModal={this.openAddStepModal}
+          getContent={this.getContent}
+          checkedPrivateBox={this.checkedPrivateBox}
+          isFetch={this.state.isFetch}
+          imageUpload={this.imageUpload}
+        />
       </div>
     );
   }
