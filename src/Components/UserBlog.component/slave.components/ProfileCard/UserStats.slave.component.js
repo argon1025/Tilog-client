@@ -3,41 +3,55 @@ import { IconContext } from "react-icons";
 import { GoGitPullRequest, GoGitCommit, GoStar } from "react-icons/go";
 
 export default function UserStatsComponent({ userinfo, gitstats }) {
-  
+  console.log(userinfo);
+  console.log(gitstats);
   return (
     <div className="flex lg:flex-row items-center lg:items-start flex-col max-w-5xl w-full bg-white mt-10 p-10 rounded-lg border border-gray-00">
-      <img className="h-28 w-28 object-cover object-center rounded-full" src={userinfo.proFileImageUrl} alt="profile"/>
+      <img
+        className="h-28 w-28 object-cover object-center rounded-full"
+        src={userinfo.proFileImageUrl}
+        alt="profile"
+      />
       {/** gitStatus */}
       <div className="m-5">
         {/* 이름 */}
-        <p className="text-xl text-gray-700 font-bold">{gitstats.name + '(' + userinfo.userName + ')'}</p>
+        <p className="text-xl text-gray-700 font-bold">
+          {gitstats.name + "(" + userinfo.userName + ")"}
+        </p>
         {/** UserBlogCustomization */}
-        {/** 직업 */}
+        {/** 직업
         <p className="text-sm text-gray-400"> @Software Engineer </p>
+         */}
         {/* 깃허브 통계 */}
         <div className="flex mt-3 items-center">
           {/** 스타 수 */}
-        <IconContext.Provider value={{ className: "w-4 h-4 " }}>
-          <GoStar />
-          <p className="text-sm text-gray-700 d font-bold mr-1">{gitstats.totalStars}</p>
-          <p className="text-sm text-gray-400">stars</p>
-        </IconContext.Provider>
-        {/** 풀리퀘스트 수 */}
-        <IconContext.Provider value={{ className: "ml-2 w-4 h-4 " }}>
-          <GoGitPullRequest />
-          <p className="text-sm text-gray-700 font-bold mr-1">{gitstats.totalPRs}</p>
-          <p className="text-sm text-gray-400">PRs</p>
-        </IconContext.Provider>
-        {/** 커밋 수 */}
-        <IconContext.Provider value={{ className: "ml-2 w-4 h-4 " }}>
-          <GoGitCommit />
-          <p className="text-sm text-gray-700 font-bold mr-1">{gitstats.totalCommits}</p>
-          <p className="text-sm text-gray-400">Commits</p>
-        </IconContext.Provider>
-     </div>
-     </div>
-     {/** UserBlogCustomization */}
-     {/** 자기소개 */}
+          <IconContext.Provider value={{ className: "w-4 h-4 " }}>
+            <GoStar />
+            <p className="text-sm text-gray-700 d font-bold mr-1">
+              {gitstats.totalStars}
+            </p>
+            <p className="text-sm text-gray-400">stars</p>
+          </IconContext.Provider>
+          {/** 풀리퀘스트 수 */}
+          <IconContext.Provider value={{ className: "ml-2 w-4 h-4 " }}>
+            <GoGitPullRequest />
+            <p className="text-sm text-gray-700 font-bold mr-1">
+              {gitstats.totalPRs}
+            </p>
+            <p className="text-sm text-gray-400">PRs</p>
+          </IconContext.Provider>
+          {/** 커밋 수 */}
+          <IconContext.Provider value={{ className: "ml-2 w-4 h-4 " }}>
+            <GoGitCommit />
+            <p className="text-sm text-gray-700 font-bold mr-1">
+              {gitstats.totalCommits}
+            </p>
+            <p className="text-sm text-gray-400">Commits</p>
+          </IconContext.Provider>
+        </div>
+      </div>
+      {/** UserBlogCustomization */}
+      {/** 자기소개
      <div className="mt-3">
        <p className="text-sm text-gray-600 ">
          보내는 튼튼하며, 웅대한 그림자는 것이다. 하여도 대한 찾아다녀도,
@@ -50,6 +64,7 @@ export default function UserStatsComponent({ userinfo, gitstats }) {
          그것을 있는 용기가 속잎나고, 것이다. 작고 이상의 위하여, 위하여서.
        </p>
      </div>
+      */}
     </div>
   );
 }

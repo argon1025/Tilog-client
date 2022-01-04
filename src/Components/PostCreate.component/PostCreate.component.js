@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import Tiptap from "./slave.components/Editor.slave.component";
-import { IconContext } from "react-icons";
-import { FaTelegramPlane } from "react-icons/fa";
 
-import { FaBookmark, FaHashtag } from "react-icons/fa";
-import {
-  createCategory,
-  createPost,
-  searchCategory,
-  uploadImage,
-} from "../../utilities/api";
+import { createPost, searchCategory, uploadImage } from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";
@@ -187,9 +179,7 @@ export default class PostCreateComponent extends Component {
         // 카테고리 아이디를 가져올 수 없을 경우 기본 카테고리로 대체한다
         categoryId: this.state.categoryIdData.id || this.state.categoryId,
         title: this.state.title,
-        thumbNailUrl:
-          thumbNailUrl?.attrs?.src ||
-          "https://tilog-file-service-s3.s3.ap-northeast-2.amazonaws.com/1zm9rmmbir42021-12-26+12%3A37%3A18.png",
+        thumbNailUrl: thumbNailUrl?.attrs?.src || null,
         markDownContent: JSON.stringify(this.state.contentData),
         private: this.state.isPrivate ? 1 : 0,
       };
@@ -285,6 +275,7 @@ export default class PostCreateComponent extends Component {
         <input
           type="title"
           name="title"
+          maxlength="49"
           placeholder="제목"
           onChange={this.titleFromChange}
           className="h-10 px-5 text-4xl text-gray-700 focus:outline-none m-5"

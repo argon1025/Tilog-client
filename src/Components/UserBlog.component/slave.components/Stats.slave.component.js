@@ -6,7 +6,7 @@ import UserStatsComponent from "../slave.components/ProfileCard/UserStats.slave.
 // Icons
 import { IconContext } from "react-icons";
 import { GoBook } from "react-icons/go";
-import { FaCheckDouble } from "react-icons/fa";
+import { BsCaretDownFill } from "react-icons/bs";
 // Hooks
 import {
   useUserInfoToUserName,
@@ -68,7 +68,7 @@ export default function StatsComponent({ username }) {
           <div className="flex mb-5">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4 " }}>
               <GoBook />
-              <span className="text-xs">{username}'s Recent Posts</span>
+              <span className="text-xs">{username}'s Recent post</span>
             </IconContext.Provider>
           </div>
           {/** post Card */}
@@ -87,15 +87,17 @@ export default function StatsComponent({ username }) {
           }
           {/* Post Load Button */}
           <div
-            className="flex w-full justify-center items-center mt-10"
+            className="flex w-full justify-center items-center mt-10 text-gray-400 transition duration-700 ease-in-out hover:text-gray-600 cursor-pointer hover:drop-shadow-xl"
             onClick={getNextPostList}
           >
             <IconContext.Provider
-              value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
+              value={{
+                className: "mr-1 w-3 h-3 ",
+              }}
             >
-              <FaCheckDouble />
+              <BsCaretDownFill />
             </IconContext.Provider>
-            <p className="text-gray-400 text-xs">Load More</p>
+            <p className="text-xs ">Load more</p>
           </div>
         </div>
       </div>

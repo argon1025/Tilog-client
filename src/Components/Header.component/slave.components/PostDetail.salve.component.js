@@ -20,7 +20,7 @@ export default function PostDetailComponent({ username, postdata }) {
       >
         {username}.log
       </h1>
-      <h1 className="flex font-bold font-eng-sub-font-2 text-xl text-gray-800  transition ease-in-out duration-700 hover:text-sky-500 hover:drop-shadow-2xl">
+      <h1 className="flex font-bold font-eng-sub-font-2 text-xl text-gray-800 transition ease-in-out duration-700 hover:text-sky-500 hover:drop-shadow-2xl">
         /
         {!postdata ? (
           <div className="animate-pulse w-64 h-full bg-gray-100 rounded ml-2"></div>
