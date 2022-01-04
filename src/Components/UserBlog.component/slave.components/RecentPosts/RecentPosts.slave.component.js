@@ -16,7 +16,7 @@ export default function RecentPostsComponent({ username, post }) {
       {/* Category */}
       <div className="flex flex-row items-center">
         {/* Category Icon */}
-        <div className="flex h-3">
+        <div className="flex h-3 w-3">
           <TechIconLoader
             iconName={post.category.categoryName}
             color="#393939"
@@ -42,7 +42,7 @@ export default function RecentPostsComponent({ username, post }) {
           <></>
         )}
         <div className="flex-1 flex flex-col">
-          <h1 className="text-3xl font-bold text-gray-800 cursor-pointer">
+          <h1 className="text-2xl font-medium text-gray-800 cursor-pointer">
             {post.title}
           </h1>
           <div>

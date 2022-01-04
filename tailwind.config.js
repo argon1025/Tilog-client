@@ -7,7 +7,6 @@ module.exports = {
       fontFamily: {
         "eng-sub-font-1": ["Literata", "sans-serif"],
         "eng-sub-font-2": ["Poppins", "sans-serif"],
-        "eng-sub-font-3": ["Raleway", "sans-serif"],
       },
       backgroundImage: {
         "bg-1": "url('./Resource/bg1.jpg')",
@@ -17,7 +16,23 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      keyframes: {
+        "fade-in-down": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(-10px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+      },
+      animation: {
+        "fade-in-down": "fade-in-down 0.5s ease-out",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

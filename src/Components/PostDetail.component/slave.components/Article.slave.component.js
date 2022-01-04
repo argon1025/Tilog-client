@@ -25,9 +25,9 @@ export default function ArticleComponent({
         viewCounts={postData.viewCounts}
         categoryName={postData.categoryName}
       />
-      <hr className="border-gray-200 w-full my-10 max-w-4xl" />
+      <hr className="border-gray-200 w-full my-5 max-w-4xl" />
       {/* Markdown Contents */}
-      <div className="flex flex-col max-w-4xl w-full mt-10 ml-3">
+      <div className="flex flex-col max-w-4xl w-full mt-10">
         <Tiptap contentData={postData.markDownContent} />
       </div>
       <hr className="border-gray-200 w-full my-10" />

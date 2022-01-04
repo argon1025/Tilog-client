@@ -23,7 +23,7 @@ export default function PostCommentComponent({ postid }) {
     restoreComment,
   ] = useComments(postid);
   return (
-    <div className="flex flex-col w-full max-w-4xl justify-start items-start ml-3 my-10">
+    <div className="flex flex-col w-full max-w-4xl justify-start items-start my-10 px-5 overflow-hidden">
       <div className="flex text-gray-600 mr-3 my-5">
         {/* title */}
         <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>

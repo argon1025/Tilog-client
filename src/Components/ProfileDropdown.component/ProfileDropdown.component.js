@@ -52,7 +52,7 @@ export default function ProfileDropdownComponent() {
   };
 
   return (
-    <div className="z-50 flex flex-col items-center filter drop-shadow-lg">
+    <div className="z-50 flex flex-col items-center filter drop-shadow-lg pt-4">
       {islogin ? (
         // Logined
         <Menu as="div" className="relative inline-block text-left">
@@ -218,12 +218,14 @@ export default function ProfileDropdownComponent() {
         // Un Logined
         <button
           type="button"
-          className="border bg-black text-white px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline"
+          className="border bg-black text-white px-4 py-2 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline"
           onClick={onClickGithubLoginButton}
         >
           <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-            <span className="text-sm">Login with Github</span>
-            <IconContext.Provider value={{ className: "ml-2 w-7 h-7" }}>
+            <span className="text-sm hidden md:block md:mr-2 ">
+              Login with Github
+            </span>
+            <IconContext.Provider value={{ className: "w-7 h-7" }}>
               <DiGithubBadge />
             </IconContext.Provider>
           </div>

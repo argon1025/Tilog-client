@@ -23,12 +23,12 @@ export default function UserTopLanguageComponent({ username, toplanguage }) {
             className="flex flex-col w-full lg:w-32 h-32 border border-gray-200 rounded-3xl bg-gray-800  mr-5"
           >
             {/* Card icon */}
-            <div className="flex items-center justify-center w-9 h-9 border border-gray-500 rounded-xl m-3">
+            <div className="flex items-center justify-center w-9 h-9 border border-gray-500 rounded-xl m-3 p-2">
               <TechIconLoader iconName={toplanguage[v].name} color="white" />
             </div>
             {/* Card title */}
             <div className="m-3">
-              <p className="text-sm text-gray-100 font-bold mr-1">
+              <p className="text-sm text-gray-100 font-medium mr-1">
                 {toplanguage[v].name}
               </p>
               <p className="text-xs text-gray-400">
