@@ -7,6 +7,8 @@ export function useViewCursorPost(username) {
   const [postList, setPostList] = useState(null);
   // 에러 상태
   const [error, setError] = useState(false);
+  // 에러 메세지
+  const [errorMessage, setErrorMessage] = useState(null);
   // http 상태 코드
   const [statusCode, setStatusCode] = useState(null);
   const cursor = useRef();
@@ -41,9 +43,10 @@ export function useViewCursorPost(username) {
     } catch (error) {
         setStatusCode(error.statusCode);
         setError(error.error);
+        setErrorMessage(error.message);
       }
     },[username])
 
 
-    return [postList, error, statusCode, getNextPostList];
+    return [postList, error, errorMessage, statusCode, getNextPostList];
 }
