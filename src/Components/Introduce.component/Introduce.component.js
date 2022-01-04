@@ -46,7 +46,7 @@ export default class IntroduceComponent extends Component {
   render() {
     let title = "<TILog />";
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col select-none">
         {/* Nav */}
         <div className="flex flex-col justify-center items-center bg-bgd-1 bg-fixed bg-cover filter drop-shadow-md">
           <div className="flex flex-row max-w-5xl w-full">
