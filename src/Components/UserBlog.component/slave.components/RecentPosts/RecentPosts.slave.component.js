@@ -7,6 +7,7 @@ export default function RecentPostsComponent({ username, post }) {
   const clickPostPage = (username, id) => {
     window.location.href = `/${username}/${id}`;
   };
+  console.log(post);
   return (
     <div
       className="flex flex-col w-full lg:max-w-5xl"
@@ -28,8 +29,19 @@ export default function RecentPostsComponent({ username, post }) {
       </div>
       {/* Category End */}
       {/* Post Info */}
-      <div className="flex flex-row mt-2 items-center">
-        <div className="flex flex-col">
+      <div className="flex-0 flex flex-row mt-2 items-center">
+        {!!post.thumbNailUrl ? (
+          <div className="h-32 w-48 mr-3 hidden md:block">
+            <img
+              className="h-32 w-48 object-cover"
+              src={post.thumbNailUrl}
+              alt=""
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className="flex-1 flex flex-col">
           <h1 className="text-3xl font-bold text-gray-800 cursor-pointer">
             {post.title}
           </h1>
@@ -44,13 +56,6 @@ export default function RecentPostsComponent({ username, post }) {
             </span>
             <span className="text-gray-500 text-xs">{post.likes} Likes</span>
           </div>
-        </div>
-        <div className="ml-auto">
-          <img
-            className="rounded h-32 w-48 object-cover"
-            src={post.thumbNailUrl}
-            alt=""
-          />
         </div>
       </div>
       <hr className="border-gray-200 w-full my-10" />
