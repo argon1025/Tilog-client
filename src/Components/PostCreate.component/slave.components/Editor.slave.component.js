@@ -111,9 +111,13 @@ export default function Tiptap(props) {
   // 드래그 드롭 이미지 업로드 이벤트
   const onDrop = useCallback(
     async (acceptedFiles) => {
-      const result = await props.imageUpload(acceptedFiles);
-
-      editor.chain().focus().setImage({ src: result }).run();
+      try {
+        const result = await props.imageUpload(acceptedFiles);
+        editor.chain().focus().setImage({ src: result }).run();
+      } catch (error) {
+        console.log("Image Upload failed");
+        console.log(error);
+      }
     },
     [editor]
   );
