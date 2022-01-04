@@ -1,34 +1,62 @@
 import axios from "axios";
 // 인스턴스 설정
-const request = axios.create({
-    baseURL: process.env.REACT_APP_GITHUB_STATS_SERVER
+const instance = axios.create({
+    baseURL: process.env.REACT_APP_GITHUB_STATS_SERVER,
+    headers: {
+        retry: 0
+    }
 })
+
+// 응답 요청
+const reconnection = (milliseconds, originalRequest) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(instance(originalRequest)),milliseconds);
+    });
+};
+
+// 응답 지연
+const lazyResponse = (milliseconds, originalRequest) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(originalRequest), milliseconds);
+    });
+};
+
+
 // 타임아웃 
-request.defaults.timeout = 2500;
+instance.defaults.timeout = 10000;
 // 요청 인터셉터  추가
-request.interceptors.request.use(
+instance.interceptors.request.use(
     config => {
-        console.log("깃허브 통계 요청 인터셉터");
+        console.log("[Github Stats] Request Interceptors");
         return config
     },
     error =>{
-        console.log("깃허브 통계 요청 인터셉터 에러");
+        console.log("[Github Stats] Request Interceptors Error");
         return Promise.reject(error)
     }
 )
 // 응답 인터셉터  추가
-request.interceptors.response.use(
+instance.interceptors.response.use(
     response => {
-        console.log("깃허브 통계 응답 인터셉터");
-        const res = response.data
-        return res
+        console.log("[Github Stats] Response Interceptors");
+        // 1초 대기 후 응답
+        return lazyResponse(1000, response.data)
     },
     error => {
-        console.log("깃허브 통계 응답 인터셉터 에러");
-        console.log(error.response)
-        return Promise.reject(error)
+        console.log("[Github Stats] Response Interceptors Error");
+        const { config, message } = error;
+        // 요청한 서버가 죽어있는 경우. 최대 5회 재접속 요청을 합니다.
+        if(message === "Network Error" && config.headers.retry <= 5) {
+            console.log(`Connect Error Try Reconnecting... ${config.headers.retry}/5`);
+            config.headers.retry += 1;
+            return reconnection(50000, config)
+        }
+        else {
+            console.log(`Error Reject`);
+            return Promise.reject(error)
+        }
     }
 )
 
 
-export default request
+export default instance
