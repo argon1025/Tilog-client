@@ -85,7 +85,7 @@ export default function Tiptap(props) {
     editorProps: {
       attributes: {
         class:
-          "w-full h-full p-4 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200",
+          "w-full h-full p-10 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200",
       },
       transformPasted: (slice) => {
         console.log(slice);
@@ -135,12 +135,17 @@ export default function Tiptap(props) {
   };
 
   return (
-    <div {...getRootProps()}>
+    <div {...getRootProps()} className="flex flex-col flex-1">
       {props.isFetch ? <LoadingComponent /> : null}
-      <MenuBar editor={editor} />
+      <div className="ml-10">
+        <MenuBar editor={editor} />
+      </div>
       <hr className="mt-2" />
-      <div className="mt-10 flex flex-col w-full justify-center items-center">
-        <EditorContent className="max-w-4xl w-full h-full" editor={editor} />
+      <div className="flex justify-center p-5 flex-1 bg-gray-50">
+        <EditorContent
+          className="max-w-4xl w-full h-full bg-white"
+          editor={editor}
+        />
       </div>
       {/* content Limit alert 
       <div className="text-sm text-gray-300">

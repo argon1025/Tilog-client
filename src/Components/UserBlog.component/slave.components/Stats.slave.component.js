@@ -6,9 +6,16 @@ import UserStatsComponent from "../slave.components/ProfileCard/UserStats.slave.
 // Icons
 import { IconContext } from "react-icons";
 import { GoBook } from "react-icons/go";
-import { FaCheckDouble } from "react-icons/fa";
+import { BsCaretDownFill } from "react-icons/bs";
 // Hooks
-import { useUserInfoToUserName, usePinnedRepo, useUserStats, useUserTopLanguage, useViewCursorPost } from "../../../utilities/hooks";
+import {
+  useUserInfoToUserName,
+  usePinnedRepo,
+  useUserStats,
+  useUserTopLanguage,
+  useViewCursorPost,
+} from "../../../utilities/hooks";
+import StatsSkeleton from "./StatsSkeleton.slave.component";
 
 export default function StatsComponent({ username }) {
   const [gitStats, gitStatsError, gitStatsErrorMessage, gitStatsStatusCode] = useUserStats(username);
@@ -17,7 +24,7 @@ export default function StatsComponent({ username }) {
   const [pinnedRepo, pinnedRepoError, pinnedRepoErrorMessage, pinnedRepoStatusCode] = usePinnedRepo(username);
   const [postList, postListError, postListErrorMessage, postListStatusCode, getNextPostList] = useViewCursorPost(username);
   // Skeleton Loading 
-  if(!gitStatsStatusCode || !userInfoStatusCode || !topLangStatusCode || !pinnedRepoStatusCode || !postListStatusCode) return <>스켈레톤</>
+  if(!gitStatsStatusCode || !userInfoStatusCode || !topLangStatusCode || !pinnedRepoStatusCode || !postListStatusCode) return <StatsSkeleton />;
   // 최종 렌더링
   return (
       <>
@@ -64,7 +71,7 @@ export default function StatsComponent({ username }) {
           <IconContext.Provider
             value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
             >
-            <FaCheckDouble />
+            <BsCaretDownFill />
           </IconContext.Provider>
           <p className="text-gray-400 text-xs">Load More</p>
         </div>
