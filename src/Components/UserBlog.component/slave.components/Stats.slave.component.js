@@ -69,7 +69,7 @@ export default function StatsComponent({ username }) {
           <div className="flex mb-5">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4 " }}>
               <GoBook />
-              <span className="text-xs">{username}'s Recent Posts</span>
+              <span className="text-xs">{username}'s Recent post</span>
             </IconContext.Provider>
           </div>
           {/** post Card */}
