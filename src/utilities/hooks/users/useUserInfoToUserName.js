@@ -7,11 +7,13 @@ export function useUserInfoToUserName(username) {
   const [userInfo, setUserInfo] = useState(null);
   // 에러 상태
   const [error, setError] = useState(false);
+  // 에러 메세지
+  const [errorMessage, setErrorMessage] = useState(null);
   // http 상태 코드
   const [statusCode, setStatusCode] = useState(null);
   useEffect(()=>{
     // 1초 대기 후 유저 정보 Fetching
-    const fetchData = setTimeout(async()=> {
+    const fetchData = async()=> {
       try {
           const response = await getUserInfoToUserName(username);
           setUserInfo(response);
@@ -19,11 +21,10 @@ export function useUserInfoToUserName(username) {
       } catch (error) {
         setStatusCode(error.statusCode);
         setError(error.error);
+        setErrorMessage(error.message);
       }
-    }, 1000)
-
-    // setTimeout cleanup!
-    return ()=> clearTimeout(fetchData);
+    }
+    return fetchData();
   },[username])
-  return [userInfo, error, statusCode]
+  return [userInfo, error, errorMessage, statusCode]
 }

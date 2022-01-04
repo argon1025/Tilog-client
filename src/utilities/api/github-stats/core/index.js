@@ -46,10 +46,10 @@ instance.interceptors.response.use(
         console.log("[Github Stats] Response Interceptors Error");
         const { config, message } = error;
         // 요청한 서버가 죽어있는 경우. 최대 5회 재접속 요청을 합니다.
-        if(message === "Network Error" && config.headers.retry <= 5) {
+        if(message === "Network Error" && config.headers.retry <= 1) {
             console.log(`Connect Error Try Reconnecting... ${config.headers.retry}/5`);
             config.headers.retry += 1;
-            return reconnection(50000, config)
+            return reconnection(10000, config)
         }
         else {
             console.log(`Error Reject`);
