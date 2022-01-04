@@ -6,7 +6,6 @@ import UserStatsComponent from "../slave.components/ProfileCard/UserStats.slave.
 // Icons
 import { IconContext } from "react-icons";
 import { GoBook } from "react-icons/go";
-import { FaCheckDouble } from "react-icons/fa";
 import { BsCaretDownFill } from "react-icons/bs";
 // Hooks
 import {

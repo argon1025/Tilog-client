@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import Tiptap from "./slave.components/Editor.slave.component";
-import { IconContext } from "react-icons";
-import { FaTelegramPlane } from "react-icons/fa";
 
-import { FaBookmark, FaHashtag } from "react-icons/fa";
-import {
-  createCategory,
-  createPost,
-  searchCategory,
-  uploadImage,
-} from "../../utilities/api";
+import { createPost, searchCategory, uploadImage } from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";

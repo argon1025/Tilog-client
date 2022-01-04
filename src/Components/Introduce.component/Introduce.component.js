@@ -1,18 +1,10 @@
 import React, { Component } from "react";
 import { IconContext } from "react-icons";
-import {
-  FaHotjar,
-  FaWpexplorer,
-  FaRegPaperPlane,
-  FaBookReader,
-  FaGraduationCap,
-  FaKiwiBird,
-} from "react-icons/fa";
+import { FaHotjar, FaWpexplorer } from "react-icons/fa";
 
 import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
 import { ProfileDropdownComponent } from "..";
-import TrendPostsComponent from "./TrendPosts.slave.component";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
