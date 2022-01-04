@@ -15,7 +15,7 @@ export default function UserStatsComponent({ userinfo, gitstats }) {
       {/** gitStatus */}
       <div className="m-5">
         {/* 이름 */}
-        <p className="text-xl text-gray-700 font-bold">
+        <p className="text-lg text-gray-700">
           {gitstats.name + "(" + userinfo.userName + ")"}
         </p>
         {/** UserBlogCustomization */}

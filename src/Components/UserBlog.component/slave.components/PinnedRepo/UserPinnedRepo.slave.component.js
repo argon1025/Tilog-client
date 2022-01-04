@@ -32,8 +32,8 @@ export default function UserPinnedRepoCommponent({ username, pinnedrepo }) {
                 <IconContext.Provider value={{ className: "mr-1 w-4 h-4 " }}>
                   <GoRepo />
                 </IconContext.Provider>
-                <p className="text-lg text-gray-700 font-bold">
-                  {repo.nameWithOwner}
+                <p className=" text-gray-700 font-medium truncate">
+                  {repo.nameWithOwner.split("/")[1]}
                 </p>
               </div>
               {/* Card desc */}
@@ -46,7 +46,7 @@ export default function UserPinnedRepoCommponent({ username, pinnedrepo }) {
             {/* Card category icon */}
             <div className="flex flex-row mx-5">
               {/* icon example-1 */}
-              <div className="flex items-center justify-center w-8 h-8 border border-gray-200 rounded-xl">
+              <div className="flex items-center justify-center w-9 h-9 border border-gray-200 rounded-xl p-2">
                 <TechIconLoader
                   iconName={repo.primaryLanguage.name}
                   color="#393939"

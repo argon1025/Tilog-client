@@ -47,7 +47,7 @@ export default class IntroduceComponent extends Component {
               className="ml-5 mt-5 p-1 px-4 cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-bold font-eng-sub-font-2 text-2xl text-gray-200 underline decoration-sky-500">
+              <h1 className="font-bold font-eng-sub-font-2 text-2xl text-gray-200 underline decoration-sky-500 animate-fade-in-down">
                 {title}
               </h1>
             </div>

@@ -11,9 +11,9 @@ export default function HeaderComponent({ navitype, username, postdata }) {
     return <></>;
   };
   return (
-    <div className="flex flex-row max-w-5xl w-full items-center px-5">
+    <div className="flex flex-row max-w-5xl w-full items-center px-5 select-none">
       {/* Navigation */}
-      <div className="flex-1 flex cursor-pointer truncate overflow-hidden">
+      <div className="flex-1 flex overflow-hidden mt-4">
         <RenderNavigation navitype={navitype} username={username} />
       </div>
       {/* Login Button */}

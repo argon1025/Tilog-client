@@ -10,14 +10,16 @@ export default function TitleComponent({
   categoryName,
 }) {
   return (
-    <div className="flex flex-col w-full max-w-6xl justify-start items-start my-10 ml-5">
+    <div className="flex flex-col w-full max-w-6xl justify-start items-start my-10 px-10 overflow-hidden">
       <div>
         {/* Title */}
         <div className="flex h-4 my-5">
-          <TechIconLoader iconName={`${categoryName}`} color="black" />
+          <div className="w-4 h-4">
+            <TechIconLoader iconName={`${categoryName}`} color="black" />
+          </div>
           <div className="w-10 bg-gray-800 m-1"></div>
         </div>
-        <h1 className="text-5xl font-bold text-gray-800">{title}</h1>
+        <h1 className="text-5xl font-medium text-gray-800">{title}</h1>
       </div>
       {/* Info */}
       <div className="flex flex-row my-10">
@@ -27,7 +29,7 @@ export default function TitleComponent({
             {new Date(createdAt).getMonth() + 1}-{new Date(createdAt).getDay()}
           </span>
         </div>
-        <div className="flex text-gray-600  mr-3">
+        <div className="flex text-gray-600 mr-3">
           <span className="text-xs">{viewCounts} viewed</span>
         </div>
         {/* <div className="flex text-gray-600  mr-3">
