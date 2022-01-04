@@ -238,6 +238,8 @@ export default class PostCreateComponent extends Component {
       toast.error(
         "업로드에 실패했습니다 10메가 이하의 이미지만 등록할 수 있습니다"
       );
+      // 상태를 변경하고 종료한다
+      this.setIsFetch(false);
     }
   };
 
