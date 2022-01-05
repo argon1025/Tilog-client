@@ -7,6 +7,7 @@ import "./index.css";
 
 // Container
 import * as Containers from "./Containers";
+import { HelmetComponent } from "./Components";
 
 // Redux Modules
 import store from "./Redux/store";
@@ -23,8 +24,8 @@ import { Toaster } from "react-hot-toast";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
+// Helmet
 import { HelmetProvider } from "react-helmet-async";
-import { Helmet } from "react-helmet-async";
 
 const persistor = persistStore(store);
 
@@ -44,12 +45,7 @@ ReactDOM.render(
             }}
           />
           <HelmetProvider>
-            <Helmet>
-              <title>TILog.log</title>
-              <meta charSet="utf-8" />
-              <meta name="description" content="App Description" />
-              <meta name="theme-color" content="#EFEFEF" />
-            </Helmet>
+            <HelmetComponent />
             <Routes>
               {/* 메인 컨테이너 */}
               <Route path="/" element={<Containers.IntroduceContainer />} />
