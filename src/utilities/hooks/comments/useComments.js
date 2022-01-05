@@ -1,78 +1,73 @@
 import { useCallback, useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
-import { expiredUserSession } from "../../../Redux/action";
-import { createComment, deleteComment, getComments, restoreComment, updateComment } from "../../api";
+import { getComments } from "../../api";
 
-// 1. 댓글 가져오기
-// 2. 댓글 작성
-
+// 댓글 리스트 피칭
 export function useComments(postsId) {
+  // 댓글 리스트
   const [commentList, setCommentList] = useState(null);
-  const dispatch = useDispatch();
-
-  // 훅이 처음 호출되었을때.
-  useEffect(()=>{
-    // 1초 대기
-    const fetchComments = setTimeout(async () => {
-      try {
-        // 댓글 피칭
-        const result = await getComments(postsId); 
-        setCommentList(result);
-      } catch (error) {
-        console.log(error)
-      }
-    }, 1000)
-
-    // setTimeout cleanup!
-    return ()=> clearTimeout(fetchComments);
-  },[postsId])
-  // 새로운 코멘트 작성
-  const fetchWriteComment  = useCallback(async(htmlContent, toast)=>{
+  // 에러 상태
+  const [error, setError] = useState(false);
+  // 에러 메세지
+  const [errorMessage, setErrorMessage] = useState(null);
+  // http 상태 코드
+  const [statusCode, setStatusCode] = useState(null);
+  // 새로운 댓글 가져오기
+  const fetchComments = useCallback(async()=> {
     try {
-      await createComment(postsId, htmlContent)
-      const result = await getComments(postsId); 
-      setCommentList(result);
+      const response = await getComments(postsId); 
+      setCommentList(response);
+      setStatusCode(200);
     } catch (error) {
-      console.log(error);
-      toast.error(error.message.kr)
+      if(!error.message.kr) {
+        if(error.message === "Network Error") {
+          setStatusCode(502);
+          setError(true);
+          setErrorMessage("서버와 연결이 끊겼습니다.");
+        } else {
+          setStatusCode(502);
+          setError(true);
+          setErrorMessage(error.message);
+        }
+    }else {
+        setStatusCode(error.statusCode);
+        setError(error.error);
+        setErrorMessage(error.message);
+      }
     }
   },[postsId])
-  // 코멘트 수정
-  const fetchUpdateComment = useCallback(async(commentId, htmlContent, toast)=>{
-    try {
-      await updateComment(commentId, htmlContent)
-      const result = await getComments(postsId); 
-      setCommentList(result);
-      toast.success("댓글이 수정되었습니다.")
-    } catch (error) { 
-      if(error.statusCode === 403) dispatch(expiredUserSession());
-      toast.error(error.message.kr)
+
+  useEffect(()=>{
+    let unmount = false;
+  // 새로운 댓글 가져오기
+  const response = async()=> {
+    if(!unmount){
+      try {
+        const response = await getComments(postsId); 
+        setCommentList(response);
+        setStatusCode(200);
+      } catch (error) {
+        if(!error.message.kr) {
+          if(error.message === "Network Error") {
+            console.log(error)
+            setStatusCode(502);
+            setError(true);
+            setErrorMessage("서버와 연결이 끊겼습니다.");
+          } else {
+            setStatusCode(502);
+            setError(true);
+            setErrorMessage(error.message);
+          }
+      } else {
+          setStatusCode(error.statusCode);
+          setError(error.error);
+          setErrorMessage(error.message.kr);
+        }
+      }
     }
-  },[dispatch, postsId])
-  // 코멘트 삭제
-  const fetchDeleteComment = useCallback(async(commentId, toast)=>{
-    try {
-      await deleteComment(commentId)
-      const result = await getComments(postsId); 
-      setCommentList(result);
-      toast.success("댓글이 삭제되었습니다.")
-    } catch (error) { 
-      console.log(error);
-      toast.error(error.message.kr)
-    }
+  }
+  response()
+  return ()=> unmount = true;
   },[postsId])
-  // 코멘트 복구
-  const fetchRestoreComment = useCallback(async(commentId, toast)=>{
-    try {
-      await restoreComment(commentId)
-      const result = await getComments(postsId); 
-      setCommentList(result);
-      toast.success("댓글이 복구되었습니다.")
-    } catch (error) { 
-      console.log(error);
-      toast.error(error.message.kr)
-    }
-  },[postsId])
-  // 답글 작성
-    return [commentList, fetchWriteComment, fetchUpdateComment, fetchDeleteComment, fetchRestoreComment]
+
+    return [commentList, error, errorMessage, statusCode, fetchComments]
 }

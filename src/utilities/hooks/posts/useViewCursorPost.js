@@ -14,7 +14,7 @@ export function useViewCursorPost(username) {
   const cursor = useRef();
   useEffect(()=>{
         // 1초 대기 후 유저 정보 Fetching
-      const fetchData = setTimeout(async()=> {
+      const fetchData = async()=> {
         try {
         cursor.current = 0;
         const { id } = await getUserInfoToUserName(username);
@@ -23,12 +23,25 @@ export function useViewCursorPost(username) {
         cursor.current = response.data.nextCursorNumber
         setStatusCode(200);
     } catch (error) {
-      setStatusCode(error.statusCode);
-      setError(error.error);
+      if(!error.message.kr) {
+        if(error.message === "Network Error") {
+          console.log(error.message)
+          setStatusCode(502);
+          setError(true);
+          setErrorMessage("서버와 연결이 끊겼습니다.");
+        } else {
+          setStatusCode(502);
+          setError(true);
+          setErrorMessage(error.message);
+        }
+    }else {
+        console.log(error.message.kr)
+        setStatusCode(error.statusCode);
+        setError(error.error);
+        setErrorMessage(error.message.kr);
+      }
     }
-  }, 1000)
-    // setTimeout cleanup!
-    return ()=> clearTimeout(fetchData);
+  }
   },[username])
 
     // 다음 포스트 가져오기
@@ -36,7 +49,6 @@ export function useViewCursorPost(username) {
       try {
         const { id } = await getUserInfoToUserName(username)
         const response = await viewCursorPost(id, cursor.current)
-        console.log(response)
         setPostList(oldPostList => [...oldPostList, ...response.data.postListData])
         cursor.current = response.data.nextCursorNumber
         setStatusCode(200);

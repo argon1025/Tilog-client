@@ -13,25 +13,29 @@ export function usePinnedRepo(username) {
   const [statusCode, setStatusCode] = useState(null);
 
   useEffect(()=>{
+    let unmount = false
     const fetchData = async () => {
-      try {
-        const response = await getPinnedRepo(username);
-        setGitPinnedRepo(response);
-        setStatusCode(200);
-      } catch (error) {
-        if(!error.response) {
-          setError(true);
-          setStatusCode(502);
-          setErrorMessage("서버에 접속할 수 없습니다.");
-        }
-        else {
-          setError(error.response.data.error === 'true' ? true : false);
-          setStatusCode(error.response.data.statusCode);
-          setErrorMessage(error.response.data.message);
+      if(!unmount) {
+        try {
+          const response = await getPinnedRepo(username);
+          setGitPinnedRepo(response);
+          setStatusCode(200);
+        } catch (error) {
+          if(!error.response) {
+            setError(true);
+            setStatusCode(502);
+            setErrorMessage("서버와 연결이 끊겼습니다.");
+          }
+          else {
+            setError(error.response.data.error === 'true' ? true : false);
+            setStatusCode(error.response.data.statusCode);
+            setErrorMessage(error.response.data.message);
+          }
         }
       }
     }
-    return fetchData();
+    fetchData();
+    return ()=> unmount = true;
   },[username])
     return [gitPinnedRepo, error, errorMessage, statusCode]
 }

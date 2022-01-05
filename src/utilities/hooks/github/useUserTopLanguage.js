@@ -13,32 +13,36 @@ export function useUserTopLanguage(username) {
   const [statusCode, setStatusCode] = useState(null);
 
     useEffect(()=>{
+      let unmount = false
     const fetchData = async () => {
-      try {
-        let totalSize = 0
-        const response = await getTopLanguage(username)
-        Object.keys(response).forEach( v => {
-            totalSize += response[v].size;
-        })
-        Object.keys(response).forEach( v => {
-          response[v].percent = ((response[v].size / totalSize) * 100).toFixed(0)
-        })
-        setGitTopLanguage(response)
-        setStatusCode(200)
-      } catch (error) {
-        if(!error.response) {
-          setError(true);
-          setStatusCode(502);
-          setErrorMessage("서버에 접속할 수 없습니다.");
-        }
-        else {
-          setError(error.response.data.error === 'true' ? true : false);
-          setStatusCode(error.response.data.statusCode);
-          setErrorMessage(error.response.data.message);
+      if(!unmount) {
+        try {
+          let totalSize = 0
+          const response = await getTopLanguage(username)
+          Object.keys(response).forEach( v => {
+              totalSize += response[v].size;
+          })
+          Object.keys(response).forEach( v => {
+            response[v].percent = ((response[v].size / totalSize) * 100).toFixed(0)
+          })
+          setGitTopLanguage(response)
+          setStatusCode(200)
+        } catch (error) {
+          if(!error.response) {
+            setError(true);
+            setStatusCode(502);
+            setErrorMessage("서버와 연결이 끊겼습니다.");
+          }
+          else {
+            setError(error.response.data.error === 'true' ? true : false);
+            setStatusCode(error.response.data.statusCode);
+            setErrorMessage(error.response.data.message);
+          }
         }
       }
     }
-    return fetchData();
+    fetchData();
+    return ()=> unmount = true;
     },[username])
     return [gitTopLanguage, error, errorMessage, statusCode]
 }

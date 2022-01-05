@@ -13,26 +13,29 @@ export function useUserStats(username) {
   const [statusCode, setStatusCode] = useState(null);
 
   useEffect(()=>{
-    // 1초 대기 후 fetching
+    let unmount = false;
     const fetchData = async() => {
-      try {
-          const response = await getGithubStats(username)
-          setGitStats(response)
-          setStatusCode(200);
-        } catch (error) {
-          if(!error.response) {
-            setError(true);
-            setStatusCode(502);
-            setErrorMessage("서버에 접속할 수 없습니다.");
+      if(!unmount) {
+        try {
+            const response = await getGithubStats(username)
+            setGitStats(response)
+            setStatusCode(200);
+          } catch (error) {
+            if(!error.response) {
+              setError(true);
+              setStatusCode(502);
+              setErrorMessage("서버와 연결이 끊겼습니다.");
+            }
+          else {
+            setError(error.response.data.error === 'true' ? true : false);
+            setStatusCode(error.response.data.statusCode);
+            setErrorMessage(error.response.data.message);
           }
-        else {
-          setError(error.response.data.error === 'true' ? true : false);
-          setStatusCode(error.response.data.statusCode);
-          setErrorMessage(error.response.data.message);
         }
       }
     }
-    return fetchData()
+    fetchData()
+    return ()=> unmount = true;
   },[username])
 
   return [gitStats, error,errorMessage,  statusCode]
