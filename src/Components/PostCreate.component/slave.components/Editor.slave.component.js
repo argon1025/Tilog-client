@@ -26,34 +26,6 @@ import { IconContext } from "react-icons";
 import { FaRegHandPointRight, FaPaperPlane } from "react-icons/fa";
 import MenuBar from "./MenuBar.slave.component";
 
-// DataURL to fileData
-function blobCreationFromURL(inputURI) {
-  var binaryVal;
-
-  // mime extension extraction
-  var inputMIME = inputURI.split(",")[0].split(":")[1].split(";")[0];
-
-  // Extract remaining part of URL and convert it to binary value
-  if (inputURI.split(",")[0].indexOf("base64") >= 0)
-    binaryVal = atob(inputURI.split(",")[1]);
-  // Decoding of base64 encoded string
-  else binaryVal = unescape(inputURI.split(",")[1]);
-
-  // Computation of new string in which hexadecimal
-  // escape sequences are replaced by the character
-  // it represents
-
-  // Store the bytes of the string to a typed array
-  var blobArray = [];
-  for (var index = 0; index < binaryVal.length; index++) {
-    blobArray.push(binaryVal.charCodeAt(index));
-  }
-
-  return new Blob([blobArray], {
-    type: inputMIME,
-  });
-}
-
 export default function Tiptap(props) {
   const CONTENT_LIMIT = 10000;
 
@@ -108,15 +80,39 @@ export default function Tiptap(props) {
     content: props.getContent(),
   });
 
+  // 이미지 업로드 컨테이너 메서드와 연결
+  const imageUpload = async (blob) => {
+    try {
+      console.log(blob);
+      const result = await props.imageUpload(blob);
+      editor.chain().focus().setImage({ src: result }).run();
+    } catch (error) {
+      console.log("Image Upload failed");
+      console.log(error);
+    }
+  };
+
   // 드래그 드롭 이미지 업로드 이벤트
   const onDrop = useCallback(
     async (acceptedFiles) => {
-      try {
-        const result = await props.imageUpload(acceptedFiles);
-        editor.chain().focus().setImage({ src: result }).run();
-      } catch (error) {
-        console.log("Image Upload failed");
-        console.log(error);
+      await imageUpload(acceptedFiles);
+    },
+    [editor]
+  );
+
+  // 페이스트 이미지 업로드 이벤트
+  const onPaste = useCallback(
+    async (event) => {
+      event.preventDefault();
+
+      // 이벤트에서 파일 데이터를 가져온다
+      const pasteItem = event.clipboardData.items[0];
+
+      // 파일 타입이 image일 경우에만 작업을 시작한다
+      if (pasteItem.type.includes("image")) {
+        const blob = pasteItem.getAsFile();
+        // imageUpload 메서드가 Array<Blob> 을 필요합니다
+        await imageUpload([blob]);
       }
     },
     [editor]
@@ -134,12 +130,8 @@ export default function Tiptap(props) {
     // await props.setPostRequest();
   };
 
-  const setImage = (rul) => {
-    editor.commands.setImage({ src: rul });
-  };
-
   return (
-    <div {...getRootProps()} className="flex flex-col flex-1">
+    <div {...getRootProps()} className="flex flex-col flex-1" onPaste={onPaste}>
       {props.isFetch ? <LoadingComponent /> : null}
       <div className="ml-10">
         <MenuBar editor={editor} />
