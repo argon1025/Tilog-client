@@ -6,6 +6,8 @@ import ArticleComponent from "./slave.components/Article.slave.component";
 import HeaderComponent from "../Header.component/Header.component";
 // Hooks
 import { useViewDetailPost } from "../../utilities/hooks";
+// helmet
+import { HelmetComponent } from "../";
 
 export default function PostDetailComponent() {
   // Get Params
@@ -14,6 +16,15 @@ export default function PostDetailComponent() {
   const [postData, error, statusCode] = useViewDetailPost(postid);
   return (
     <div className="flex flex-col justify-center items-center">
+      {!postData ? (
+        <></>
+      ) : (
+        <HelmetComponent
+          title={postData?.title}
+          ogImage={postData?.thumbNailUrl}
+        />
+      )}
+
       {/* Navigationbar & UserProfile */}
       <HeaderComponent
         navitype="PostDetail"
