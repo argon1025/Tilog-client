@@ -23,6 +23,9 @@ import { Toaster } from "react-hot-toast";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
+
 const persistor = persistStore(store);
 
 ReactDOM.render(
@@ -40,22 +43,33 @@ ReactDOM.render(
               },
             }}
           />
-          <Routes>
-            {/* 메인 컨테이너 */}
-            <Route path="/" element={<Containers.IntroduceContainer />} />
-            {/* 포스트 디테일 뷰어 컨테이너 */}
-            <Route
-              path="/:username/:postid"
-              element={<Containers.PostDetailContainer  />}
-            />
-            {/* 포스트 작성기 */}
-            <Route
-              path="/post/editor"
-              element={<Containers.PostCreateContainer />}
-            />
-            {/* 유저 블로그 */}
-            <Route path="/:username" element={<Containers.UserBlogContainer />} />
-          </Routes>
+          <HelmetProvider>
+            <Helmet>
+              <title>TILog.log</title>
+              <meta charSet="utf-8" />
+              <meta name="description" content="App Description" />
+              <meta name="theme-color" content="#EFEFEF" />
+            </Helmet>
+            <Routes>
+              {/* 메인 컨테이너 */}
+              <Route path="/" element={<Containers.IntroduceContainer />} />
+              {/* 포스트 디테일 뷰어 컨테이너 */}
+              <Route
+                path="/:username/:postid"
+                element={<Containers.PostDetailContainer />}
+              />
+              {/* 포스트 작성기 */}
+              <Route
+                path="/post/editor"
+                element={<Containers.PostCreateContainer />}
+              />
+              {/* 유저 블로그 */}
+              <Route
+                path="/:username"
+                element={<Containers.UserBlogContainer />}
+              />
+            </Routes>
+          </HelmetProvider>
         </PersistGate>
       </Provider>
     </React.StrictMode>
