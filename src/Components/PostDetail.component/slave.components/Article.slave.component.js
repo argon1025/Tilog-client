@@ -24,6 +24,8 @@ export default function ArticleComponent({
         createdAt={postData.createdAt}
         viewCounts={postData.viewCounts}
         categoryName={postData.categoryName}
+        postId={postData.id}
+        ownerId={postData.usersId}
       />
       <hr className="border-gray-200 w-full my-5 max-w-4xl" />
       {/* Markdown Contents */}

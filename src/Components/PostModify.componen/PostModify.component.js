@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import Tiptap from "./slave.components/Editor.slave.component";
 
-import { createPost, searchCategory, uploadImage } from "../../utilities/api";
+import {
+  updatePost,
+  searchCategory,
+  uploadImage,
+  viewDetailPost,
+} from "../../utilities/api";
 
 // Toaster
 import { toast } from "react-hot-toast";
 import AddStepModal from "./slave.components/AddStopModal.slave.component";
+import LoadingComponent from "./slave.components/Loading.slave.component";
 
-export default class PostCreateComponent extends Component {
+export default class PostModifyComponent extends Component {
   state = {
+    targetPostId: 0,
     title: "", // 게시글 제목
-    contentData: {}, // 게시글 내용
+    contentData: undefined, // 게시글 내용
+    originalContentData: undefined, // 수정 게시글 원본
     isPrivate: false, // 비밀글 여부
     addStep: false, // 추가정보 입력모달 출력 여부
     isFetch: false, // API Fetch 유무
+    isLoading: false, // 페이지 로딩 유무
     tagInput: "", // 태그 라벨에 입력한 텍스트 데이터
     tagListData: [], // 등록한 태그 리스트 데이터
     tagRecommend: [], // 태그 추천 리스트 데이터
@@ -28,19 +37,65 @@ export default class PostCreateComponent extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.state);
+    // 로딩 화면을 랜더링한다
+    await this.updateState({
+      ...this.state,
+      isLoading: true,
+    });
+
     // 비 로그인 접근시
     if (!this.props.ISLOGIN) {
       // 메인페이지로 이동한다
       window.location.href = "/";
     }
+
+    // React Router가 class Component 지원을 하지 않음으로
+    const targetURL = window.location.pathname.split("/")[3];
+
+    // TypeGuard
+    if (!isNaN(Number(targetURL))) {
+      const postId = Number(targetURL);
+      await this.updateState({ ...this.state, targetPostId: postId });
+    } else {
+      // 메인페이지로 이동한다
+      window.location.href = "/";
+    }
+
+    let postData = {};
+    // 수정하기 위해 포스트 디테일 정보를 로드
+    try {
+      this.setIsFetch(true);
+      postData = await viewDetailPost(this.state.targetPostId);
+    } catch (error) {
+      // 메인페이지로 이동한다
+      window.location.href = "/";
+    } finally {
+      this.setIsFetch(false);
+    }
+
+    // 포스트 수정 권한 체크
+    if (!this.props.USERINFO.id === postData.data.usersId) {
+      // 메인페이지로 이동한다
+      window.location.href = "/";
+    }
+    // 상태를 업데이트한다
+    await this.updateState({
+      ...this.state,
+      title: postData.data.title,
+      originalContentData: postData.data.markDownContent,
+    });
+
+    // 로딩 화면을 종료한다
+    await this.updateState({
+      ...this.state,
+      isLoading: false,
+    });
   }
 
   /**
    * 추가정보입력 모달을 연다
    */
   openAddStepModal = () => {
-    console.log(this.state.contentData);
     this.setState({ ...this.state, addStep: true });
   };
 
@@ -137,7 +192,6 @@ export default class PostCreateComponent extends Component {
     // 카테고리 추천 팝업 삭제
     await this.updateState({ ...this.state, categoryRecommend: [] });
     await this.updateState({ ...this.state, categoryInput: "" });
-    console.log(this.state);
   };
 
   /**
@@ -166,7 +220,7 @@ export default class PostCreateComponent extends Component {
       // 토스트 메시징
       toast("게시물을 등록하고 있습니다.");
 
-      // 썸네일
+      // 콘텐츠 데이터에서 썸네일 탐색
       const thumbNailUrl = this.state.contentData?.content.find((content) => {
         if (content.type === "image") {
           return true;
@@ -186,19 +240,22 @@ export default class PostCreateComponent extends Component {
       };
 
       // 포스트 등록을 요청한다
-      const requestResult = await createPost(requestData);
+      const requestResult = await updatePost(
+        this.state.targetPostId,
+        requestData
+      );
 
       // 상태를 변경하고 종료한다
       this.setIsFetch(false);
 
       // 토스트 메시징
-      toast.success("게시글을 발행했습니다!");
+      toast.success("게시글을 수정했습니다!");
 
       // 포스트 등록이 완료되더라도 대기한다
       await this.waitTime(3000);
 
       // 작성된 게시글로 이동 한다
-      window.location.href = `/${this.props.USERINFO.userName}/${requestResult.data.postId}`;
+      window.location.href = `/${this.props.USERINFO.userName}/${this.state.targetPostId}`;
     } catch (error) {
       // 토스트 메시징
       toast.error("게시글 등록에 실패했습니다..");
@@ -261,7 +318,9 @@ export default class PostCreateComponent extends Component {
   };
 
   render() {
-    return this.state.addStep ? (
+    return this.state.isLoading ? (
+      <LoadingComponent />
+    ) : this.state.addStep ? (
       <AddStepModal
         closeAddStepModal={this.closeAddStepModal}
         setCategoryInput={this.setCategoryInput}
@@ -293,6 +352,8 @@ export default class PostCreateComponent extends Component {
           checkedPrivateBox={this.checkedPrivateBox}
           isFetch={this.state.isFetch}
           imageUpload={this.imageUpload}
+          originalContentData={this.state.originalContentData}
+          contentData={this.state.contentData}
         />
       </div>
     );
