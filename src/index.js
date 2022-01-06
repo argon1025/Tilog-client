@@ -64,6 +64,11 @@ ReactDOM.render(
                 path="/:username"
                 element={<Containers.UserBlogContainer />}
               />
+              {/* 포스트 수정 */}
+              <Route
+                path="/post/modify/:postid"
+                element={<Containers.PostModifyComponent />}
+              />
             </Routes>
           </HelmetProvider>
         </PersistGate>
