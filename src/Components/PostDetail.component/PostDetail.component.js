@@ -6,7 +6,6 @@ import ArticleComponent from "./slave.components/Article.slave.component";
 import HeaderComponent from "../Header.component/Header.component";
 // Hooks
 import { useComments, useViewDetailPost } from "../../utilities/hooks";
-import { useViewDetailPost } from "../../utilities/hooks";
 // helmet
 import { HelmetComponent } from "../";
 
