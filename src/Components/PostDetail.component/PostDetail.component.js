@@ -13,7 +13,7 @@ export default function PostDetailComponent() {
   // Get Params
   const { username, postid } = useParams();
   // Fetching Post Detail
-  const [postData, postDataError, postDataErrorMessage, postDataStatusCode] = useViewDetailPost(postid);
+  const [postData, postDataError, postDataErrorMessage, postDataStatusCode, refreshPostData] = useViewDetailPost(postid);
   // Fetching Comment Data
   const [commentsList, commentsListError, commentsListErrorMessage, commentsListStatusCode, getCommentsList] = useComments(postid);
   return (
@@ -45,6 +45,7 @@ export default function PostDetailComponent() {
         postData={postData}
         commentsList={commentsList}
         getCommentsList={getCommentsList}
+        refreshPostData={refreshPostData}
       />
     </div>
   );

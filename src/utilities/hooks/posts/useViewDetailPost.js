@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { viewDetailPost } from "../../api";
 
 // 포스트 디테일을 가져옵니다.
@@ -37,5 +37,24 @@ export function useViewDetailPost(postId) {
     fetchData()
     return ()=> unmount = true;
   },[postId])
-  return [postData, error, errorMessage, statusCode];
+
+  const refreshPostData = useCallback(async(postId) => {
+    try {
+        const response = await viewDetailPost(postId);
+        setpostData(response.data);
+        setStatusCode(200);
+    } catch (error) {
+      // 서버측 응답이 없는 경우
+      if(!error.response) {
+        setError(true);
+          setErrorMessage(error.message);
+          setStatusCode(502);
+    } else {
+        setError(error.response.data.error);
+        setErrorMessage(error.response.data.message.kr);
+        setStatusCode(error.response.data.statusCode);
+      }
+    }
+  },[])
+  return [postData, error, errorMessage, statusCode, refreshPostData];
 }

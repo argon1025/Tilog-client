@@ -4,6 +4,7 @@ import TitleComponent from "./Title/Title.slave.component";
 import TagsComponent from "./Tags/Tags.slave.component";
 import { PostCommentComponent } from "../..";
 import ArticleSkeleton from "./ArticleSkeleton.slave.component";
+import LikeButtonComponent from "./LikeButton/LikeButton.slave.component";
 
 export default function ArticleComponent({
   postid,
@@ -15,7 +16,8 @@ export default function ArticleComponent({
   commentsListStatusCode,
   postData,
   commentsList,
-  getCommentsList
+  getCommentsList,
+  refreshPostData
 }) {
   // Skeleton Loading
   if (!postDataStatusCode || !commentsListStatusCode) return <ArticleSkeleton />;
@@ -39,12 +41,14 @@ export default function ArticleComponent({
         <Tiptap contentData={postData.markDownContent} />
       </div>
       <hr className="border-gray-200 w-full my-10" />
-        {/*
-          <PostLikeButtonComponent
-          postID={params}
-          likes={!postData ? <>fetching...</> : postData.likes}
+        
+          <LikeButtonComponent
+          postid={postid}
+          isLiked={postData.isLiked}
+          likeCount={postData.likes}
+          refreshPostData={refreshPostData}
           />
-          */}
+         
       {/* Tags */}
       <TagsComponent tags={postData.TagData} />
       {/* Comments */}
