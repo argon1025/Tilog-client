@@ -45,7 +45,7 @@ export default function PostCommentComponent({ postid, commentsList, getComments
             </div>
           )
         }
-        <InputComment createComment={createComment} />
+        <InputComment createComment={createComment} getCommentsList={getCommentsList}/>
       </div>
     </div>
   );

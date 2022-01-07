@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function InputComment({createComment}) {
+export default function InputComment({createComment, getCommentsList}) {
   const [commentData, setCommentData] = useState("");
   return(
     /* Comment input */
@@ -19,7 +19,8 @@ export default function InputComment({createComment}) {
         class="m-3 w-20 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
         type="submit"
         onClick={async()=> {
-          await createComment(commentData, toast)
+          await createComment(commentData, toast);
+          await getCommentsList();
           setCommentData("")
         }}
       >
