@@ -137,15 +137,8 @@ export default function StatsComponent({ username }) {
                   <></>
                 ) : // 더보기 버튼을 눌렀을때
                 isLoad ? (
-                  // 로딩
-                  <div
-                    className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800"
-                    onClick={async () => {
-                      setIsLoad(true);
-                      await getNextPostList();
-                      setIsLoad(false);
-                    }}
-                  >
+                  // 로딩 컴포넌트
+                  <div className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800">
                     <IconContext.Provider
                       value={{
                         className: "animate-spin mr-1 w-3 h-3 text-gray-400",

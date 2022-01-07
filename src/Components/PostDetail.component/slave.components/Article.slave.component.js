@@ -5,6 +5,9 @@ import TagsComponent from "./Tags/Tags.slave.component";
 import { PostCommentComponent } from "../..";
 import ArticleSkeleton from "./ArticleSkeleton.slave.component";
 import LikeButtonComponent from "./LikeButton/LikeButton.slave.component";
+// Icons
+import { FaRegComment } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 export default function ArticleComponent({
   postid,
@@ -17,44 +20,71 @@ export default function ArticleComponent({
   postData,
   commentsList,
   getCommentsList,
-  refreshPostData
+  refreshPostData,
 }) {
   // Skeleton Loading
-  if (!postDataStatusCode || !commentsListStatusCode) return <ArticleSkeleton />;
+  if (!postDataStatusCode || !commentsListStatusCode)
+    return <ArticleSkeleton />;
   // Rendering
   return (
     <div className="mt-10 flex flex-col w-full justify-center items-center">
-      {postDataError ? <>{postDataStatusCode}/{postDataErrorMessage}</> :
-      <>
-      {/* Title */}
-      <TitleComponent
-        title={postData.title}
-        createdAt={postData.createdAt}
-        viewCounts={postData.viewCounts}
-        categoryName={postData.categoryName}
-        postId={postData.id}
-        ownerId={postData.usersId}
-      />
-      <hr className="border-gray-200 w-full my-5 max-w-4xl" />
-      {/* Markdown Contents */}
-      <div className="flex flex-col max-w-4xl w-full mt-10">
-        <Tiptap contentData={postData.markDownContent} />
-      </div>
-      <hr className="border-gray-200 w-full my-10" />
-        
-          <LikeButtonComponent
-          postid={postid}
-          isLiked={postData.isLiked}
-          likeCount={postData.likes}
-          refreshPostData={refreshPostData}
+      {postDataError ? (
+        <>
+          {postDataStatusCode}/{postDataErrorMessage}
+        </>
+      ) : (
+        <>
+          {/* Title */}
+          <TitleComponent
+            title={postData.title}
+            createdAt={postData.createdAt}
+            viewCounts={postData.viewCounts}
+            categoryName={postData.categoryName}
+            postId={postData.id}
+            ownerId={postData.usersId}
           />
-         
-      {/* Tags */}
-      <TagsComponent tags={postData.TagData} />
-      {/* Comments */}
-      <PostCommentComponent postid={postid} commentsList={commentsList} getCommentsList={getCommentsList} />
-      </>
-      }
+
+          <hr className="border-gray-200 w-full my-5 max-w-4xl" />
+
+          {/* Markdown Contents */}
+          <div className="flex flex-col max-w-4xl w-full mt-10">
+            <Tiptap contentData={postData.markDownContent} />
+          </div>
+
+          <hr className="border-gray-200 w-full my-10" />
+
+          {/* Tags 
+          <TagsComponent tags={postData.TagData} />
+        */}
+
+          {/* Like, Comment Component */}
+          <div className="flex flex-col w-full max-w-4xl justify-start items-start ">
+            <div className="flex items-center w-full px-5">
+              {/* Comments Title */}
+              <div className="flex text-gray-600 mr-auto">
+                <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
+                  <FaRegComment />
+                  <span className="text-xs">Comments</span>
+                </IconContext.Provider>
+              </div>
+              {/* Like button */}
+              <LikeButtonComponent
+                postid={postid}
+                isLiked={postData.isLiked}
+                likeCount={postData.likes}
+                refreshPostData={refreshPostData}
+              />
+            </div>
+
+            {/* Comments */}
+            <PostCommentComponent
+              postid={postid}
+              commentsList={commentsList}
+              getCommentsList={getCommentsList}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
