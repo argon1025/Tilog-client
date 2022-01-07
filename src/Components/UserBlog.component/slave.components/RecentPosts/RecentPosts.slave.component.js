@@ -7,9 +7,9 @@ export default function RecentPostsComponent({ username, post }) {
   const clickPostPage = (username, id) => {
     window.location.href = `/${username}/${id}`;
   };
-  console.log(post);
   return (
     <div
+      key={post.id}
       className="flex flex-col w-full lg:max-w-5xl"
       onClick={() => clickPostPage(username, post.id)}
     >

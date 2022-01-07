@@ -3,8 +3,6 @@ import { IconContext } from "react-icons";
 import { GoGitPullRequest, GoGitCommit, GoStar } from "react-icons/go";
 
 export default function UserStatsComponent({ userinfo, gitstats }) {
-  console.log(userinfo);
-  console.log(gitstats);
   return (
     <div className="flex lg:flex-row items-center lg:items-start flex-col max-w-5xl w-full bg-white mt-10 p-10 rounded-lg border border-gray-00">
       <img

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function InputReply({ createReply, commentId }) {
   const [replyData, setReplyData] = useState("");
@@ -18,9 +19,9 @@ export default function InputReply({ createReply, commentId }) {
         <button
           class="m-3 w-20 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
           type="submit"
-          onClick={() => {
+          onClick={async() => {
+            await createReply(commentId, replyData, toast);
             setReplyData("");
-            createReply(commentId, replyData);
           }}
         >
           작성

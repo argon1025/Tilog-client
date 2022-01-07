@@ -22,6 +22,7 @@ export default function PostDetailComponent({ username, postdata }) {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   });
 
   return (

@@ -12,23 +12,40 @@ export function useViewCursorPost(username) {
   // http 상태 코드
   const [statusCode, setStatusCode] = useState(null);
   const cursor = useRef();
+  // 첫 포스트 로딩
   useEffect(()=>{
-        // 1초 대기 후 유저 정보 Fetching
-      const fetchData = setTimeout(async()=> {
+    let unmount  = false
+    const fetchData = async()=> {
+      if(!unmount) {
         try {
-        cursor.current = 0;
-        const { id } = await getUserInfoToUserName(username);
-        const response = await viewCursorPost(id, cursor.current);
-        setPostList(response.data.postListData);
-        cursor.current = response.data.nextCursorNumber
-        setStatusCode(200);
-    } catch (error) {
-      setStatusCode(error.statusCode);
-      setError(error.error);
+          cursor.current = 0;
+          const { id } = await getUserInfoToUserName(username);
+          const response = await viewCursorPost(id, cursor.current);
+          setPostList(response.data.postListData);
+          cursor.current = response.data.nextCursorNumber
+          setStatusCode(200);
+        } catch (error) {
+          // 서버측 응답이 없는 경우
+          if(!error.response) {
+            if(error.message === "Network Error") {
+              setError(true);
+              setErrorMessage("서버와 연결이 끊겼습니다.");
+              setStatusCode(502);
+            } else {
+              setError(true);
+              setErrorMessage(error.message);
+              setStatusCode(502);
+            }
+          } else {
+            setStatusCode(error.response.data.statusCode);
+            setErrorMessage(error.response.data.message.kr);
+            setError(error.response.data.error);
+          }
+        }
+      }
     }
-  }, 1000)
-    // setTimeout cleanup!
-    return ()=> clearTimeout(fetchData);
+  fetchData()
+  return () => unmount = true;
   },[username])
 
     // 다음 포스트 가져오기
@@ -36,14 +53,18 @@ export function useViewCursorPost(username) {
       try {
         const { id } = await getUserInfoToUserName(username)
         const response = await viewCursorPost(id, cursor.current)
-        console.log(response)
         setPostList(oldPostList => [...oldPostList, ...response.data.postListData])
         cursor.current = response.data.nextCursorNumber
         setStatusCode(200);
     } catch (error) {
-        setStatusCode(error.statusCode);
-        setError(error.error);
-        setErrorMessage(error.message);
+        // 서버측 응답이 없는 경우
+        if(!error.response) {
+            setErrorMessage(error.message);
+            setStatusCode(502);
+        } else {
+          setStatusCode(error.response.data.statusCode);
+          setErrorMessage(error.response.data.message.kr);
+        }
       }
     },[username])
 
