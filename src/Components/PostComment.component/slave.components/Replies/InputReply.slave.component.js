@@ -8,7 +8,7 @@ export default function InputReply({ createReply, commentId }) {
       {/* Reply input */}
       <div className="flex  w-full h-28 p-3">
         <input
-          className="px-4 w-full h-full text-base focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
+          className="px-4 w-full h-full text-sm focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
           type="text"
           value={replyData}
           placeholder="답글을 작성해주세요."

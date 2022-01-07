@@ -74,7 +74,11 @@ export default function Replies({
         </div>
       );
     // 최종 렌더링
-    return <span>{replies.comments_htmlContent}</span>;
+    return (
+      <span className="text-sm text-gray-800">
+        {replies.comments_htmlContent}
+      </span>
+    );
   };
   return (
     <div key={replies.comments_id} className="px-3">
@@ -100,7 +104,7 @@ export default function Replies({
           </div>
         </div>
         {/** 댓글 내용 */}
-        <div className="w-full px-12 py-4">
+        <div className="w-full px-5 py-4">
           {!isUpdateMode ? (
             <RenderRepliesContents />
           ) : (
