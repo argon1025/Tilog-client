@@ -9,7 +9,6 @@ export function useCommentTools(postsId) {
         try {
           await createComment(postsId, htmlContent)
         } catch (error) {
-          console.log(error.response);
           // 서버측 응답이 없는 경우
           if(!error.response) {
               if(error.message === "Network Error") {
