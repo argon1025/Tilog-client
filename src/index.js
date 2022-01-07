@@ -36,11 +36,11 @@ ReactDOM.render(
         <PersistGate loading={null} persistor={persistor}>
           <Toaster
             toastOptions={{
-              className: "p-4 filter drop-shadow-2xl text-xs w-64 h-14",
+              className:
+                "filter drop-shadow-2xl text-xs mt-16 w-full md:w-64 h-14",
               style: {
-                borderRadius: "20px",
-                backgroundColor: "rgba(255, 255, 255, 0.4)",
-                backdropFilter: "blur(5px)",
+                borderRadius: "2px",
+                backgroundColor: "rgba(255, 255, 255)",
               },
             }}
           />
