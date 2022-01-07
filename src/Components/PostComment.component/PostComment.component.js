@@ -3,25 +3,22 @@ import React from "react";
 import { FaRegComment } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
-// Hooks
-import { useComments } from "../../utilities/hooks";
-
 // Components
 import Comments from "./slave.components/Comments/Comments.slave.component";
 import InputComment from "./slave.components/Comments/InputComment.slave.component";
+import { useCommentTools } from "../../utilities/hooks/comments/useCommentTools";
 
 /**
  * @Todo 스켈레톤 로딩
  * @Todo 로그인 안한 유저
  */
-export default function PostCommentComponent({ postid }) {
+export default function PostCommentComponent({ postid, commentsList, getCommentsList }) {
   const [
-    comments,
     createComment,
     updateComment,
     deleteComment,
     restoreComment,
-  ] = useComments(postid);
+  ] = useCommentTools(postid);
   return (
     <div className="flex flex-col w-full max-w-4xl justify-start items-start my-10 px-5 overflow-hidden">
       <div className="flex text-gray-600 mr-3 my-5">
@@ -33,20 +30,21 @@ export default function PostCommentComponent({ postid }) {
       </div>
       {/* content */}
       <div className="w-full">
-        {!comments ? (
-          <>스켈레톤</>
-        ) : (
-          comments.map((comment) => (
+        {
+        commentsList.length === 0 ? <>댓글이 없습니다!</> :
+        commentsList.map((comment) => 
+        <div key={comment.comments_id}>
             <Comments
-              key={comment.comments_id}
               postid={postid}
               comment={comment}
+              getCommentsList={getCommentsList}
               updateComment={updateComment}
               deleteComment={deleteComment}
               restoreComment={restoreComment}
             />
-          ))
-        )}
+            </div>
+          )
+        }
         <InputComment createComment={createComment} />
       </div>
     </div>

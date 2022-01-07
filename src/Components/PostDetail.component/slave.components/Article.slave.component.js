@@ -7,17 +7,23 @@ import ArticleSkeleton from "./ArticleSkeleton.slave.component";
 
 export default function ArticleComponent({
   postid,
-  error,
-  statusCode,
+  postDataError,
+  commentsListError,
+  postDataErrorMessage,
+  commentsListErrorMessage,
+  postDataStatusCode,
+  commentsListStatusCode,
   postData,
+  commentsList,
+  getCommentsList
 }) {
   // Skeleton Loading
-  if (!statusCode) return <ArticleSkeleton />;
-  // Error Page
-  if (error) return <>{statusCode}</>;
+  if (!postDataStatusCode || !commentsListStatusCode) return <ArticleSkeleton />;
   // Rendering
   return (
     <div className="mt-10 flex flex-col w-full justify-center items-center">
+      {postDataError ? <>{postDataStatusCode}/{postDataErrorMessage}</> :
+      <>
       {/* Title */}
       <TitleComponent
         title={postData.title}
@@ -31,16 +37,18 @@ export default function ArticleComponent({
         <Tiptap contentData={postData.markDownContent} />
       </div>
       <hr className="border-gray-200 w-full my-10" />
-      {/*
-        <PostLikeButtonComponent
-        postID={params}
-        likes={!postData ? <>fetching...</> : postData.likes}
-        />
-        */}
+        {/*
+          <PostLikeButtonComponent
+          postID={params}
+          likes={!postData ? <>fetching...</> : postData.likes}
+          />
+          */}
       {/* Tags */}
       <TagsComponent tags={postData.TagData} />
       {/* Comments */}
-      <PostCommentComponent postid={postid} />
+      <PostCommentComponent postid={postid} commentsList={commentsList} getCommentsList={getCommentsList} />
+      </>
+      }
     </div>
   );
 }
