@@ -29,6 +29,20 @@ import MenuBar from "./MenuBar.slave.component";
 export default function Tiptap(props) {
   const CONTENT_LIMIT = 10000;
 
+  const stringToJson = (contentData) => {
+    try {
+      const markdownContentData = JSON.parse(contentData);
+      return markdownContentData;
+    } catch (error) {
+      return undefined;
+    }
+  };
+
+  // 만약 게시글 발행 버튼 입력으로 contentData 가 저장 되었을 경우 처음 콘텐츠 데이터를 로드하지 않습니다
+  const contentData = props.contentData
+    ? props.getContent()
+    : stringToJson(props.originalContentData);
+
   // 에디터 초기화
   let editor = useEditor({
     extensions: [
@@ -77,18 +91,16 @@ export default function Tiptap(props) {
     },
     autofocus: true,
     editable: true,
-    content: props.getContent(),
+    content: contentData,
   });
 
   // 이미지 업로드 컨테이너 메서드와 연결
   const imageUpload = async (blob) => {
     try {
-      console.log(blob);
       const result = await props.imageUpload(blob);
       editor.chain().focus().setImage({ src: result }).run();
     } catch (error) {
       console.log("Image Upload failed");
-      console.log(error);
     }
   };
 

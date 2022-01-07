@@ -6,6 +6,8 @@ import PostCreateComponent from "./PostCreate.component/PostCreate.component";
 import UserBlogComponent from "./UserBlog.component/UserBlog.component";
 import ProfileDropdownComponent from "./ProfileDropdown.component/ProfileDropdown.component";
 import TechIconLoader from "./Utility.components/techIconLoader";
+import HelmetComponent from "./Helmet.component/Helmet.component";
+import PostModifyComponent from "./PostModify.componen/PostModify.component";
 
 export {
   TestComponent,
@@ -16,4 +18,6 @@ export {
   UserBlogComponent,
   ProfileDropdownComponent,
   TechIconLoader,
+  HelmetComponent,
+  PostModifyComponent,
 };

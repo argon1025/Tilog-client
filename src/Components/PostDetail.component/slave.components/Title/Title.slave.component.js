@@ -8,7 +8,10 @@ export default function TitleComponent({
   viewCounts,
   likes,
   categoryName,
+  postId,
+  ownerId,
 }) {
+  console.log(`${postId} ${ownerId}`);
   return (
     <div className="flex flex-col w-full max-w-6xl justify-start items-start my-10 px-10 overflow-hidden">
       <div>
@@ -22,7 +25,7 @@ export default function TitleComponent({
         <h1 className="text-5xl font-medium text-gray-800">{title}</h1>
       </div>
       {/* Info */}
-      <div className="flex flex-row my-10">
+      <div className="flex flex-row my-10 w-full">
         <div className="flex text-gray-600 mr-3">
           <span className="text-xs">
             {new Date(createdAt).getFullYear()}-
@@ -31,6 +34,14 @@ export default function TitleComponent({
         </div>
         <div className="flex text-gray-600 mr-3">
           <span className="text-xs">{viewCounts} viewed</span>
+        </div>
+        <div className="ml-auto flex">
+          <div className="flex text-gray-600 hover:text-blue-500 mr-3 cursor-pointer">
+            <span className="text-xs ">게시글 수정</span>
+          </div>
+          <div className="flex text-gray-600 hover:text-blue-500 mr-3 cursor-pointer">
+            <span className="text-xs">삭제</span>
+          </div>
         </div>
         {/* <div className="flex text-gray-600  mr-3">
             <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
