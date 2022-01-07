@@ -12,36 +12,40 @@ export function useViewCursorPost(username) {
   // http 상태 코드
   const [statusCode, setStatusCode] = useState(null);
   const cursor = useRef();
+  // 첫 포스트 로딩
   useEffect(()=>{
-        // 1초 대기 후 유저 정보 Fetching
-      const fetchData = async()=> {
+    let unmount  = false
+    const fetchData = async()=> {
+      if(!unmount) {
         try {
-        cursor.current = 0;
-        const { id } = await getUserInfoToUserName(username);
-        const response = await viewCursorPost(id, cursor.current);
-        setPostList(response.data.postListData);
-        cursor.current = response.data.nextCursorNumber
-        setStatusCode(200);
-    } catch (error) {
-      if(!error.message.kr) {
-        if(error.message === "Network Error") {
-          console.log(error.message)
-          setStatusCode(502);
-          setError(true);
-          setErrorMessage("서버와 연결이 끊겼습니다.");
-        } else {
-          setStatusCode(502);
-          setError(true);
-          setErrorMessage(error.message);
+          cursor.current = 0;
+          const { id } = await getUserInfoToUserName(username);
+          const response = await viewCursorPost(id, cursor.current);
+          setPostList(response.data.postListData);
+          cursor.current = response.data.nextCursorNumber
+          setStatusCode(200);
+        } catch (error) {
+          // 서버측 응답이 없는 경우
+          if(!error.response) {
+            if(error.message === "Network Error") {
+              setError(true);
+              setErrorMessage("서버와 연결이 끊겼습니다.");
+              setStatusCode(502);
+            } else {
+              setError(true);
+              setErrorMessage(error.message);
+              setStatusCode(502);
+            }
+          } else {
+            setStatusCode(error.response.data.statusCode);
+            setErrorMessage(error.response.data.message.kr);
+            setError(error.response.data.error);
+          }
         }
-    }else {
-        console.log(error.message.kr)
-        setStatusCode(error.statusCode);
-        setError(error.error);
-        setErrorMessage(error.message.kr);
       }
     }
-  }
+  fetchData()
+  return () => unmount = true;
   },[username])
 
     // 다음 포스트 가져오기
@@ -53,9 +57,14 @@ export function useViewCursorPost(username) {
         cursor.current = response.data.nextCursorNumber
         setStatusCode(200);
     } catch (error) {
-        setStatusCode(error.statusCode);
-        setError(error.error);
-        setErrorMessage(error.message);
+        // 서버측 응답이 없는 경우
+        if(!error.response) {
+            setErrorMessage(error.message);
+            setStatusCode(502);
+        } else {
+          setStatusCode(error.response.data.statusCode);
+          setErrorMessage(error.response.data.message.kr);
+        }
       }
     },[username])
 

@@ -22,14 +22,14 @@ export function useUserStats(username) {
             setStatusCode(200);
           } catch (error) {
             if(!error.response) {
-              setError(true);
-              setStatusCode(502);
-              setErrorMessage("서버와 연결이 끊겼습니다.");
+                setError(true);
+                setErrorMessage(error.message);
+                setStatusCode(502);
             }
           else {
             setError(error.response.data.error === 'true' ? true : false);
-            setStatusCode(error.response.data.statusCode);
             setErrorMessage(error.response.data.message);
+            setStatusCode(error.response.data.statusCode);
           }
         }
       }

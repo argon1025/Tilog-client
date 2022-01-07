@@ -21,21 +21,15 @@ export function useViewDetailPost(postId) {
             setpostData(response.data);
             setStatusCode(200);
         } catch (error) {
-          if(!error.message.kr) {
-            if(error.message === "Network Error") {
-              console.log(error.message)
-              setStatusCode(502);
-              setError(true);
-              setErrorMessage("서버와 연결이 끊겼습니다.");
-            } else {
-              setStatusCode(502);
-              setError(true);
+          // 서버측 응답이 없는 경우
+          if(!error.response) {
+            setError(true);
               setErrorMessage(error.message);
-            }
-        }else {
-            setStatusCode(error.statusCode);
-            setError(error.error);
-            setErrorMessage(error.message.kr);
+              setStatusCode(502);
+        } else {
+            setError(error.response.data.error);
+            setErrorMessage(error.response.data.message.kr);
+            setStatusCode(error.response.data.statusCode);
           }
         }
       }

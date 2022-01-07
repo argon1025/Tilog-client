@@ -29,19 +29,21 @@ export function useUserTopLanguage(username) {
           setStatusCode(200)
         } catch (error) {
           if(!error.response) {
-            setError(true);
-            setStatusCode(502);
-            setErrorMessage("서버와 연결이 끊겼습니다.");
+              setError(true);
+              setErrorMessage(error.message);
+              setStatusCode(502);
           }
           else {
             setError(error.response.data.error === 'true' ? true : false);
-            setStatusCode(error.response.data.statusCode);
             setErrorMessage(error.response.data.message);
+            setStatusCode(error.response.data.statusCode);
           }
         }
       }
     }
     fetchData();
+    console.log("핀레포 훅")
+    console.log(gitTopLanguage, error, errorMessage, statusCode)
     return ()=> unmount = true;
     },[username])
     return [gitTopLanguage, error, errorMessage, statusCode]
