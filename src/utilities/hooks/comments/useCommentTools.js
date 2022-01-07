@@ -22,8 +22,10 @@ export function useCommentTools(postsId) {
                 toast.error(`${error.response.data.message.kr}`)
                 dispatch(expiredUserSession());
               }
-              console.log(error)
-              toast.error(`${error.response.data.message.kr}`)
+              else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+              else {
+                toast.error(`${error.response.data.message.kr}`)
+              }
             }
         }
       },[dispatch, postsId])
@@ -45,7 +47,10 @@ export function useCommentTools(postsId) {
             toast.error(`${error.response.data.message.kr}`)
             dispatch(expiredUserSession());
           }
-            toast.error(`${error.response.data.message.kr}`)
+            else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+            else {
+              toast.error(`${error.response.data.message.kr}`)
+            }
           }
         }
       },[dispatch])
@@ -68,7 +73,10 @@ export function useCommentTools(postsId) {
             toast.error(`${error.response.data.message.kr}`)
             dispatch(expiredUserSession());
           }
-            toast.error(`${error.response.data.message.kr}`)
+            else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+            else {
+              toast.error(`${error.response.data.message.kr}`)
+            }
           }
         }
       },[dispatch])
@@ -86,7 +94,10 @@ export function useCommentTools(postsId) {
                 toast.error(`${error.response.data.message.kr}`)
                 dispatch(expiredUserSession());
               }
-            toast.error(`${error.response.data.message.kr}`)
+            else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+            else {
+              toast.error(`${error.response.data.message.kr}`)
+            }
           }
         }
       },[dispatch])
