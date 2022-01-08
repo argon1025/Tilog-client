@@ -5,7 +5,6 @@ import { FaHotjar, FaWpexplorer } from "react-icons/fa";
 import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
 import { ProfileDropdownComponent } from "..";
-import PostCard from "./slave.components/postCard.component/postCard.slave.component";
 import PostRank from "./slave.components/postCard.component/postRank.slave.component";
 
 export default class IntroduceComponent extends Component {
