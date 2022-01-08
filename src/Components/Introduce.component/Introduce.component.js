@@ -12,6 +12,9 @@ export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
+    this.state = {
+      searchScope: "WEEK"
+    }
   }
   /**
    * 로고 클릭 이벤트
@@ -38,6 +41,7 @@ export default class IntroduceComponent extends Component {
     }
   };
   render() {
+    console.log(this.state.searchScope);
     let title = "<TILog />";
     return (
       <div className="flex flex-col select-none w-full h-full">
@@ -55,7 +59,7 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-              <ProfileDropdownComponent />
+              <ProfileDropdownComponent searchScope={this.state.searchScope}/>
             </div>
           </div>
         </div>
@@ -70,9 +74,11 @@ export default class IntroduceComponent extends Component {
                 <span className="text-xs">TRENDING ON TILOG</span>
               </IconContext.Provider>
             </div>
+            <span onClick={()=> this.setState({ searchScope: "DAY" })}>1일</span>
+            <span onClick={()=> this.setState({ searchScope: "WEEK" })}>7일</span>
+            <span onClick={()=> this.setState({ searchScope: "MONTH" })}>30일</span>
           </div>
         </div>
-
         {/* content */}
         <div className="flex-1 flex flex-col w-full bg-gray-100 items-center">
           <div className="w-full flex flex-col sm:flex-wrap sm:flex-row gap-10 items-center justify-center">
