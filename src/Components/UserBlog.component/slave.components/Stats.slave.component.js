@@ -16,7 +16,7 @@ import {
   useUserTopLanguage,
   useViewCursorPost,
 } from "../../../utilities/hooks";
-import StatsSkeleton from "./StatsSkeleton.slave.component";
+import StatsSkeleton from "./Skeleton/StatsSkeleton.slave.component";
 import { useState } from "react";
 
 export default function StatsComponent({ username }) {

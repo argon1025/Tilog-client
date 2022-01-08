@@ -59,9 +59,11 @@ export function useViewCursorPost(username) {
     } catch (error) {
         // 서버측 응답이 없는 경우
         if(!error.response) {
+            setError(true);
             setErrorMessage(error.message);
             setStatusCode(502);
         } else {
+          setError(true);
           setStatusCode(error.response.data.statusCode);
           setErrorMessage(error.response.data.message.kr);
         }
