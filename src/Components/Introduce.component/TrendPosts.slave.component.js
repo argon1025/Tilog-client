@@ -4,90 +4,28 @@ import { FaRegThumbsUp, FaClock, FaLock, FaCheckDouble } from "react-icons/fa";
 import TechIconLoader from "../Utility.components/techIconLoader";
 import { formatDistance, subDays } from "date-fns";
 import { useTrendPosts } from "../../utilities/hooks/posts/useTrendPosts";
+import PostRank from "./slave.components/postCard.component/postRank.slave.component";
 
 export default function TrendPostsComponent() {
   const [postList, error, errorMessage, statusCode, getNextPostList] = useTrendPosts("WEEK")
   const clickPostPage= (id) => {
     window.open(`/post?postid=${id}`, "_blank");
   };
-  console.log(errorMessage)
+  if(!statusCode) return <>스캘래톤</>
+  if(error) return <>{errorMessage}</>
+  console.log(postList)
   return (
     <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
       {/* Card Area */}
       {/* Card */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-5xl gap-5">
-        {!postList ? (
-          <></>
-        ) : (
-          postList.postListData.map((post) => (
-            <div
-              key={post.posts_id}
-              className="rounded-lg w-full h-72 bg-white shadow-lg cursor-pointer"
-              onClick={()=> clickPostPage(post.posts_id)}
-            >
-              {/* Category Icon */}
-              <div className="absolute m-3 bg-white flex items-center justify-center w-9 h-9 rounded-xl shadow-lg">
-                <TechIconLoader
-                  iconName={post.category_categoryName}
-                  color="#393939"
-                />
-              </div>
-              {/* Image */}
-              <img
-                class="rounded-t-lg h-44 w-full object-cover"
-                src={post.posts_thumbNailURL}
-                alt=""
-              />
-              {/* Card content */}
-              <div>
-                {/* title */}
-                <div className="relative p-3">
-                  <h5 class="text-gray-800 font-bold text-base tracking-tight w-full h-12 truncate">
-                    {post.posts_title}
-                  </h5>
-                </div>
-                <hr className="w-full" />
-                {/* Info */}
-                <div className="flex items-center mt-3 mx-3">
-                  <div className="flex items-center mr-auto">
-                    <IconContext.Provider
-                      value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                    >
-                      <FaRegThumbsUp />
-                    </IconContext.Provider>
-                    <p className="text-gray-400 text-xs">{post.posts_likes}</p>
-                  </div>
-                  <div className="flex mr-3 items-center">
-                    <IconContext.Provider
-                      value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                    >
-                      <FaClock />
-                    </IconContext.Provider>
-                    <p className="text-gray-400 text-xs">
-                      {formatDistance(
-                        subDays(new Date(post.posts_createdAt), 1),
-                        new Date(),
-                        { addSuffix: true }
-                      )}
-                    </p>
-                  </div>
-                  {post.posts_private === 0 ? (
-                    <></>
-                  ) : (
-                    <div className="flex items-center">
-                      <IconContext.Provider
-                        value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                      >
-                        <FaLock />
-                      </IconContext.Provider>
-                      <p className="text-gray-400 text-xs">Locked</p>
-                    </div>
-                  )}
-                </div>
-              </div>
+        {
+          postList.map((post) => (
+            <div key={post.id}>
+              <PostRank title={post.title} username={post.users.userName} image={post.thumbNailUrl} />
             </div>
           ))
-        )}
+        }
         {/* Card End */}
       </div>
       {/* Post Load Button */}

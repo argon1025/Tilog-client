@@ -6,6 +6,7 @@ import NotFoundContent from "./NotFoundContent.component";
 import { logout } from "../../utilities/api";
 import { ProfileDropdownComponent } from "..";
 import PostRank from "./slave.components/postCard.component/postRank.slave.component";
+import TrendPostsComponent from "./TrendPosts.slave.component";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -75,20 +76,8 @@ export default class IntroduceComponent extends Component {
         {/* content */}
         <div className="flex-1 flex flex-col w-full bg-gray-100 items-center">
           <div className="w-full flex flex-col sm:flex-wrap sm:flex-row gap-10 items-center justify-center">
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
-            <PostRank />
           </div>
-          {/* <TrendPostsComponent /> */}
+          <TrendPostsComponent />
         </div>
         <hr className="border-gray-200" />
 

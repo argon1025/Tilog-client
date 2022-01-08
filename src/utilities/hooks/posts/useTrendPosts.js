@@ -20,6 +20,7 @@ export function useTrendPosts(searchScope) {
         try {
           cursor.current = 0;
           const response = await viewTrendPosts(searchScope);
+          console.log(response)
           setPostList(response.data.postListData);
           cursor.current = response.data.nextCursorNumber
           setStatusCode(200);
