@@ -5,12 +5,12 @@ import TechIconLoader from "../Utility.components/techIconLoader";
 import { formatDistance, subDays } from "date-fns";
 import { useTrendPosts } from "../../utilities/hooks/posts/useTrendPosts";
 
-export default function TrendPostsComponent({}) {
-  let nextCursorNumber = 0;
-  const postList = useTrendPosts()
+export default function TrendPostsComponent() {
+  const [postList, error, errorMessage, statusCode, getNextPostList] = useTrendPosts("WEEK")
   const clickPostPage= (id) => {
     window.open(`/post?postid=${id}`, "_blank");
   };
+  console.log(errorMessage)
   return (
     <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
       {/* Card Area */}
