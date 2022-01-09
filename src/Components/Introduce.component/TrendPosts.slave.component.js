@@ -7,25 +7,29 @@ import { useTrendPosts } from "../../utilities/hooks/posts/useTrendPosts";
 import PostRank from "./slave.components/postCard.component/postRank.slave.component";
 
 export default function TrendPostsComponent() {
-  const [postList, error, errorMessage, statusCode, getNextPostList] = useTrendPosts("WEEK")
-  const clickPostPage= (id) => {
+  const [postList, error, errorMessage, statusCode, getNextPostList] =
+    useTrendPosts("WEEK");
+  const clickPostPage = (id) => {
     window.open(`/post?postid=${id}`, "_blank");
   };
-  if(!statusCode) return <>스캘래톤</>
-  if(error) return <>{errorMessage}</>
-  console.log(postList)
+  if (!statusCode) return <>스캘래톤</>;
+  if (error) return <>{errorMessage}</>;
+  console.log(postList);
   return (
-    <div className="flex flex-col max-w-5xl w-full bg-white dark:bg-gray-800 p-10">
+    <div className="flex flex-col w-full justify-center items-center">
       {/* Card Area */}
       {/* Card */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-5xl gap-5">
-        {
-          postList.map((post) => (
-            <div key={post.id}>
-              <PostRank title={post.title} username={post.users.userName} image={post.thumbNailUrl} />
-            </div>
-          ))
-        }
+      <div className="w-full max-w-7xl flex flex-col md:flex-row md:flex-wrap md:gap-x-14 gap-y-12 justify-center items-center">
+        {postList.map((post) => (
+          <div key={post.id}>
+            <PostRank
+              key={post.id}
+              title={post.title}
+              username={post.users.userName}
+              image={post.thumbNailUrl}
+            />
+          </div>
+        ))}
         {/* Card End */}
       </div>
       {/* Post Load Button */}
