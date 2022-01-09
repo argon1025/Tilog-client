@@ -21,7 +21,7 @@ export function useDeletePost(username) {
                 toast.error(`${error.message}`)
             }
         } else {
-          if(error.statusCode === 403) {
+          if(error.response.data.statusCode === 403) {
             toast.error(`${error.response.data.message.kr}`)
             dispatch(expiredUserSession());
           }

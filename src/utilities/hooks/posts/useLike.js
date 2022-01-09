@@ -4,7 +4,7 @@ import { expiredUserSession } from "../../../Redux/action";
 import { setLikePost, unSetLikePost } from "../../api";
 
 // 좋아요!
-export function useLike(postID) {
+export function useLike() {
     const dispatch = useDispatch();
     const setLike = useCallback(async(postId, toast)=> {
     try {
@@ -18,10 +18,10 @@ export function useLike(postID) {
             toast.error(`${error.message}`)
         }
     } else {
-        if(error.statusCode === 403) {
-          toast.error(`${error.response.data.message.kr}`)
-          dispatch(expiredUserSession());
-        }
+      if(error.response.data.statusCode === 403) {
+        toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
         else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
         else {
           toast.error(`${error.response.data.message.kr}`)
@@ -42,16 +42,16 @@ export function useLike(postID) {
             toast.error(`${error.message}`)
         }
     } else {
-        if(error.statusCode === 403) {
-          toast.error(`${error.response.data.message.kr}`)
-          dispatch(expiredUserSession());
-        }
+      if(error.response.data.statusCode === 403) {
+        toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
         else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
         else {
           toast.error(`${error.response.data.message.kr}`)
         }
-      }
     }
+  }
   },[dispatch])
   return [setLike, unSetLike];
 }
