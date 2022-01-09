@@ -4,8 +4,8 @@ import PostCommentContainer from "./PostComment.container/PostComment.container"
 import PostCreateContainer from "./PostCreate.container/PostCreate.container";
 import UserBlogContainer from "./UserBlog.container/UserBlog.container";
 import ProfileDropdownContainer from "./ProfileDropdown.container/ProfileDropdown.container";
-import PostModifyComponent from "./PostMofidy.container/PostModify.container";
-
+import PostModifyContainer from "./PostMofidy.container/PostModify.container";
+import LoginContainer from "./Login.container/Login.container";
 export {
   IntroduceContainer,
   PostDetailContainer,
@@ -13,5 +13,6 @@ export {
   PostCreateContainer,
   UserBlogContainer,
   ProfileDropdownContainer,
-  PostModifyComponent,
+  PostModifyContainer,
+  LoginContainer
 };
