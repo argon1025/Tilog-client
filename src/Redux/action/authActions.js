@@ -25,6 +25,5 @@ export const getUserInfo = () =>{
 //     return dispatch => dispatch
 // }
 export const expiredUserSession = () => {
-    console.log("인증?")
     return dispatch => dispatch({ type: GET_USER_USERINFO_SESSION_EXPIRED, ISLOGIN: false, USERINFO: null, AUTHERROR: "세션이 만료되었습니다." })
 }

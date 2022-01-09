@@ -17,14 +17,17 @@ export function useReplies(postsId) {
       if(!error.response) {
         toast.error(`${error.message}`)
     } else {
-          if(error.statusCode === 403) {
-            toast.error(`${error.response.data.message.kr}`)
-            dispatch(expiredUserSession());
-          }
+      if(error.response.data.statusCode === 403) {
         toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
+        else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+        else {
+          toast.error(`${error.response.data.message.kr}`)
+        }
       }
     }
-  },[])
+  },[dispatch])
   // 새로운 코멘트 작성
   const fetchWriteReply  = useCallback(async (commentId, htmlContent, toast)=>{
     try {
@@ -36,14 +39,17 @@ export function useReplies(postsId) {
       if(!error.response) {
         toast.error(`${error.message}`)
     } else {
-          if(error.statusCode === 403) {
-            toast.error(`${error.response.data.message.kr}`)
-            dispatch(expiredUserSession());
-          }
+      if(error.response.data.statusCode === 403) {
         toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
+        else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+        else {
+          toast.error(`${error.response.data.message.kr}`)
+        }
       }
     }
-  },[postsId])
+  },[dispatch, postsId])
   // 코멘트 수정
   const fetchUpdateReply = useCallback(async(commentId, repliyId, htmlContent, toast)=>{
     try {
@@ -56,14 +62,17 @@ export function useReplies(postsId) {
       if(!error.response) {
         toast.error(`${error.message}`)
     } else {
-          if(error.statusCode === 403) {
-            toast.error(`${error.response.data.message.kr}`)
-            dispatch(expiredUserSession());
-          }
+      if(error.response.data.statusCode === 403) {
         toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
+        else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+        else {
+          toast.error(`${error.response.data.message.kr}`)
+        }
       }
     }
-  },[])
+  },[dispatch])
   // 코멘트 삭제
   const fetchDeleteReply = useCallback(async(commentId, repliyId, toast)=>{
     try {
@@ -76,14 +85,17 @@ export function useReplies(postsId) {
       if(!error.response) {
         toast.error(`${error.message}`)
     } else {
-          if(error.statusCode === 403) {
-            toast.error(`${error.response.data.message.kr}`)
-            dispatch(expiredUserSession());
-          }
+      if(error.response.data.statusCode === 403) {
         toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
+        else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+        else {
+          toast.error(`${error.response.data.message.kr}`)
+        }
       }
     }
-  },[])
+  },[dispatch])
   // 코멘트 복구
   const fetchRestoreReply = useCallback(async(commentId, repliyId, toast)=>{
     try {
@@ -96,14 +108,17 @@ export function useReplies(postsId) {
       if(!error.response) {
         toast.error(`${error.message}`)
     } else {
-          if(error.statusCode === 403) {
-            toast.error(`${error.response.data.message.kr}`)
-            dispatch(expiredUserSession());
-          }
+      if(error.response.data.statusCode === 403) {
         toast.error(`${error.response.data.message.kr}`)
+        dispatch(expiredUserSession());
+      }
+        else if(!error.response.data.message.kr) toast.error(`${error.response.data.message}`)
+        else {
+          toast.error(`${error.response.data.message.kr}`)
+        }
       }
     }
-  },[])
+  },[dispatch])
   // 답글 작성
     return [repliesList, fetchReplies, fetchWriteReply, fetchUpdateReply, fetchDeleteReply, fetchRestoreReply]
 }

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { IconContext } from "react-icons";
 import { FaSignOutAlt, FaCaretRight } from "react-icons/fa";
@@ -6,16 +6,14 @@ import { CgChevronLeftO, CgChevronDownO } from "react-icons/cg";
 import { DiGithubBadge } from "react-icons/di";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../utilities/api";
-import { expiredUserSession, getUserInfo } from "../../Redux/action";
+import { expiredUserSession } from "../../Redux/action";
 
 export default function ProfileDropdownComponent() {
   const session = useSelector((store) => store.AuthReducer.USERINFO);
   const islogin = useSelector((store) => store.AuthReducer.ISLOGIN);
   // useSelector((store) => console.log(store));
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUserInfo());
-  }, [dispatch]);
+
   /**
    * 새 포스트
    */

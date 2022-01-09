@@ -67,7 +67,12 @@ ReactDOM.render(
               {/* 포스트 수정 */}
               <Route
                 path="/post/modify/:postid"
-                element={<Containers.PostModifyComponent />}
+                element={<Containers.PostModifyContainer />}
+              />
+              {/* 로그인 컴펌 */}
+              <Route
+                path="/login"
+                element={<Containers.LoginContainer />}
               />
             </Routes>
           </HelmetProvider>
