@@ -13,8 +13,8 @@ export default class IntroduceComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchScope: "WEEK"
-    }
+      searchScope: "WEEK",
+    };
   }
   /**
    * 로고 클릭 이벤트
@@ -59,7 +59,7 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-              <ProfileDropdownComponent searchScope={this.state.searchScope}/>
+              <ProfileDropdownComponent searchScope={this.state.searchScope} />
             </div>
           </div>
         </div>
@@ -68,21 +68,40 @@ export default class IntroduceComponent extends Component {
         <div className="flex-0 flex flex-col justify-center items-center bg-gray-100 py-10">
           <div className="flex max-w-5xl flex-col w-full px-4">
             {/* title */}
-            <div className="flex text-gray-600">
-              <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
+            <div className="flex flex-row items-center justify-center text-gray-600">
+              {/* title Icon */}
+              <IconContext.Provider value={{ className: "w-3 h-3" }}>
                 <FaHotjar />
-                <span className="text-xs">TRENDING ON TILOG</span>
+                <span className="text-sm text-gray-700">TRENDING ON TILOG</span>
               </IconContext.Provider>
+              {/* title Text */}
+              {/* searchScope */}
+              <div className="ml-auto">
+                <span
+                  onClick={() => this.setState({ searchScope: "DAY" })}
+                  className="text-sm border-r-2 pr-2 cursor-pointer hover:text-gray-800"
+                >
+                  Today
+                </span>
+                <span
+                  onClick={() => this.setState({ searchScope: "WEEK" })}
+                  className="text-sm pl-2 border-r-2 pr-2 cursor-pointer hover:text-gray-800"
+                >
+                  Weekly
+                </span>
+                <span
+                  onClick={() => this.setState({ searchScope: "MONTH" })}
+                  className="text-sm pl-2 cursor-pointer hover:text-gray-800"
+                >
+                  Monthly
+                </span>
+              </div>
             </div>
-            <span onClick={()=> this.setState({ searchScope: "DAY" })}>1일</span>
-            <span onClick={()=> this.setState({ searchScope: "WEEK" })}>7일</span>
-            <span onClick={()=> this.setState({ searchScope: "MONTH" })}>30일</span>
           </div>
         </div>
         {/* content */}
         <div className="flex-1 flex flex-col w-full bg-gray-100 items-center">
-          <div className="w-full flex flex-col sm:flex-wrap sm:flex-row gap-10 items-center justify-center">
-          </div>
+          <div className="w-full flex flex-col sm:flex-wrap sm:flex-row gap-10 items-center justify-center"></div>
           <TrendPostsComponent />
         </div>
         <hr className="border-gray-200" />
