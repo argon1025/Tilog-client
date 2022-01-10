@@ -68,7 +68,7 @@ workflows:
               only:
                 - release
       - cloudfront-s3-deploy/sync-and-invalidate:
-          bucket-name: "${AWS_BUCKET_NAME}"
+          bucket-name: "'${AWS_BUCKET_NAME}'"
           distribution-id: "${AWS_DISTRIBUTION_ID}"
           local: "build/"
           checkout: false
