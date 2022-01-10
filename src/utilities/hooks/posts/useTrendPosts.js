@@ -58,9 +58,9 @@ export function useTrendPosts() {
           setStatusCode(502);
         }
       } else {
-        setStatusCode(error.response.data.statusCode);
-        setErrorMessage(error.response.data.message.kr);
         setError(error.response.data.error);
+        setErrorMessage(error.response.data.message.kr);
+        setStatusCode(error.response.data.statusCode);
       }
     }
   },[])
@@ -95,8 +95,8 @@ export function useTrendPosts() {
             setStatusCode(502);
         } else {
           setError(true);
-          setStatusCode(error.response.data.statusCode);
           setErrorMessage(error.response.data.message.kr);
+          setStatusCode(error.response.data.statusCode);
         }
       }
     },[])
