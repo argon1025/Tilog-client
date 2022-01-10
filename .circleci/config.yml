@@ -1,0 +1,51 @@
+version: 2.1
+
+# 오브를 호출합니다
+orbs:
+  cloudfront-s3-deploy: trustedshops-public/cloudfront-s3-deploy@2.0.0
+# 워크플로우에서 사용할 작업을 정의합니다
+jobs:
+  # 테스트 빌드를 진행하는 작업입니다
+  BuildTest:
+    docker:
+      - image: cimg/node:lts-browsers
+    steps:
+      - checkout
+      - run:
+          name: "install npm module"
+          command: |
+            yarn install
+      - run:
+          name: "build project"
+          command: |
+            yarn build
+  # CircleCI 컨텍스트를 활용해 .ENV 파일을 프로젝트 폴더에 생성해주는 작업입니다
+  createEnv:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: "Create .env file"
+          command: |
+            ./.circleci/scripts/generate-env-files.sh
+            ls -al src
+            cat src/.env
+      # Job간에 파일을 공유합니다
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+# 워크플로우를 정의합니다
+workflows:
+  # 빌드 테스트
+  # 작업 조건 : TIL 로 시작하는 브랜치
+  Test-build:
+    jobs:
+      - BuildTest:
+          filters:
+            branches:
+              only: /^TIL-.*/
+      - createEnv:
+          requires:
+            - BuildTest
