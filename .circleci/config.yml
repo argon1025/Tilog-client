@@ -19,9 +19,10 @@ jobs:
           name: "build project"
           command: |
             yarn build
-  # CircleCI 컨텍스트를 활용해 .ENV 파일을 프로젝트 폴더에 생성해주는 작업입니다
+  # CircleCI 컨텍스트를 활용해 .ENV 파일을 프로젝트 폴더에 생성후 빌드합니다
   createEnv:
-    machine: true
+    docker:
+      - image: cimg/node:lts-browsers
     steps:
       - checkout
       - run:
@@ -30,6 +31,14 @@ jobs:
             ./.circleci/scripts/generate-env-files.sh
             ls -al src
             cat .env.production.local
+      - run:
+          name: "install npm module"
+          command: |
+            yarn install
+      - run:
+          name: "build project"
+          command: |
+            yarn build
       # Job간에 파일을 공유합니다
       - persist_to_workspace:
           root: .
@@ -46,11 +55,6 @@ workflows:
           filters:
             branches:
               only: /^TIL-.*/
-      - createEnv:
-          context:
-            - TILOG_WEBAPP_PROD
-          requires:
-            - BuildTest
   # 배포
   deploy-cloudfront:
     jobs:
