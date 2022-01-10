@@ -1,0 +1,80 @@
+version: 2.1
+
+# 오브를 호출합니다
+orbs:
+  cloudfront-s3-deploy: trustedshops-public/cloudfront-s3-deploy@2.0.0
+# 워크플로우에서 사용할 작업을 정의합니다
+jobs:
+  # 테스트 빌드를 진행하는 작업입니다
+  BuildTest:
+    docker:
+      - image: cimg/node:lts-browsers
+    steps:
+      - checkout
+      - run:
+          name: "install npm module"
+          command: |
+            yarn install
+      - run:
+          name: "build project"
+          command: |
+            yarn build
+  # CircleCI 컨텍스트를 활용해 .ENV 파일을 프로젝트 폴더에 생성후 빌드합니다
+  createEnv:
+    docker:
+      - image: cimg/node:lts-browsers
+    steps:
+      - checkout
+      - run:
+          name: "Create .env file"
+          command: |
+            ./.circleci/scripts/generate-env-files.sh
+            ls -al src
+            cat .env.production.local
+      - run:
+          name: "install npm module"
+          command: |
+            yarn install
+      - run:
+          name: "build project"
+          command: |
+            yarn build
+      # Job간에 파일을 공유합니다
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+# 워크플로우를 정의합니다
+workflows:
+  # 빌드 테스트
+  # 작업 조건 : TIL 로 시작하는 브랜치
+  Test-build:
+    jobs:
+      - BuildTest:
+          filters:
+            branches:
+              only: /^TIL-.*/
+  # 배포
+  deploy-cloudfront:
+    jobs:
+      # CircleCI 컨텍스트를 활용해 .ENV 파일을 프로젝트 폴더에 생성해주는 작업
+      # 작업 조건 : release 브랜치 커밋
+      - createEnv:
+          context:
+            - TILOG_WEBAPP_PROD
+          filters:
+            branches:
+              only:
+                - release
+      - cloudfront-s3-deploy/sync-and-invalidate:
+          bucket-name: "${AWS_BUCKET_NAME}"
+          distribution-id: "${AWS_DISTRIBUTION_ID}"
+          checkout: false
+          attach-workspace: true
+          requires:
+            - createEnv
+          filters:
+            branches:
+              only:
+                - release
