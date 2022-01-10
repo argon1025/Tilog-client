@@ -66,7 +66,6 @@ const  viewDetailPost = (postID) =>{
     return request({
         url: `/posts/${postID}`,
         method: 'get',
-        withCredentials: true
     })
 }
 // 특정 유저가 작성한 게시글 리스트를 요청합니다.
@@ -74,21 +73,17 @@ const  viewCursorPost = (userID, nextCursorNumber) =>{
     return request({
         url: `/users/${userID}/posts?cursor=${nextCursorNumber}`,
         method: 'get',
-        withCredentials: true
     })
 }
 
 // 전체 맴버가 작성한 글중 좋아요가 가장 많은 게시글
-const  viewTrendPosts = (searchScope) =>{
+const  viewTrendPosts = (searchScope, nextCursorNumber) =>{
     return request({
-        url: `/posts/trends/like`,
+        url: `/posts/${searchScope}/posts?cursor=${nextCursorNumber}`,
         method: 'get',
-        params: {
-            searchScope: searchScope,
-            cursor: 0,
-        }
     })
 }
+
 export {
     createPost,
     updatePost,
