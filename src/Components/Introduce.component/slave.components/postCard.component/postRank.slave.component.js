@@ -8,15 +8,15 @@ import { AiFillHeart, AiOutlineEye } from "react-icons/ai";
 
 export default function PostRank({ postData }) {
   const onClickCard = () => {
-    window.location.href = `/${postData.users.userName}/${postData.id}`
-  }
+    window.location.href = `/${postData.userName}/${postData.id}`;
+  };
+  console.log(postData);
   return (
     <div
       className="cursor-pointer h-96 w-full sm:w-80 transition duration-700 ease-in-out bg-white border border-gray-200 hover:shadow-xl"
       onClick={onClickCard}
     >
-      {console.log(postData)}
-      {postData.thumbNailUrl ? (
+      {postData?.thumbNailUrl ? (
         <img
           src={postData.thumbNailUrl}
           alt="titleImage"
@@ -24,7 +24,9 @@ export default function PostRank({ postData }) {
         />
       ) : (
         <div className="flex justify-center items-center w-full h-36 bg-gray-800 text-gray-50 overflow-hidden">
-          <span className="w-full break-words p-5 text-center">{postData.title}</span>
+          <span className="w-full break-words p-5 text-center">
+            {postData.title}
+          </span>
         </div>
       )}
 
@@ -34,9 +36,14 @@ export default function PostRank({ postData }) {
         <div className="flex my-3">
           {/* content Icon */}
           <div className="w-3 h-3">
-            <TechIconLoader iconName="typescript" color="rgb(107 114 128)" />
+            <TechIconLoader
+              iconName={postData?.categoryName}
+              color="rgb(107 114 128)"
+            />
           </div>
-          <span className="text-xs text-gray-500">{postData.category.categoryName}</span>
+          <span className="text-xs text-gray-500">
+            {postData?.categoryName}
+          </span>
         </div>
         {/* Category End */}
         {/* Content */}
@@ -50,24 +57,26 @@ export default function PostRank({ postData }) {
               {/* Profile */}
               <img
                 alt="Profile"
-                class="w-5 h-5 bg-gray-100 object-cover object-center rounded-full mr-1"
-                src="https://dummyimage.com/98x98"
+                className="w-5 h-5 bg-gray-100 object-cover object-center rounded-full mr-1"
+                src={postData?.proFileImageUrl}
               />
-              <h2 className="text-xs text-gray-700">{postData.username}</h2>
+              <h2 className="text-xs text-gray-700">{postData?.userName}</h2>
             </div>
             <IconContext.Provider
               value={{ className: "mr-1 w-3 h-3 text-red-400" }}
             >
               <AiFillHeart />
               {/* Likes */}
-              <span className="text-xs text-gray-400 pr-3 border-r-2">{postData.likes}</span>
+              <span className="text-xs text-gray-400 pr-3 border-r-2">
+                {postData?.likes}
+              </span>
             </IconContext.Provider>
             <IconContext.Provider
               value={{ className: "ml-3 mr-1 w-4 h-4 text-gray-400" }}
             >
               <AiOutlineEye />
               {/* ViewCounts */}
-              <span className="text-xs text-gray-400 border-r-2 pr-3 ">
+              <span className="text-xs text-gray-400 ">
                 {postData.viewCounts}
               </span>
             </IconContext.Provider>
