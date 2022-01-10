@@ -41,7 +41,6 @@ export default class IntroduceComponent extends Component {
     }
   };
   render() {
-    console.log(this.state.searchScope);
     let title = "<TILog />";
     return (
       <div className="flex flex-col select-none w-full h-full">
@@ -59,7 +58,7 @@ export default class IntroduceComponent extends Component {
             </div>
             {/* Login Button */}
             <div className="ml-auto mr-5">
-              <ProfileDropdownComponent searchScope={this.state.searchScope} />
+              <ProfileDropdownComponent />
             </div>
           </div>
         </div>
@@ -102,7 +101,7 @@ export default class IntroduceComponent extends Component {
         {/* content */}
         <div className="flex-1 flex flex-col w-full bg-gray-100 items-center">
           <div className="w-full flex flex-col sm:flex-wrap sm:flex-row gap-10 items-center justify-center"></div>
-          <TrendPostsComponent />
+          <TrendPostsComponent searchScope={this.state.searchScope} />
         </div>
         <hr className="border-gray-200" />
 

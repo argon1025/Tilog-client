@@ -7,11 +7,14 @@ import { IconContext } from "react-icons";
 import { AiFillHeart, AiOutlineEye } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 
-export default function PostRank({ key, image, title, username }) {
+export default function PostRank({ id, image, title, username }) {
+  const onClickCard = () => {
+    window.location.href = `/${username}/${id}`
+  }
   return (
     <div
-      key={key}
       className="cursor-pointer h-96 w-full sm:w-80 transition duration-700 ease-in-out bg-white border border-gray-200 hover:shadow-xl"
+      onClick={onClickCard}
     >
       {image ? (
         <img
@@ -73,7 +76,7 @@ export default function PostRank({ key, image, title, username }) {
       </div>
       <div className="relative">
         <p className="absolute w-10 -top-96 -left-12 font-bold text-gray-300 text-2xl text-right">
-          {key}.
+          {id}.
         </p>
       </div>
     </div>
