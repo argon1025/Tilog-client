@@ -78,8 +78,9 @@ const  viewCursorPost = (userID, nextCursorNumber) =>{
 
 // 전체 맴버가 작성한 글중 좋아요가 가장 많은 게시글
 const  viewTrendPosts = (searchScope, nextCursorNumber) =>{
+    console.log(searchScope, nextCursorNumber)
     return request({
-        url: `/posts/${searchScope}/posts?cursor=${nextCursorNumber}`,
+        url: `/posts/trends/like?searchScope=${searchScope}&cursor=${nextCursorNumber}`,
         method: 'get',
     })
 }

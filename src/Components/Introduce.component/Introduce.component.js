@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { IconContext } from "react-icons";
-import { FaHotjar, FaWpexplorer } from "react-icons/fa";
-
-import NotFoundContent from "./NotFoundContent.component";
+import { FaHotjar } from "react-icons/fa";
 import { logout } from "../../utilities/api";
 import { ProfileDropdownComponent } from "..";
-import PostRank from "./slave.components/postCard.component/postRank.slave.component";
-import TrendPostsComponent from "./TrendPosts.slave.component";
+import WeekTrendPostsComponent from "./slave.components/trend/WeekTrendPosts.slave.component";
+import DayTrendPostsComponent from "./slave.components/trend/DayTrendPosts.slave.component";
+import MonthTrendPostsComponent from "./slave.components/trend/MonthTrendPosts.slave.component";
 
 export default class IntroduceComponent extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -40,6 +39,11 @@ export default class IntroduceComponent extends Component {
       console.log(error);
     }
   };
+  RenderTrendPosts = () => {
+    if(this.state.searchScope === "DAY") return <DayTrendPostsComponent searchScope={this.state.searchScope} />
+    if(this.state.searchScope === "WEEK") return <WeekTrendPostsComponent searchScope={this.state.searchScope} />
+    if(this.state.searchScope === "MONTH") return <MonthTrendPostsComponent searchScope={this.state.searchScope} />
+  }
   render() {
     let title = "<TILog />";
     return (
@@ -101,7 +105,7 @@ export default class IntroduceComponent extends Component {
         {/* content */}
         <div className="flex-1 flex flex-col w-full bg-gray-100 items-center">
           <div className="w-full flex flex-col sm:flex-wrap sm:flex-row gap-10 items-center justify-center"></div>
-          <TrendPostsComponent searchScope={this.state.searchScope} />
+          <this.RenderTrendPosts />
         </div>
         <hr className="border-gray-200" />
 

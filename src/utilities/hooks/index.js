@@ -1,3 +1,6 @@
+export { useDayTrendPosts } from "./posts/useDayTrendPosts";
+export { useMonthTrendPosts } from "./posts/useMonthTrendPosts";
+export { useWeekTrendPosts } from "./posts/useWeekTrendPosts";
 export { useUserStats } from "./github/useUserStats";
 export { useUserTopLanguage } from "./github/useUserTopLanguage";
 export { usePinnedRepo } from "./github/useUserPinnedRepo";
