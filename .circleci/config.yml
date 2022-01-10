@@ -29,7 +29,7 @@ jobs:
           command: |
             ./.circleci/scripts/generate-env-files.sh
             ls -al src
-            cat src/.env
+            cat .env.production.local
       # Job간에 파일을 공유합니다
       - persist_to_workspace:
           root: .
