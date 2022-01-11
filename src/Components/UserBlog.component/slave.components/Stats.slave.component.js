@@ -33,6 +33,7 @@ export default function StatsComponent({ username }) {
   const [userInfo, userInfoError, userInfoErrorMessage, userInfoStatusCode] =
     useUserInfoToUserName(username);
   const [
+    cursor,
     postList,
     postListError,
     postListErrorMessage,
@@ -41,14 +42,6 @@ export default function StatsComponent({ username }) {
   ] = useViewCursorPost(username);
   const [isLoad, setIsLoad] = useState(false);
 
-  console.log(
-    gitStatsStatusCode,
-    topLangStatusCode,
-    pinnedRepoStatusCode,
-    userInfoStatusCode,
-    postListStatusCode
-  );
-  console.log(gitStatsError, topLangError, pinnedRepoError);
   // Skeleton Loading
   if (
     !userInfoStatusCode ||
@@ -113,7 +106,7 @@ export default function StatsComponent({ username }) {
                 </IconContext.Provider>
               </div>
               {/** post Card */}
-              {postListError ? (
+              {postListError && cursor === 0 ? (
                 <>
                   {postListStatusCode}/{postListErrorMessage}
                 </>
