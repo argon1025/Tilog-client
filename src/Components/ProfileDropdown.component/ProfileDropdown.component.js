@@ -58,9 +58,10 @@ export default function ProfileDropdownComponent() {
       }
     }
   };
+  console.log(session);
 
   return (
-    <div className="z-50 flex flex-col items-center filter drop-shadow-lg pt-4">
+    <div className="z-50 flex flex-row items-center filter drop-shadow-lg pt-4">
       {islogin ? (
         // Logined
         <Menu as="div" className="relative inline-block text-left">
@@ -68,14 +69,17 @@ export default function ProfileDropdownComponent() {
             {({ open }) => (
               <IconContext.Provider
                 value={{
-                  className: "ml-2 w-5 h-5 text-gray-400",
+                  className: "ml-2 w-5 h-5 text-gray-400 dark:text-gray-200",
                 }}
               >
                 <img
                   src={session.proFileImageUrl}
                   alt="profile"
-                  className=" w-12 h-12 object-cover rounded-full"
+                  className=" w-8 h-8 object-cover rounded-full mr-2"
                 />
+                <span className="text-sm text-gray-700 dark:text-gray-200 hidden md:block">
+                  {session.userName}님 반가워요!👋
+                </span>
                 {open ? <CgChevronDownO /> : <CgChevronLeftO />}
               </IconContext.Provider>
             )}
