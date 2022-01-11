@@ -22,7 +22,7 @@ const lazyResponse = (milliseconds, originalRequest) => {
 };
 
 // 타임아웃
-instance.defaults.timeout = 9999999;
+instance.defaults.timeout = 7000;
 // 요청 인터셉터  추가
 instance.interceptors.request.use(
   (config) => {
