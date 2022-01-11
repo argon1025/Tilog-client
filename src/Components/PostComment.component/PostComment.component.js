@@ -20,7 +20,7 @@ export default function PostCommentComponent({
       {/* content */}
       <div className="w-full">
         {commentsList.length === 0 ? (
-          <>댓글이 없습니다!</>
+          <>{/* 댓글이 존재하지 않음 */}</>
         ) : (
           commentsList.map((comment) => (
             <div key={comment.comments_id}>

@@ -34,10 +34,10 @@ export default function DayTrendPostsComponent({ searchScope }) {
         {/* Card End */}
       </div>
       {load ? (
-        <div className="flex w-full justify-center items-center my-10 text-gray-400 ">
+        <div className="flex w-full justify-center items-center my-10 text-gray-400 dark:text-gray-200">
           <IconContext.Provider
             value={{
-              className: "animate-spin mr-1 w-3 h-3 text-gray-400",
+              className: "animate-spin mr-1 w-3 h-3",
             }}
           >
             <AiOutlineLoading3Quarters />
@@ -48,7 +48,7 @@ export default function DayTrendPostsComponent({ searchScope }) {
         <NotFoundContent />
       ) : (
         /* Post Load Button */
-        <div className="flex w-full justify-center items-center my-10 text-gray-400 cursor-pointer transition duration-300 ease-in-out hover:text-gray-800">
+        <div className="flex w-full justify-center items-center my-10 text-gray-400 cursor-pointer transition duration-300 ease-in-out hover:text-gray-800 dark:text-gray-200 dark:hover:text-blue-500">
           <IconContext.Provider value={{ className: "mr-1 w-3 h-3 " }}>
             <FaCheckDouble />
           </IconContext.Provider>

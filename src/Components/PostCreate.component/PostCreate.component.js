@@ -277,9 +277,9 @@ export default class PostCreateComponent extends Component {
           placeholder="제목"
           onChange={this.titleFromChange}
           value={this.state.title}
-          className="h-10 px-5 text-4xl text-gray-700 focus:outline-none m-5"
+          className="h-10 px-5 text-4xl text-gray-700 focus:outline-none m-5 dark:text-gray-100 dark:bg-gray-900"
         />
-        <hr className="mt-2" />
+        <hr className="mt-2 dark:border-gray-700" />
         {/* Editor Tiptap */}
         <Tiptap
           setContent={this.setContent}

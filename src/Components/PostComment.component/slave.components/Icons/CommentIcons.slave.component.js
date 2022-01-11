@@ -36,25 +36,25 @@ export default function CommentIcons({
           <>
             {/* 삭제 */}
             <button
-              className="text-gray-400"
+              className="transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200"
               onClick={async () => {
                 setIsDeleted(true);
                 await deleteTo(commentId, replyId, toast);
                 setIsDeleted(false);
               }}
             >
-              <span class="ml-1 text-xs text-gray-500">삭제</span>
+              <span class="ml-1 text-xs ">답글 삭제</span>
             </button>
             {/* 수정*/}
             <button
-              className="text-gray-400"
+              className="transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200"
               onClick={() => {
                 setIsUpdated(true);
                 setIsUpdateMode(!isUpdateMode);
                 setIsUpdated(false);
               }}
             >
-              <span class="ml-1 text-xs text-gray-500">| 수정</span>
+              <span class="ml-1 text-xs">| 답글 수정</span>
             </button>
           </>
         )}
@@ -64,7 +64,8 @@ export default function CommentIcons({
         {isDeleted ? (
           <IconContext.Provider
             value={{
-              className: "animate-spin mr-1 w-5 h-5 text-gray-400",
+              className:
+                "animate-spin mr-1 w-5 h-5 text-gray-400 dark:text-blue-500",
             }}
           >
             {/* 로딩 아이콘 */}
@@ -73,14 +74,14 @@ export default function CommentIcons({
         ) : (
           /* 복원*/
           <button
-            className="text-gray-400"
+            className="transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200"
             onClick={async () => {
               setIsDeleted(true);
               await restoreTo(commentId, replyId, toast);
               setIsDeleted(false);
             }}
           >
-            <span class="ml-1 text-xs text-gray-500">삭제 취소</span>
+            <span class="ml-1 text-xs ">삭제 취소</span>
           </button>
         )}
       </>
@@ -91,7 +92,8 @@ export default function CommentIcons({
         {isDeleted || isUpdated ? (
           <IconContext.Provider
             value={{
-              className: "animate-spin mr-1 w-5 h-5 text-gray-400",
+              className:
+                "animate-spin mr-1 w-5 h-5 text-gray-400 dark:text-blue-500",
             }}
           >
             {/* 로딩 아이콘 */}
@@ -101,7 +103,7 @@ export default function CommentIcons({
           <>
             {/**삭제 */}
             <button
-              className="text-gray-400"
+              className="transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200"
               onClick={async () => {
                 setIsDeleted(true);
                 await deleteTo(commentId, toast);
@@ -109,18 +111,18 @@ export default function CommentIcons({
                 setIsDeleted(false);
               }}
             >
-              <span class="ml-1 text-xs text-gray-500">삭제</span>
+              <span class="ml-1 text-xs ">삭제</span>
             </button>
             {/** 수정 */}
             <button
-              className="text-gray-400"
+              className="transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200"
               onClick={() => {
                 setIsUpdated(true);
                 setIsUpdateMode(!isUpdateMode);
                 setIsUpdated(false);
               }}
             >
-              <span class="ml-1 text-xs text-gray-500">| 수정</span>
+              <span class="ml-1 text-xs ">| 수정</span>
             </button>
           </>
         )}
@@ -130,7 +132,8 @@ export default function CommentIcons({
         {isDeleted ? (
           <IconContext.Provider
             value={{
-              className: "animate-spin mr-1 w-5 h-5 text-gray-400",
+              className:
+                "animate-spin mr-1 w-5 h-5 text-gray-400 dark:text-blue-500",
             }}
           >
             {/* 로딩 아이콘 */}
@@ -139,7 +142,7 @@ export default function CommentIcons({
         ) : (
           /* 복원*/
           <button
-            className="text-gray-400"
+            className="transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200"
             onClick={async () => {
               setIsDeleted(true);
               await restoreTo(commentId, toast);
@@ -147,7 +150,7 @@ export default function CommentIcons({
               setIsDeleted(false);
             }}
           >
-            <span class="ml-1 text-xs text-gray-500">삭제 취소</span>
+            <span class="ml-1 text-xs ">삭제 취소</span>
           </button>
         )}
       </>
