@@ -74,7 +74,7 @@ export default class IntroduceComponent extends Component {
         <div className="flex-0 flex flex-col justify-center items-center bg-gray-100 py-10 dark:bg-gray-800">
           <div className="flex max-w-5xl flex-col w-full px-3">
             {/* title */}
-            <div className="flex flex-row items-center justify-center text-gray-600">
+            <div className="flex flex-col md:flex-row items-center justify-center text-gray-600">
               {/* title Icon */}
               <IconContext.Provider
                 value={{ className: "w-3 h-3 mr-1 dark:text-gray-50" }}
@@ -92,7 +92,7 @@ export default class IntroduceComponent extends Component {
               </IconContext.Provider>
               {/* title Text */}
               {/* searchScope */}
-              <div className="ml-auto">
+              <div className="mt-5 md:mt-0 md:ml-auto">
                 <span
                   onClick={() => this.setState({ searchScope: "DAY" })}
                   className="text-sm border-r-2 pr-2 cursor-pointer transition duration-300 ease-in-out hover:text-blue-500 dark:text-gray-50"
