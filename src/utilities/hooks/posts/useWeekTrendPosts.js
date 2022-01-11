@@ -22,7 +22,6 @@ export function useWeekTrendPosts(searchScope) {
       if (!unmount) {
         try {
           const response = await viewTrendPosts(searchScope, cursor.current);
-          console.log(response);
           setTrendList(response.data.postListData);
           cursor.current = response.data.nextCursorNumber;
           setStatusCode(200);
@@ -53,9 +52,7 @@ export function useWeekTrendPosts(searchScope) {
   // 다음 포스트 가져오기
   const getNextPostList = useCallback(async (searchScope) => {
     try {
-      console.log("현재 커서 =>", cursor.current);
       const response = await viewTrendPosts(searchScope, cursor.current);
-      console.log(response);
       setTrendList((oldPostList) => [
         ...oldPostList,
         ...response.data.postListData,

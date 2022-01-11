@@ -28,7 +28,6 @@ export default class PostCreateComponent extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.state);
     // 비 로그인 접근시
     if (!this.props.ISLOGIN) {
       // 메인페이지로 이동한다
@@ -40,7 +39,6 @@ export default class PostCreateComponent extends Component {
    * 추가정보입력 모달을 연다
    */
   openAddStepModal = () => {
-    console.log(this.state.contentData);
     this.setState({ ...this.state, addStep: true });
   };
 
@@ -97,13 +95,11 @@ export default class PostCreateComponent extends Component {
 
     // 글자수가 0일 경우 검색 결과 초기화
     if (nowValue.length === 0) {
-      console.log("검색 기록 초기화");
       this.setState({ ...this.state, categoryRecommend: [] });
     }
 
     // 글자수 체크 후 검색 이벤트 발생
     if (beforeValue.length !== nowValue.length && nowValue.length > 0) {
-      console.log("검색 이벤트 발생");
       this.getCategoryRecommend(nowValue);
     }
   };
@@ -137,7 +133,6 @@ export default class PostCreateComponent extends Component {
     // 카테고리 추천 팝업 삭제
     await this.updateState({ ...this.state, categoryRecommend: [] });
     await this.updateState({ ...this.state, categoryInput: "" });
-    console.log(this.state);
   };
 
   /**

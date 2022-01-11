@@ -152,13 +152,11 @@ export default class PostModifyComponent extends Component {
 
     // 글자수가 0일 경우 검색 결과 초기화
     if (nowValue.length === 0) {
-      console.log("검색 기록 초기화");
       this.setState({ ...this.state, categoryRecommend: [] });
     }
 
     // 글자수 체크 후 검색 이벤트 발생
     if (beforeValue.length !== nowValue.length && nowValue.length > 0) {
-      console.log("검색 이벤트 발생");
       this.getCategoryRecommend(nowValue);
     }
   };

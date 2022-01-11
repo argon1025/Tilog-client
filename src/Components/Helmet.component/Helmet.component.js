@@ -17,7 +17,6 @@ export default class HelmetComponent extends Component {
     super(props);
     this.state.title = this.props.title || this.state.title;
     this.state.ogImage = this.props.ogImage || this.state.ogImage;
-    console.log(this.props);
   }
   render() {
     return (

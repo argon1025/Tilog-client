@@ -58,7 +58,6 @@ export function useDayTrendPosts(searchScope) {
         ...response.data.postListData,
       ]);
       cursor.current = response.data.nextCursorNumber;
-      console.log(cursor.current);
       setStatusCode(200);
     } catch (error) {
       // 서버측 응답이 없는 경우

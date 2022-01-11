@@ -59,9 +59,10 @@ export default function StatsComponent({ username }) {
   return (
     <>
       {userInfoError ? (
-        <>
-          {userInfoStatusCode}/{userInfoErrorMessage}
-        </>
+        <RecentPostsError
+          errorCode={userInfoStatusCode}
+          errorMessage={userInfoErrorMessage}
+        />
       ) : (
         <>
           {/* UserStats */}

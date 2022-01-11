@@ -10,7 +10,6 @@ export default function PostRank({ postData, idx }) {
   const onClickCard = () => {
     window.location.href = `/${postData.userName}/${postData.id}`;
   };
-  console.log(postData);
   return (
     <div
       className="cursor-pointer h-96 w-full sm:w-80 transition duration-700 ease-in-out bg-white border border-gray-200 hover:shadow-xl"
