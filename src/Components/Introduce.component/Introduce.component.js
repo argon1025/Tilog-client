@@ -72,14 +72,16 @@ export default class IntroduceComponent extends Component {
 
         {/* now Issue */}
         <div className="flex-0 flex flex-col justify-center items-center bg-gray-100 py-10">
-          <div className="flex max-w-5xl flex-col w-full px-4">
+          <div className="flex max-w-5xl flex-col w-full px-3">
             {/* title */}
             <div className="flex flex-row items-center justify-center text-gray-600">
               {/* title Icon */}
               <IconContext.Provider value={{ className: "w-3 h-3 mr-1" }}>
                 <FaHotjar />
-                <span className="text-sm text-gray-700">
-                  {this.state.searchScope} TRENDING ON TILOG
+                <span className="text-sm text-gray-700">TRENDING ON TILOG</span>
+                <span className="text-sm text-gray-700 px-2">·</span>
+                <span className="text-sm text-blue-500">
+                  {this.state.searchScope}
                 </span>
               </IconContext.Provider>
               {/* title Text */}

@@ -39,7 +39,7 @@ export default function ProfileDropdownComponent() {
    * 프로필 설정
    */
   const onClickProfile = () => {
-    toast("준비중입니다 곧 찾아갈께요!", {
+    toast("준비중입니다 곧 찾아갈게요!", {
       icon: "🛠",
     });
   };

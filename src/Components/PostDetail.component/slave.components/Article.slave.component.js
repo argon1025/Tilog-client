@@ -8,6 +8,7 @@ import LikeButtonComponent from "./LikeButton/LikeButton.slave.component";
 // Icons
 import { FaRegComment } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import ArticleError from "./Skeleton/ArticleError.slave.component";
 
 export default function ArticleComponent({
   postid,
@@ -29,9 +30,10 @@ export default function ArticleComponent({
   return (
     <div className="mt-10 flex flex-col w-full justify-center items-center">
       {postDataError ? (
-        <>
-          {postDataStatusCode}/{postDataErrorMessage}
-        </>
+        <ArticleError
+          errorMessage={postDataErrorMessage}
+          errorCode={postDataStatusCode}
+        />
       ) : (
         <>
           {/* Title */}
