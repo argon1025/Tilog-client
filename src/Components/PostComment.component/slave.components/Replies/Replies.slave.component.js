@@ -41,11 +41,15 @@ export default function Replies({
   const RenderRepliesContents = () => {
     // 삭제된 댓글
     if (!!replies.comments_deletedAt)
-      return <span className="text-sm text-zinc-600">삭제된 댓글입니다.</span>;
+      return (
+        <span className="text-sm text-zinc-600 dark:text-gray-200">
+          삭제된 답글입니다.
+        </span>
+      );
     // 업데이트 모드
     if (isUpdateMode)
       return (
-        <div className="flex bg-gray-100 rounded-lg w-full h-28 mt-10 px-4">
+        <div className="flex bg-gray-100 rounded-lg w-full h-23 mt-10 px-4">
           <input
             className="px-4 bg-gray-100 w-full h-full rounded-l-lg text-base focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
             type="text"
@@ -73,23 +77,23 @@ export default function Replies({
       );
     // 최종 렌더링
     return (
-      <span className="text-sm text-gray-800">
+      <span className="text-sm text-gray-800 dark:text-gray-200">
         {replies.comments_htmlContent}
       </span>
     );
   };
   return (
-    <div key={replies.comments_id} className="px-3">
+    <div key={replies.comments_id} className="px-2">
       {/* commentTree */}
       <div className="pb-5">
         <div className="flex flex-row items-center pt-5">
           <img
-            class="rounded-full w-8 h-8"
+            class="rounded-full w-8 h-8 dark:border dark:border-gray-600"
             src={replies.users_proFileImageURL}
             alt=""
           />
           <span
-            class="ml-2 font-medium text-gray-800"
+            class="ml-2 font-medium text-gray-800 dark:text-gray-200"
             onClick={() => onClickUserImage(replies.users_userName)}
           >
             {replies.users_userName}
@@ -106,9 +110,9 @@ export default function Replies({
           {!isUpdateMode ? (
             <RenderRepliesContents />
           ) : (
-            <div className="flex w-full h-28">
+            <div className="flex w-full h-28 dark:bg-gray-600">
               <input
-                className="px-4 w-full h-full text-base focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
+                className="text-sm px-4 bg-gray-100 w-full h-full focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-200"
                 type="text"
                 placeholder={replies.comments_htmlContent}
                 onChange={(event) => {
@@ -116,7 +120,7 @@ export default function Replies({
                 }}
               />
               <button
-                class="m-3 w-20 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
+                class="p-3 w-20 text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50  dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
                 type="submit"
                 onClick={async () => {
                   await updateReply(
@@ -134,7 +138,7 @@ export default function Replies({
           )}
         </div>
       </div>
-      <hr className="border-gray-200 w-full" />
+      <hr className="border-gray-200 w-full dark:border-gray-800" />
     </div>
   );
 }

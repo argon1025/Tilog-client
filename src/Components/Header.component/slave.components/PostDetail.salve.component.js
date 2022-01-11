@@ -30,7 +30,7 @@ export default function PostDetailComponent({ username, postdata }) {
       <div
         className={
           scrolled
-            ? "transition duration-500 ease-in-out flex fixed top-0 left-0 right-0 w-full p-5 bg-white z-50 border-b drop-shadow-2xl items-center"
+            ? "transition duration-500 ease-in-out flex fixed top-0 left-0 right-0 w-full p-5 bg-white z-50 border-b drop-shadow-2xl items-center dark:bg-gray-800 dark:border-gray-700"
             : "transition duration-100 ease-in-out -translate-y-20 flex fixed top-0 left-0 right-0 w-full p-5 bg-white z-50 border-b drop-shadow-2xl"
         }
       >
@@ -40,7 +40,7 @@ export default function PostDetailComponent({ username, postdata }) {
             height="24px"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            className="transition ease-in-out duration-700 hover:fill-blue-500"
+            className="transition ease-in-out duration-700 hover:fill-blue-500 dark:fill-blue-500"
           >
             <g>
               <path fill="none" d="M0 0h24v24H0z" />
@@ -48,35 +48,32 @@ export default function PostDetailComponent({ username, postdata }) {
             </g>
           </svg>
         </div>
-        <span className="mx-2">·</span>
-        <p className="truncate overflow-hidden font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl ">
+        <span className="mx-2 dark:text-gray-100">·</span>
+        <p className="truncate overflow-hidden font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100">
           {postdata?.title || ""}
         </p>
-        <div className="ml-auto mx-3 w-4 h-4">
-          <TechIconLoader
-            iconName={`${postdata?.categoryName || ""}`}
-            color="black"
-          />
+        <div className="ml-auto mx-3 w-4 h-4 text-gray-800 dark:text-gray-200">
+          <TechIconLoader iconName={`${postdata?.categoryName || ""}`} />
         </div>
       </div>
       <h1
         onClick={onClickMainLogo}
-        className="cursor-pointer text-lg text-gray-700 font-medium transition ease-in-out duration-300 hover:text-sky-500 hover:drop-shadow-2xl"
+        className="cursor-pointer text-lg text-gray-700 font-medium transition ease-in-out duration-300 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100"
       >
         {"#"}
       </h1>
-      <h1 className="text-lg text-blue-600/70">{">"}</h1>
+      <h1 className="text-lg text-blue-600/70 dark:text-blue-500">{">"}</h1>
       <h1
         onClick={() => onClickLogo(username)}
-        className="cursor-pointer subpixel-antialiased font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl"
+        className="cursor-pointer subpixel-antialiased font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100"
       >
         {"./"}
         {username}
       </h1>
       {!postdata ? (
-        <div className="animate-pulse w-64 h-full bg-gray-100 rounded ml-2"></div>
+        <div className="animate-pulse w-64 h-full bg-gray-100 rounded ml-2 dark:bg-gray-700"></div>
       ) : (
-        <p className="truncate overflow-hidden font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl">
+        <p className="truncate overflow-hidden font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100">
           /{postdata.title}.log
         </p>
       )}

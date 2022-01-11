@@ -88,7 +88,7 @@ export default function StatsComponent({ username }) {
               />
             )}
 
-            <hr className="w-full" />
+            <hr className="w-full dark:border-gray-700" />
 
             {/* Pinned Projects component */}
             {pinnedRepoError ? (
@@ -102,15 +102,19 @@ export default function StatsComponent({ username }) {
                 pinnedrepo={pinnedRepo}
               />
             )}
-            <hr className="w-full" />
+            <hr className="w-full dark:border-gray-700" />
 
             {/* Recent Posts component */}
-            <div className="flex flex-col max-w-5xl w-full bg-white p-10">
+            <div className="flex flex-col max-w-5xl w-full bg-white p-10 dark:bg-gray-900">
               {/* component title */}
               <div className="flex mb-5">
-                <IconContext.Provider value={{ className: "mr-2 w-4 h-4 " }}>
+                <IconContext.Provider
+                  value={{ className: "mr-2 w-4 h-4 dark:text-blue-500" }}
+                >
                   <GoBook />
-                  <span className="text-xs">{username}'s Recent Posts</span>
+                  <span className="text-xs dark:text-gray-100">
+                    {username}'s Recent Posts
+                  </span>
                 </IconContext.Provider>
               </div>
               {/** post Card */}
@@ -121,7 +125,7 @@ export default function StatsComponent({ username }) {
                 />
               ) : // 포스트가 없을시
               !postList ? (
-                <RecentPostsError errorCode="작성한 포스트가 없습니다.." />
+                <RecentPostsError errorCode="작성된 포스트가 없습니다.." />
               ) : (
                 // 포스트가 존재할 시
                 postList.map((postdata) => (
@@ -138,10 +142,10 @@ export default function StatsComponent({ username }) {
                 ) : // 더보기 버튼을 눌렀을때
                 isLoad ? (
                   // 로딩 컴포넌트
-                  <div className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800">
+                  <div className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800 dark:text-blue-500 dark:hover:text-blue-500">
                     <IconContext.Provider
                       value={{
-                        className: "animate-spin mr-1 w-3 h-3 text-gray-400",
+                        className: "animate-spin mr-1 w-3 h-3",
                       }}
                     >
                       <AiOutlineLoading3Quarters />
@@ -151,16 +155,14 @@ export default function StatsComponent({ username }) {
                 ) : (
                   // 최종 렌더링
                   <div
-                    className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800"
+                    className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800 transition duration-300 ease-in-out dark:text-gray-200 dark:hover:text-blue-500"
                     onClick={async () => {
                       setIsLoad(true);
                       await getNextPostList();
                       setIsLoad(false);
                     }}
                   >
-                    <IconContext.Provider
-                      value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-                    >
+                    <IconContext.Provider value={{ className: "mr-1 w-3 h-3" }}>
                       <BsCaretDownFill />
                     </IconContext.Provider>
                     <p className="text-xs">Load More</p>

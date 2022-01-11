@@ -45,14 +45,14 @@ export default function ArticleComponent({
             ownerId={postData.usersId}
           />
 
-          <hr className="border-gray-200 w-full my-5 max-w-4xl" />
+          <hr className="border-gray-200 w-full my-5 max-w-4xl dark:border-gray-700" />
 
           {/* Markdown Contents */}
           <div className="flex flex-col max-w-4xl w-full mt-10">
             <Tiptap contentData={postData.markDownContent} />
           </div>
 
-          <hr className="border-gray-200 w-full my-10" />
+          <hr className="border-gray-200 w-full my-10 dark:border-gray-700" />
 
           {/* Tags 
           <TagsComponent tags={postData.TagData} />
@@ -62,8 +62,10 @@ export default function ArticleComponent({
           <div className="flex flex-col w-full max-w-4xl justify-start items-start ">
             <div className="flex items-center w-full px-5">
               {/* Comments Title */}
-              <div className="flex text-gray-600 mr-auto">
-                <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
+              <div className="flex text-gray-600 mr-auto dark:text-gray-200">
+                <IconContext.Provider
+                  value={{ className: "mr-2 w-4 h-4 dark:text-blue-500" }}
+                >
                   <FaRegComment />
                   <span className="text-xs">Comments</span>
                 </IconContext.Provider>

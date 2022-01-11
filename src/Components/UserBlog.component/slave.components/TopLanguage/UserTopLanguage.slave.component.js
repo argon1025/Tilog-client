@@ -6,12 +6,16 @@ import TechIconLoader from "../../../Utility.components/techIconLoader";
 
 export default function UserTopLanguageComponent({ username, toplanguage }) {
   return (
-    <div className="flex flex-col max-w-5xl w-full bg-white p-10">
+    <div className="flex flex-col max-w-5xl w-full bg-white p-10 dark:bg-gray-900">
       {/* component title */}
       <div className="flex mb-5">
-        <IconContext.Provider value={{ className: "mr-2 w-4 h-4" }}>
+        <IconContext.Provider
+          value={{ className: "mr-2 w-4 h-4 dark:text-blue-500" }}
+        >
           <GoTerminal />
-          <span className="text-xs">{username}'s TOP languages</span>
+          <span className="text-xs dark:text-gray-100">
+            {username}'s TOP languages
+          </span>
         </IconContext.Provider>
       </div>
       {/* content Card Area */}
@@ -20,7 +24,7 @@ export default function UserTopLanguageComponent({ username, toplanguage }) {
         {Object.keys(toplanguage).map((v) => (
           <div
             key={toplanguage[v].size}
-            className="flex flex-col w-full lg:w-32 h-32 border border-gray-200 rounded-3xl bg-gray-800  mr-5"
+            className="flex flex-col w-full lg:w-32 h-32 border border-gray-200 rounded-3xl bg-gray-800 mr-5 dark:border-gray-700"
           >
             {/* Card icon */}
             <div className="flex items-center justify-center w-9 h-9 border border-gray-500 rounded-xl m-3 p-2">

@@ -4,16 +4,16 @@ import { GoGitPullRequest, GoGitCommit, GoStar } from "react-icons/go";
 
 export default function UserStatsComponent({ userinfo, gitstats }) {
   return (
-    <div className="flex lg:flex-row items-center lg:items-start flex-col max-w-5xl w-full bg-white mt-10 p-10 rounded-lg border border-gray-00">
+    <div className="flex lg:flex-row items-center lg:items-start flex-col max-w-5xl w-full bg-white mt-10 p-10 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600">
       <img
-        className="h-28 w-28 object-cover object-center rounded-full"
+        className="h-28 w-28 object-cover object-center rounded-full dark:border dark:border-gray-600"
         src={userinfo.proFileImageUrl}
         alt="profile"
       />
       {/** gitStatus */}
       <div className="m-5">
         {/* 이름 */}
-        <p className="text-lg text-gray-700">
+        <p className="text-lg text-gray-700 dark:text-gray-50">
           {gitstats.name + "(" + userinfo.userName + ")"}
         </p>
         {/** UserBlogCustomization */}
@@ -23,25 +23,31 @@ export default function UserStatsComponent({ userinfo, gitstats }) {
         {/* 깃허브 통계 */}
         <div className="flex mt-3 items-center">
           {/** 스타 수 */}
-          <IconContext.Provider value={{ className: "w-4 h-4 " }}>
+          <IconContext.Provider
+            value={{ className: "w-4 h-4 mr-1 dark:text-blue-500" }}
+          >
             <GoStar />
-            <p className="text-sm text-gray-700 d font-bold mr-1">
+            <p className="text-sm text-gray-700 d font-bold mr-1 dark:text-gray-100">
               {gitstats.totalStars}
             </p>
             <p className="text-sm text-gray-400">stars</p>
           </IconContext.Provider>
           {/** 풀리퀘스트 수 */}
-          <IconContext.Provider value={{ className: "ml-2 w-4 h-4 " }}>
+          <IconContext.Provider
+            value={{ className: "ml-2 w-4 h-4 mr-1 dark:text-blue-500" }}
+          >
             <GoGitPullRequest />
-            <p className="text-sm text-gray-700 font-bold mr-1">
+            <p className="text-sm text-gray-700 font-bold mr-1 dark:text-gray-100">
               {gitstats.totalPRs}
             </p>
             <p className="text-sm text-gray-400">PRs</p>
           </IconContext.Provider>
           {/** 커밋 수 */}
-          <IconContext.Provider value={{ className: "ml-2 w-4 h-4 " }}>
+          <IconContext.Provider
+            value={{ className: "ml-2 w-4 h-4 mr-1 dark:text-blue-500" }}
+          >
             <GoGitCommit />
-            <p className="text-sm text-gray-700 font-bold mr-1">
+            <p className="text-sm text-gray-700 font-bold mr-1 dark:text-gray-100">
               {gitstats.totalCommits}
             </p>
             <p className="text-sm text-gray-400">Commits</p>
