@@ -71,7 +71,7 @@ export default function Tiptap(props) {
     editorProps: {
       attributes: {
         class:
-          "w-full h-full p-10 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200",
+          "w-full h-full p-10 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200 dark:prose-invert dark:bg-gray-900 dark:prose-img:border-gray-700",
       },
       transformPasted: (slice) => {
         const result = slice.content.content.map((node) => {
@@ -146,8 +146,8 @@ export default function Tiptap(props) {
       <div className="ml-10">
         <MenuBar editor={editor} />
       </div>
-      <hr className="mt-2" />
-      <div className="flex justify-center p-5 flex-1 bg-gray-50">
+      <hr className="mt-2 dark:border-gray-700" />
+      <div className="flex justify-center p-5 flex-1 bg-gray-50 dark:bg-gray-800">
         <EditorContent
           className="max-w-4xl w-full h-full bg-white"
           editor={editor}
@@ -169,19 +169,19 @@ export default function Tiptap(props) {
               <input
                 id="checkbox"
                 type="checkbox"
-                className="relative peer z-20 text-purple-600 rounded-md focus:ring-0"
+                className="relative peer z-20 text-blue-500 rounded-md focus:ring-0"
                 onChange={props.checkedPrivateBox}
               />
-              <span className="ml-2 relative z-20 text-sm text-gray-400">
+              <span className="ml-2 relative z-20 text-sm text-gray-400 dark:text-gray-200">
                 비밀글 생성
               </span>
-              <div className="w-52 absolute inset-0 bg-white peer-checked:bg-purple-50 peer-checked:border-purple-300 z-10 border"></div>
+              <div className="w-52 absolute inset-0 bg-white peer-checked:bg-blue-50 peer-checked:border-blue-500 z-10 border dark:bg-gray-700"></div>
             </label>
           </section>
         </div>
         <button
           type="button"
-          className="border text-gray-400 px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-black hover:border-black focus:outline-none focus:shadow-outline"
+          className="border text-gray-400 px-4 py-2 mt-4 transition duration-500 ease select-none hover:text-white hover:bg-gray-800 hover:border-gray-700 focus:outline-none focus:shadow-outline"
           onClick={clickNextButton}
         >
           <div className="flex flex-row flex-nowrap align-middle justify-center items-center ">
@@ -194,8 +194,10 @@ export default function Tiptap(props) {
               </div>
             ) : (
               <div className="flex items-center">
-                <span className="text-sm">게시글 발행</span>
-                <IconContext.Provider value={{ className: "ml-2 w-6 h-6" }}>
+                <span className="text-sm dark:text-gray-200">게시글 발행</span>
+                <IconContext.Provider
+                  value={{ className: "ml-2 w-6 h-6 dark:text-blue-500" }}
+                >
                   <FaRegHandPointRight />
                 </IconContext.Provider>
               </div>

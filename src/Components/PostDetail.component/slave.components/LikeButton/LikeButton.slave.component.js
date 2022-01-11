@@ -22,7 +22,7 @@ export default function LikeButtonComponent({
     // 2. 몇초 대기. 후 서버 반영
     <div className="flex flex-row">
       {load ? ( // 로딩 컴포넌트
-        <div className="flex text-xs text-gray-600  items-center">
+        <div className="flex text-xs text-gray-600 items-center transition duration-300 ease-in-out dark:hover:text-red-400 dark:text-gray-200">
           <IconContext.Provider
             value={{
               className: "animate-pulse mr-1 w-5 h-5",
@@ -34,7 +34,7 @@ export default function LikeButtonComponent({
         </div>
       ) : isLiked ? (
         <button
-          class="flex text-xs text-gray-600 items-center"
+          class="flex text-xs text-gray-600 items-center transition duration-300 ease-in-out dark:hover:text-red-400 dark:text-gray-200"
           type="submit"
           onClick={async () => {
             setLoad(true);
@@ -52,7 +52,7 @@ export default function LikeButtonComponent({
         </button>
       ) : (
         <button
-          class="flex text-xs text-gray-600 items-center"
+          class="flex text-xs text-gray-600 items-center transition duration-300 ease-in-out dark:hover:text-red-400 dark:text-gray-200"
           type="submit"
           onClick={async () => {
             setLoad(true);

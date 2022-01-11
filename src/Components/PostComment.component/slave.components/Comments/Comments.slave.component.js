@@ -70,7 +70,11 @@ export default function Comments({
   const RednerCommentContents = () => {
     // 삭제된 댓글
     if (!!comment.comments_deletedAt)
-      return <span className="text-gray-600">삭제된 댓글입니다.</span>;
+      return (
+        <span className="text-sm text-gray-600 dark:text-gray-100">
+          삭제된 댓글입니다.
+        </span>
+      );
     // 최종 렌더링
     return <span>{comment.comments_htmlContent}</span>;
   };
@@ -80,7 +84,10 @@ export default function Comments({
       return (
         <>
           {replies.map((reply) => (
-            <div key={reply.comments_id} className="px-4 bg-gray-100">
+            <div
+              key={reply.comments_id}
+              className="px-4 bg-gray-100 dark:bg-gray-800"
+            >
               <Replies
                 commentId={comment.comments_id}
                 replies={reply}
@@ -111,7 +118,9 @@ export default function Comments({
             setIsRepliesOpened(false);
           }}
         >
-          <span class="ml-1 text-xs text-gray-500">숨기기</span>
+          <span class="ml-1 text-xs transition duration-300 ease-in-out text-gray-800 hover:text-blue-500 dark:text-gray-200">
+            숨기기
+          </span>
         </button>
       );
     // 닫혀있고 답글이 없을 경우
@@ -124,7 +133,7 @@ export default function Comments({
             setIsRepliesOpened(true);
           }}
         >
-          <span class="ml-1 text-xs text-gray-500">
+          <span class="ml-1 text-xs text-gray-500 hover:text-blue-500 transition duration-300 ease-in-out dark:text-gray-100">
             {comment.childcount}개의 답글 보기
           </span>
         </button>
@@ -138,7 +147,9 @@ export default function Comments({
           setIsRepliesOpened(true);
         }}
       >
-        <span class="ml-1 text-xs text-gray-500">Add Reply</span>
+        <span class="ml-1 text-xs text-gray-500 hover:text-blue-500 transition duration-300 ease-in-out dark:text-gray-100">
+          Add Reply
+        </span>
       </button>
     );
   };
@@ -148,13 +159,13 @@ export default function Comments({
       <div className="flex flex-row items-center">
         {/** 댓글 작성자 이미지 */}
         <img
-          class="rounded-full w-10 h-10"
+          class="rounded-full w-10 h-10 dark:border dark:border-gray-700"
           src={comment.users_proFileImageURL}
           alt=""
         />
         {/** 댓글 작성자 이름 */}
         <span
-          class="ml-2 font-medium text-gray-800"
+          class="ml-2 font-medium text-gray-800 dark:text-gray-100"
           onClick={() => onClickUserImage(comment.users_userName)}
         >
           {comment.users_userName}
@@ -167,20 +178,20 @@ export default function Comments({
         <RenderCommentTools />
       </div>
       {/** 댓글 내용 */}
-      <div className="w-full px-12 py-4">
+      <div className="w-full px-12 py-4 text-gray-800 dark:text-zinc-100 text-sm">
         {/* 업데이트 모드 */}
         {!isUpdateMode ? (
           <RednerCommentContents />
         ) : (
-          <div className="flex bg-gray-100 rounded-lg w-full h-28">
+          <div className="flex bg-gray-100 rounded-lg w-full h-28 dark:bg-gray-700">
             <input
-              className="px-4 bg-gray-100 w-full h-full rounded-l-lg text-base focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
+              className="px-4 bg-gray-100 w-full h-full rounded-l-lg text-base focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
               type="text"
               placeholder={comment.comments_htmlContent}
               onChange={(event) => setCommentData(event.target.value)}
             />
             <button
-              class="m-3 w-20 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300"
+              class="m-3 w-20 rounded-md text-sm font-medium focus:outline-none focus:ring transition text-gray-600 hover:bg-gray-50 active:bg-gray-100 focus:ring-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
               type="submit"
               onClick={async () => {
                 await updateComment(comment.comments_id, commentData, toast);
@@ -197,7 +208,7 @@ export default function Comments({
       <RednerRepliesOpened />
       {/** 답글 */}
       <RenderReplies />
-      <hr className="border-gray-200 w-full my-2" />
+      <hr className="border-gray-200 w-full my-2 dark:border-gray-700" />
     </div>
   );
 }
