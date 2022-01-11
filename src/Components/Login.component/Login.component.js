@@ -8,11 +8,10 @@ export default function LoginComponent() {
   useEffect(() => {
     dispatch(getUserInfo());
   }, [dispatch]);
-  if(islogin) {
-    window.location.href = "/"
-    return (
-      <>인증성공</>
-    )
+
+  if (islogin) {
+    window.location.href = "/";
+    return <>인증성공</>;
   }
-  return <>인증중...</>
+  return <>인증중...</>;
 }
