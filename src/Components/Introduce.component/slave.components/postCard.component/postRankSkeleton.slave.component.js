@@ -1,9 +1,5 @@
 import React from "react";
 
-// Icons
-import { IconContext } from "react-icons";
-import { AiFillHeart, AiOutlineEye } from "react-icons/ai";
-
 export default function PostRankSkeleton() {
   return (
     <div className="animate-pulse h-96 w-full sm:w-80 transition duration-700 ease-in-out bg-white border border-gray-200 hover:shadow-xl">

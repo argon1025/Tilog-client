@@ -1,7 +1,6 @@
 // Components
 import { Tiptap } from "./MarkdownViewer/MarkdownViewer.slave.component";
 import TitleComponent from "./Title/Title.slave.component";
-import TagsComponent from "./Tags/Tags.slave.component";
 import { PostCommentComponent } from "../..";
 import ArticleSkeleton from "./Skeleton/ArticleSkeleton.slave.component";
 import LikeButtonComponent from "./LikeButton/LikeButton.slave.component";

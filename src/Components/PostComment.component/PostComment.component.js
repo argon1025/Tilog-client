@@ -1,8 +1,4 @@
 import React from "react";
-// Icons
-import { FaRegComment } from "react-icons/fa";
-import { IconContext } from "react-icons";
-
 // Components
 import Comments from "./slave.components/Comments/Comments.slave.component";
 import InputComment from "./slave.components/Comments/InputComment.slave.component";

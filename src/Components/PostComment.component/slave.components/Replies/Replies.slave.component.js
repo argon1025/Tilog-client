@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 // Redux
 import { useSelector } from "react-redux";
-// Component
-import IsDeletedComments from "../Icons/CommentIcons.slave.component";
 // Toast
 import { toast } from "react-hot-toast";
 import CommentIcons from "../Icons/CommentIcons.slave.component";

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { uploadImage } from "../../../utilities/api/TILog/upload";
+// import { uploadImage } from "../../../utilities/api/TILog/upload";
 
 // src/Tiptap.jsx
 import { useEditor, EditorContent } from "@tiptap/react";

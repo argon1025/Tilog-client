@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { IconContext } from "react-icons";
 import { FaTelegramPlane } from "react-icons/fa";
 
-import { FaBookmark, FaHashtag, FaTrashAlt } from "react-icons/fa";
+import { FaBookmark, FaTrashAlt } from "react-icons/fa";
 import TechIconLoader from "../../Utility.components/techIconLoader";
 
 export default class AddStepModal extends Component {
