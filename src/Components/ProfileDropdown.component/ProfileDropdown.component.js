@@ -50,9 +50,12 @@ export default function ProfileDropdownComponent() {
   const onClickLogout = async () => {
     try {
       await logout();
-      dispatch(expiredUserSession());
     } catch (error) {
-      console.log("로그아웃 에러!");
+      if (error.response.status === 403) {
+        dispatch(expiredUserSession());
+      } else {
+        console.log(error);
+      }
     }
   };
 

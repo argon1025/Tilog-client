@@ -6,7 +6,7 @@ import { TechIconLoader } from "../../..";
 import { IconContext } from "react-icons";
 import { AiFillHeart, AiOutlineEye } from "react-icons/ai";
 
-export default function PostRank({ postData }) {
+export default function PostRank({ postData, idx }) {
   const onClickCard = () => {
     window.location.href = `/${postData.userName}/${postData.id}`;
   };
@@ -85,7 +85,7 @@ export default function PostRank({ postData }) {
       </div>
       <div className="relative">
         <p className="absolute w-10 -top-96 -left-12 font-bold text-gray-300 text-2xl text-right">
-          {postData.id}.
+          {idx}.
         </p>
       </div>
     </div>
