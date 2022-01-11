@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../utilities/api";
 import { expiredUserSession } from "../../Redux/action";
 
+// Toaster
+import { toast } from "react-hot-toast";
+
 export default function ProfileDropdownComponent() {
   const session = useSelector((store) => store.AuthReducer.USERINFO);
   const islogin = useSelector((store) => store.AuthReducer.ISLOGIN);
@@ -35,7 +38,11 @@ export default function ProfileDropdownComponent() {
   /**
    * 프로필 설정
    */
-  const onClickProfile = () => {};
+  const onClickProfile = () => {
+    toast("준비중입니다 곧 찾아갈게요!", {
+      icon: "🛠",
+    });
+  };
 
   /**
    * 로그아웃
@@ -43,9 +50,12 @@ export default function ProfileDropdownComponent() {
   const onClickLogout = async () => {
     try {
       await logout();
-      dispatch(expiredUserSession());
     } catch (error) {
-      console.log("로그아웃 에러!");
+      if (error.response.status === 403) {
+        dispatch(expiredUserSession());
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -179,7 +189,7 @@ export default function ProfileDropdownComponent() {
                           <FaCaretRight />
                         </IconContext.Provider>
                       )}
-                      내 블로그와 프로필
+                      내 프로필
                     </button>
                   )}
                 </Menu.Item>

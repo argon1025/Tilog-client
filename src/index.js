@@ -36,8 +36,7 @@ ReactDOM.render(
         <PersistGate loading={null} persistor={persistor}>
           <Toaster
             toastOptions={{
-              className:
-                "filter drop-shadow-2xl text-xs mt-16 w-full md:w-64 h-14",
+              className: "filter drop-shadow-2xl text-xs w-full md:w-64 h-14",
               style: {
                 borderRadius: "2px",
                 backgroundColor: "rgba(255, 255, 255)",
@@ -70,10 +69,7 @@ ReactDOM.render(
                 element={<Containers.PostModifyContainer />}
               />
               {/* 로그인 컴펌 */}
-              <Route
-                path="/login"
-                element={<Containers.LoginContainer />}
-              />
+              <Route path="/login" element={<Containers.LoginContainer />} />
             </Routes>
           </HelmetProvider>
         </PersistGate>

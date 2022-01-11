@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { FaRegThumbsUp } from "react-icons/fa";
+import React, { useState } from "react";
 import { useLike } from "../../../../utilities/hooks/posts/useLike";
 import toast from "react-hot-toast";
 
 // Icons
 import { IconContext } from "react-icons";
-import { GoBook } from "react-icons/go";
-import { BsCaretDownFill } from "react-icons/bs";
-import {
-  AiOutlineLoading3Quarters,
-  AiOutlineHeart,
-  AiFillHeart,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 /**
  * @TODO BackEnd 작업 끝나고 라이크 시작.

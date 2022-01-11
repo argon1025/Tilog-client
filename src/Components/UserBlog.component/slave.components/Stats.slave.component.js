@@ -18,6 +18,10 @@ import {
 } from "../../../utilities/hooks";
 import StatsSkeleton from "./Skeleton/StatsSkeleton.slave.component";
 import { useState } from "react";
+import UserStatsError from "./ProfileCard/UserStatsError.slave.component";
+import UserTopLanguageError from "./TopLanguage/UserTopLanguageError.slave.component";
+import UserPinnedRepoError from "./PinnedRepo/UserPinnedRepoError.slave.component";
+import RecentPostsError from "./RecentPosts/RecentPostsError.component";
 
 export default function StatsComponent({ username }) {
   const [gitStats, gitStatsError, gitStatsErrorMessage, gitStatsStatusCode] =
@@ -33,6 +37,7 @@ export default function StatsComponent({ username }) {
   const [userInfo, userInfoError, userInfoErrorMessage, userInfoStatusCode] =
     useUserInfoToUserName(username);
   const [
+    cursor,
     postList,
     postListError,
     postListErrorMessage,
@@ -41,14 +46,6 @@ export default function StatsComponent({ username }) {
   ] = useViewCursorPost(username);
   const [isLoad, setIsLoad] = useState(false);
 
-  console.log(
-    gitStatsStatusCode,
-    topLangStatusCode,
-    pinnedRepoStatusCode,
-    userInfoStatusCode,
-    postListStatusCode
-  );
-  console.log(gitStatsError, topLangError, pinnedRepoError);
   // Skeleton Loading
   if (
     !userInfoStatusCode ||
@@ -62,25 +59,28 @@ export default function StatsComponent({ username }) {
   return (
     <>
       {userInfoError ? (
-        <>
-          {userInfoStatusCode}/{userInfoErrorMessage}
-        </>
+        <RecentPostsError
+          errorCode={userInfoStatusCode}
+          errorMessage={userInfoErrorMessage}
+        />
       ) : (
         <>
           {/* UserStats */}
           {gitStatsError ? (
-            <>
-              {gitStatsStatusCode}/{gitStatsErrorMessage}
-            </>
+            <UserStatsError
+              errorMessage={gitStatsErrorMessage}
+              errorCode={gitStatsStatusCode}
+            />
           ) : (
             <UserStatsComponent userinfo={userInfo} gitstats={gitStats} />
           )}
           <div className="max-w-5xl w-full mt-5">
             {/* Top Language */}
             {topLangError ? (
-              <>
-                {topLangStatusCode}/{topLangErrorMessage}
-              </>
+              <UserTopLanguageError
+                errorMessage={topLangErrorMessage}
+                errorCode={topLangStatusCode}
+              />
             ) : (
               <UserTopLanguageComponent
                 username={username}
@@ -92,9 +92,10 @@ export default function StatsComponent({ username }) {
 
             {/* Pinned Projects component */}
             {pinnedRepoError ? (
-              <>
-                {pinnedRepoStatusCode}/{pinnedRepoErrorMessage}
-              </>
+              <UserPinnedRepoError
+                errorMessage={pinnedRepoErrorMessage}
+                errorCode={pinnedRepoStatusCode}
+              />
             ) : (
               <UserPinnedRepoCommponent
                 username={username}
@@ -113,15 +114,14 @@ export default function StatsComponent({ username }) {
                 </IconContext.Provider>
               </div>
               {/** post Card */}
-              {postListError ? (
-                <>
-                  {postListStatusCode}/{postListErrorMessage}
-                </>
+              {postListError && cursor === 0 ? (
+                <RecentPostsError
+                  errorMessage={postListErrorMessage}
+                  errorCode={postListStatusCode}
+                />
               ) : // 포스트가 없을시
               !postList ? (
-                <p className="text-gray-400 text-xs">
-                  작성된 포스트가 없습니다.
-                </p>
+                <RecentPostsError errorCode="작성한 포스트가 없습니다.." />
               ) : (
                 // 포스트가 존재할 시
                 postList.map((postdata) => (
@@ -134,7 +134,7 @@ export default function StatsComponent({ username }) {
               {
                 // 추가 포스터가 없을때
                 postListStatusCode === 404 ? (
-                  <></>
+                  <RecentPostsError errorCode="더이상 포스트가 없습니다.." />
                 ) : // 더보기 버튼을 눌렀을때
                 isLoad ? (
                   // 로딩 컴포넌트

@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 import { TechIconLoader } from "../../..";
-import { deletePost } from "../../../../utilities/api";
 import { useDeletePost } from "../../../../utilities/hooks/posts/useDeletePost";
 
 export default function TitleComponent({
@@ -20,12 +19,12 @@ export default function TitleComponent({
   const fetchDeletePost = useDeletePost();
   // 수정 버튼
   const onClickModifyPost = () => {
-    window.location.href = `/post/modify/${postId}`
-  }
+    window.location.href = `/post/modify/${postId}`;
+  };
   // 삭제 버튼
-  const onClickRemovePost = async() => {
+  const onClickRemovePost = async () => {
     await fetchDeletePost(postId, toast);
-  }
+  };
   const RenderPostTools = () => {
     // 유저 세션이 없다면.
     if (!session) return <></>;
@@ -33,19 +32,21 @@ export default function TitleComponent({
     if (session.id !== ownerId) return <></>;
     return (
       <div className="ml-auto flex">
-      <div className="flex text-gray-600 hover:text-blue-500 mr-3 cursor-pointer"
-        onClick={onClickModifyPost}
-      >
-        <span className="text-xs ">게시글 수정</span>
+        <div
+          className="flex text-gray-600 hover:text-blue-500 mr-3 cursor-pointer"
+          onClick={onClickModifyPost}
+        >
+          <span className="text-xs ">게시글 수정</span>
+        </div>
+        <div
+          className="flex text-gray-600 hover:text-blue-500 mr-3 cursor-pointer"
+          onClick={onClickRemovePost}
+        >
+          <span className="text-xs">삭제</span>
+        </div>
       </div>
-      <div className="flex text-gray-600 hover:text-blue-500 mr-3 cursor-pointer"
-        onClick={onClickRemovePost}
-      >
-        <span className="text-xs">삭제</span>
-      </div>
-    </div>
-    )
-  }
+    );
+  };
   return (
     <div className="flex flex-col w-full max-w-6xl justify-start items-start my-10 px-10 overflow-hidden">
       <div>

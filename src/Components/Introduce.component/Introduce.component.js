@@ -40,12 +40,15 @@ export default class IntroduceComponent extends Component {
     }
   };
   RenderTrendPosts = () => {
-    if(this.state.searchScope === "DAY") return <DayTrendPostsComponent searchScope={this.state.searchScope} />
-    if(this.state.searchScope === "WEEK") return <WeekTrendPostsComponent searchScope={this.state.searchScope} />
-    if(this.state.searchScope === "MONTH") return <MonthTrendPostsComponent searchScope={this.state.searchScope} />
-  }
+    if (this.state.searchScope === "DAY")
+      return <DayTrendPostsComponent searchScope={this.state.searchScope} />;
+    if (this.state.searchScope === "WEEK")
+      return <WeekTrendPostsComponent searchScope={this.state.searchScope} />;
+    if (this.state.searchScope === "MONTH")
+      return <MonthTrendPostsComponent searchScope={this.state.searchScope} />;
+  };
   render() {
-    let title = "<TILog />";
+    let title = "TILog.io";
     return (
       <div className="flex flex-col select-none w-full h-full">
         {/* Nav */}
@@ -56,7 +59,7 @@ export default class IntroduceComponent extends Component {
               className="ml-5 mt-5 p-1 px-4 cursor-pointer"
               onClick={this.clickLogoButton}
             >
-              <h1 className="font-bold font-eng-sub-font-2 text-2xl text-gray-600 underline decoration-sky-500 animate-fade-in-down">
+              <h1 className="font-semibold font-eng-sub-font-2 text-2xl text-gray-600 underline decoration-sky-500 animate-fade-in-down">
                 {title}
               </h1>
             </div>
@@ -69,32 +72,36 @@ export default class IntroduceComponent extends Component {
 
         {/* now Issue */}
         <div className="flex-0 flex flex-col justify-center items-center bg-gray-100 py-10">
-          <div className="flex max-w-5xl flex-col w-full px-4">
+          <div className="flex max-w-5xl flex-col w-full px-3">
             {/* title */}
             <div className="flex flex-row items-center justify-center text-gray-600">
               {/* title Icon */}
-              <IconContext.Provider value={{ className: "w-3 h-3" }}>
+              <IconContext.Provider value={{ className: "w-3 h-3 mr-1" }}>
                 <FaHotjar />
                 <span className="text-sm text-gray-700">TRENDING ON TILOG</span>
+                <span className="text-sm text-gray-700 px-2">·</span>
+                <span className="text-sm text-blue-500">
+                  {this.state.searchScope}
+                </span>
               </IconContext.Provider>
               {/* title Text */}
               {/* searchScope */}
               <div className="ml-auto">
                 <span
                   onClick={() => this.setState({ searchScope: "DAY" })}
-                  className="text-sm border-r-2 pr-2 cursor-pointer hover:text-gray-800"
+                  className="text-sm border-r-2 pr-2 cursor-pointer transition duration-300 ease-in-out hover:text-blue-500"
                 >
                   Today
                 </span>
                 <span
                   onClick={() => this.setState({ searchScope: "WEEK" })}
-                  className="text-sm pl-2 border-r-2 pr-2 cursor-pointer hover:text-gray-800"
+                  className="text-sm pl-2 border-r-2 pr-2 cursor-pointer transition duration-300 ease-in-out hover:text-blue-500"
                 >
                   Weekly
                 </span>
                 <span
                   onClick={() => this.setState({ searchScope: "MONTH" })}
-                  className="text-sm pl-2 cursor-pointer hover:text-gray-800"
+                  className="text-sm pl-2 cursor-pointer transition duration-300 ease-in-out hover:text-blue-500"
                 >
                   Monthly
                 </span>

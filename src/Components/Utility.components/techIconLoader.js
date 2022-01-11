@@ -33,7 +33,6 @@ export default class TechIconLoader extends Component {
     let icon;
     let iconName;
     if (!!this.state.customUrl) {
-      console.log("Sorry Not supported customURL Icon We will soon...");
       icon = (
         <IconContext.Provider value={{ className: "w-full h-full" }}>
           {iconList.NOTFOUND_CONTENT.iconData}

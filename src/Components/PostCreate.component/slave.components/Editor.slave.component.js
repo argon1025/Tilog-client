@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { uploadImage } from "../../../utilities/api/TILog/upload";
+// import { uploadImage } from "../../../utilities/api/TILog/upload";
 
 // src/Tiptap.jsx
 import { useEditor, EditorContent } from "@tiptap/react";
@@ -60,7 +60,6 @@ export default function Tiptap(props) {
           "w-full h-full p-10 prose prose-sm max-w-none focus:outline-none overflow-y-auto prose-img:ml-auto prose-img:mr-auto prose-img:border prose-img:border-gray-200",
       },
       transformPasted: (slice) => {
-        console.log(slice);
         const result = slice.content.content.map((node) => {
           if (node.type.name === "image" && node.attrs.src.includes("data:")) {
             node.attrs.src =
@@ -71,7 +70,6 @@ export default function Tiptap(props) {
           }
         });
         slice.content.content = result;
-        console.log(slice);
         return slice;
       },
     },
@@ -83,12 +81,10 @@ export default function Tiptap(props) {
   // 이미지 업로드 컨테이너 메서드와 연결
   const imageUpload = async (blob) => {
     try {
-      console.log(blob);
       const result = await props.imageUpload(blob);
       editor.chain().focus().setImage({ src: result }).run();
     } catch (error) {
       console.log("Image Upload failed");
-      console.log(error);
     }
   };
 
