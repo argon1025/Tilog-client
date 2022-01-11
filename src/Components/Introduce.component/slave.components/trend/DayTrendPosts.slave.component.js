@@ -5,6 +5,7 @@ import PostRank from "../postCard.component/postRank.slave.component";
 import { useDayTrendPosts } from "../../../../utilities/hooks";
 import PostRankSkeleton from "../postCard.component/postRankSkeleton.slave.component";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import NotFoundContent from "../../NotFoundContent.component";
 
 export default function DayTrendPostsComponent({ searchScope }) {
   const [cursor, trendList, error, errorMessage, statusCode, getNextPostList] =
@@ -33,7 +34,7 @@ export default function DayTrendPostsComponent({ searchScope }) {
         {/* Card End */}
       </div>
       {load ? (
-        <div className="flex w-full justify-center items-center mt-10 cursor-pointer text-gray-400 hover:text-gray-800">
+        <div className="flex w-full justify-center items-center my-10 text-gray-400 ">
           <IconContext.Provider
             value={{
               className: "animate-spin mr-1 w-3 h-3 text-gray-400",
@@ -44,17 +45,15 @@ export default function DayTrendPostsComponent({ searchScope }) {
           <p className="text-xs">Loading..</p>
         </div>
       ) : error ? (
-        <></>
+        <NotFoundContent />
       ) : (
         /* Post Load Button */
-        <div className="flex w-full justify-center items-center mt-10">
-          <IconContext.Provider
-            value={{ className: "mr-1 w-3 h-3 text-gray-400" }}
-          >
+        <div className="flex w-full justify-center items-center my-10 text-gray-400 cursor-pointer transition duration-300 ease-in-out hover:text-gray-800">
+          <IconContext.Provider value={{ className: "mr-1 w-3 h-3 " }}>
             <FaCheckDouble />
           </IconContext.Provider>
           <p
-            className="text-gray-400 text-xs"
+            className="text-xs"
             onClick={async () => {
               setLoad(true);
               await getNextPostList(searchScope);

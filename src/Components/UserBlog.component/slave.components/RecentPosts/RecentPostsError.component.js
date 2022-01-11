@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { IconContext } from "react-icons";
 import { FaSmog } from "react-icons/fa";
 
-export default class NotFoundContent extends Component {
+export default class RecentPostsError extends Component {
   state = {
     errorCode: 0,
     errorMessage: "",
