@@ -69,7 +69,7 @@ export default function ProfileDropdownComponent() {
             {({ open }) => (
               <IconContext.Provider
                 value={{
-                  className: "ml-2 w-5 h-5 text-gray-400 dark:text-gray-200",
+                  className: "w-5 h-5 text-gray-400 dark:text-gray-200",
                 }}
               >
                 <img

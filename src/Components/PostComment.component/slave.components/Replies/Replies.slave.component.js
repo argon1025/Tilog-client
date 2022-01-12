@@ -92,15 +92,17 @@ export default function Replies({
             src={replies.users_proFileImageURL}
             alt=""
           />
-          <span
-            class="ml-2 font-medium text-gray-800 dark:text-gray-200"
-            onClick={() => onClickUserImage(replies.users_userName)}
-          >
-            {replies.users_userName}
-          </span>
-          <span class="ml-1 text-xs text-gray-400">
-            {replies.comments_createdAt.slice(0, 10)}
-          </span>
+          <div className="flex flex-col md:flex-row items-center">
+            <span
+              class="ml-2 font-medium text-gray-800 dark:text-gray-200"
+              onClick={() => onClickUserImage(replies.users_userName)}
+            >
+              {replies.users_userName}
+            </span>
+            <span class="ml-1 text-xs text-gray-400">
+              {replies.comments_createdAt.slice(0, 10)}
+            </span>
+          </div>
           <div className="ml-auto">
             <RenderRepliesTools />
           </div>
