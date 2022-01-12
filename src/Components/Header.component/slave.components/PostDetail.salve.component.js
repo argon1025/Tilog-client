@@ -65,7 +65,7 @@ export default function PostDetailComponent({ username, postdata }) {
       <h1 className="text-lg text-blue-600/70 dark:text-blue-500">{">"}</h1>
       <h1
         onClick={() => onClickLogo(username)}
-        className="cursor-pointer subpixel-antialiased font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100"
+        className="truncate cursor-pointer subpixel-antialiased font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100"
       >
         {"./"}
         {username}
@@ -73,7 +73,7 @@ export default function PostDetailComponent({ username, postdata }) {
       {!postdata ? (
         <div className="animate-pulse w-64 h-full bg-gray-100 rounded ml-2 dark:bg-gray-700"></div>
       ) : (
-        <p className="truncate overflow-hidden font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100">
+        <p className="hidden md:block truncate overflow-hidden font-medium text-lg text-gray-800 transition ease-in-out duration-700 hover:text-blue-500 hover:drop-shadow-2xl dark:text-gray-100">
           /{postdata.title}.log
         </p>
       )}

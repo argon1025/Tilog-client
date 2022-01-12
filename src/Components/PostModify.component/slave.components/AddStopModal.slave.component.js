@@ -22,7 +22,7 @@ export default class AddStepModal extends Component {
             onClick={this.props.setCategoryIdData}
           >
             <div className="flex justify-center items-center">
-              <div className="w-6 h-6 text-gray-800 dark:text-gray-200">
+              <div className="md:w-6 md:h-6 text-gray-800 dark:text-gray-200">
                 <TechIconLoader iconName={listData.categoryName} />
               </div>
             </div>

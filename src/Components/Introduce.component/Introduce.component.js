@@ -142,8 +142,8 @@ export default class IntroduceComponent extends Component {
         <div className="flex flex-col justify-center items-center bg-gray-900 relative inset-x-0 bottom-0 ">
           <div className="flex flex-row max-w-5xl w-full justify-center m-5">
             {/* sub */}
-            <div className="mr-auto">
-              <h1 className="text-2xl font-bold font-eng-sub-font-2 underline decoration-sky-100 text-gray-100">
+            <div className="flex mr-auto justify-center items-center w-full">
+              <h1 className="text-sm font-bold font-eng-sub-font-2 underline decoration-sky-100 text-gray-100">
                 {title}
               </h1>
             </div>
