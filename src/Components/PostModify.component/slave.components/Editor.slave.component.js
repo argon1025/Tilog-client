@@ -18,6 +18,7 @@ import Code from "@tiptap/extension-code";
 import LoadingComponent from "./Loading.slave.component";
 import Image from "@tiptap/extension-image";
 import Dropcursor from "@tiptap/extension-dropcursor";
+import Link from "@tiptap/extension-link";
 
 // load all highlight.js languages
 import lowlight from "lowlight";
@@ -49,6 +50,7 @@ export default function Tiptap(props) {
       StarterKit.configure({
         document: false,
       }),
+      Link,
       Document,
       Highlight,
       Typography,
