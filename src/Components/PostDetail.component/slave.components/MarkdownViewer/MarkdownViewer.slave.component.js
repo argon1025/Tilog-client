@@ -13,6 +13,7 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import Code from "@tiptap/extension-code";
 import Image from "@tiptap/extension-image";
 import Dropcursor from "@tiptap/extension-dropcursor";
+import Link from "@tiptap/extension-link";
 
 // load all highlight.js languages
 import lowlight from "lowlight";
@@ -32,6 +33,7 @@ export default function Tiptap(contentData) {
       StarterKit.configure({
         document: false,
       }),
+      Link,
       Document,
       Highlight,
       Typography,
