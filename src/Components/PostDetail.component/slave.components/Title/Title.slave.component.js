@@ -51,11 +51,11 @@ export default function TitleComponent({
     <div className="flex flex-col w-full max-w-6xl justify-start items-start my-10 px-10 overflow-hidden">
       <div>
         {/* Title */}
-        <div className="flex h-4 my-5">
-          <div className="w-4 h-4 text-gray-800 dark:text-blue-500">
+        <div className="flex h-5 my-5">
+          <div className="w-5 h-5 text-gray-800 dark:text-blue-500">
             <TechIconLoader iconName={`${categoryName}`} />
           </div>
-          <div className="w-10 bg-gray-800 m-1 dark:bg-blue-500"></div>
+          <div className="w-10 bg-gray-800 m-2 dark:bg-blue-500"></div>
         </div>
         <h1 className="text-5xl font-medium text-gray-800 dark:text-gray-100">
           {title}
