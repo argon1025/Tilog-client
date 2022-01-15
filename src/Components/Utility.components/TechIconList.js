@@ -23,6 +23,13 @@ import {
   SiCsharp,
   SiCoursera,
   SiGo,
+  SiRedis,
+  SiMysql,
+  SiNestjs,
+  SiNodedotjs,
+  SiGit,
+  SiSwift,
+  SiLinux,
 } from "react-icons/si";
 import { GoRocket } from "react-icons/go";
 
@@ -126,6 +133,34 @@ const iconList = {
   GO: {
     iconData: <SiGo />,
     name: "Go",
+  },
+  REDIS: {
+    iconData: <SiRedis />,
+    name: "Redis",
+  },
+  MYSQL: {
+    iconData: <SiMysql />,
+    name: "NotFound",
+  },
+  NODEJS: {
+    iconData: <SiNodedotjs />,
+    name: "NodeJs",
+  },
+  NESTJS: {
+    iconData: <SiNestjs />,
+    name: "NestJs",
+  },
+  GIT: {
+    iconData: <SiGit />,
+    name: "Git",
+  },
+  SWIFT: {
+    iconData: <SiSwift />,
+    name: "Swift",
+  },
+  INFRA: {
+    iconData: <SiLinux />,
+    name: "Infra",
   },
   NOTFOUND_CONTENT: {
     iconData: <GoRocket />,
