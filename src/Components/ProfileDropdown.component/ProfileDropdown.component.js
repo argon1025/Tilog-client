@@ -1,32 +1,34 @@
-import React, { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { IconContext } from "react-icons";
-import { FaSignOutAlt, FaCaretRight } from "react-icons/fa";
-import { CgChevronLeftO, CgChevronDownO } from "react-icons/cg";
-import { DiGithubBadge } from "react-icons/di";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../utilities/api";
-import { expiredUserSession } from "../../Redux/action";
-
+import React, { Fragment, useEffect } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { IconContext } from 'react-icons';
+import { FaSignOutAlt, FaCaretRight } from 'react-icons/fa';
+import { CgChevronLeftO, CgChevronDownO } from 'react-icons/cg';
+import { DiGithubBadge } from 'react-icons/di';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../utilities/api';
+import { expiredUserSession } from '../../Redux/action';
+import { getUserInfo } from '../../Redux/action';
 // Toaster
-import { toast } from "react-hot-toast";
+import { toast } from 'react-hot-toast';
 
 export default function ProfileDropdownComponent() {
-  const session = useSelector((store) => store.AuthReducer.USERINFO);
   const islogin = useSelector((store) => store.AuthReducer.ISLOGIN);
+  const session = useSelector((store) => store.AuthReducer.USERINFO);
   // useSelector((store) => console.log(store));
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, [dispatch]);
   /**
    * 새 포스트
    */
   const onClickNewPost = () => {
-    window.location.href = "/post/editor";
+    window.location.href = '/post/editor';
   };
 
   const onClickGithubLoginButton = () => {
     // dispatch(setUserSession());
-    window.open(`${process.env.REACT_APP_TILOG_SERVER}/auth/github`, "_self");
+    window.open(`${process.env.REACT_APP_TILOG_SERVER}/auth/github`, '_self');
   };
   /**
    * 내 블로그
@@ -39,8 +41,8 @@ export default function ProfileDropdownComponent() {
    * 프로필 설정
    */
   const onClickProfile = () => {
-    toast("준비중입니다 곧 찾아갈게요!", {
-      icon: "🛠",
+    toast('준비중입니다 곧 찾아갈게요!', {
+      icon: '🛠',
     });
   };
 
@@ -50,6 +52,7 @@ export default function ProfileDropdownComponent() {
   const onClickLogout = async () => {
     try {
       await logout();
+      dispatch(expiredUserSession());
     } catch (error) {
       if (error.response.status === 403) {
         dispatch(expiredUserSession());
@@ -61,23 +64,22 @@ export default function ProfileDropdownComponent() {
   console.log(session);
 
   return (
-    <div className="z-50 flex flex-row items-center filter drop-shadow-lg pt-4">
+    <div className='z-50 flex flex-row items-center filter drop-shadow-lg pt-4'>
       {islogin ? (
         // Logined
-        <Menu as="div" className="relative inline-block text-left">
-          <Menu.Button className="inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-white rounded-md transition duration-500 hover:bg-black hover:bg-opacity-10">
+        <Menu as='div' className='relative inline-block text-left'>
+          <Menu.Button className='inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-white rounded-md transition duration-500 hover:bg-black hover:bg-opacity-10'>
             {({ open }) => (
               <IconContext.Provider
                 value={{
-                  className: "w-5 h-5 text-gray-400 dark:text-gray-200",
-                }}
-              >
+                  className: 'w-5 h-5 text-gray-400 dark:text-gray-200',
+                }}>
                 <img
                   src={session.proFileImageUrl}
-                  alt="profile"
-                  className=" w-8 h-8 object-cover rounded-full mr-2"
+                  alt='profile'
+                  className=' w-8 h-8 object-cover rounded-full mr-2'
                 />
-                <span className="text-sm text-gray-700 dark:text-gray-200 hidden md:block">
+                <span className='text-sm text-gray-700 dark:text-gray-200 hidden md:block'>
                   {session.userName}님 반가워요!👋
                 </span>
                 {open ? <CgChevronDownO /> : <CgChevronLeftO />}
@@ -86,16 +88,15 @@ export default function ProfileDropdownComponent() {
           </Menu.Button>
           <Transition
             as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
-          >
-            <Menu.Items className="absolute right-5 w-48 mt-2 origin-top-center bg-white rounded-md filter drop-shadow-2xl">
-              <div className="">
-                <p className="text-gray-800 text-sm m-3 font-medium">
+            enter='transition ease-out duration-100'
+            enterFrom='transform opacity-0 scale-95'
+            enterTo='transform opacity-100 scale-100'
+            leave='transition ease-in duration-75'
+            leaveFrom='transform opacity-100 scale-100'
+            leaveTo='transform opacity-0 scale-95'>
+            <Menu.Items className='absolute right-5 w-48 mt-2 origin-top-center bg-white rounded-md filter drop-shadow-2xl'>
+              <div className=''>
+                <p className='text-gray-800 text-sm m-3 font-medium'>
                   빠른 시작
                 </p>
                 {/* 포스트 작성 */}
@@ -105,24 +106,21 @@ export default function ProfileDropdownComponent() {
                       onClick={onClickNewPost}
                       className={`${
                         active
-                          ? "bg-gray-100 text-gray-700 text-sm"
-                          : "text-gray-700 text-sm"
-                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    >
+                          ? 'bg-gray-100 text-gray-700 text-sm'
+                          : 'text-gray-700 text-sm'
+                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}>
                       {active ? (
                         <IconContext.Provider
                           value={{
-                            className: "w-3 h-3 text-gray-400 mr-2",
-                          }}
-                        >
+                            className: 'w-3 h-3 text-gray-400 mr-2',
+                          }}>
                           <FaCaretRight />
                         </IconContext.Provider>
                       ) : (
                         <IconContext.Provider
                           value={{
-                            className: "w-3 h-3 text-gray-400 mr-2",
-                          }}
-                        >
+                            className: 'w-3 h-3 text-gray-400 mr-2',
+                          }}>
                           <FaCaretRight />
                         </IconContext.Provider>
                       )}
@@ -138,24 +136,21 @@ export default function ProfileDropdownComponent() {
                       onClick={onClickMyBlog}
                       className={`${
                         active
-                          ? "bg-gray-100 text-gray-700 text-sm"
-                          : "text-gray-700 text-sm"
-                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    >
+                          ? 'bg-gray-100 text-gray-700 text-sm'
+                          : 'text-gray-700 text-sm'
+                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}>
                       {active ? (
                         <IconContext.Provider
                           value={{
-                            className: "w-3 h-3 text-gray-400 mr-2",
-                          }}
-                        >
+                            className: 'w-3 h-3 text-gray-400 mr-2',
+                          }}>
                           <FaCaretRight />
                         </IconContext.Provider>
                       ) : (
                         <IconContext.Provider
                           value={{
-                            className: "w-3 h-3 text-gray-400 mr-2",
-                          }}
-                        >
+                            className: 'w-3 h-3 text-gray-400 mr-2',
+                          }}>
                           <FaCaretRight />
                         </IconContext.Provider>
                       )}
@@ -164,7 +159,7 @@ export default function ProfileDropdownComponent() {
                   )}
                 </Menu.Item>
                 {/* 내 블로그 끝 */}
-                <p className="text-gray-800 text-sm m-3 font-medium">개인화</p>
+                <p className='text-gray-800 text-sm m-3 font-medium'>개인화</p>
                 {/* 내 블로그와 프로필 */}
                 <Menu.Item>
                   {({ active }) => (
@@ -172,24 +167,21 @@ export default function ProfileDropdownComponent() {
                       onClick={onClickProfile}
                       className={`${
                         active
-                          ? "bg-gray-100 text-gray-700 text-sm"
-                          : "text-gray-700 text-sm"
-                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    >
+                          ? 'bg-gray-100 text-gray-700 text-sm'
+                          : 'text-gray-700 text-sm'
+                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}>
                       {active ? (
                         <IconContext.Provider
                           value={{
-                            className: "w-3 h-3 text-gray-400 mr-2",
-                          }}
-                        >
+                            className: 'w-3 h-3 text-gray-400 mr-2',
+                          }}>
                           <FaCaretRight />
                         </IconContext.Provider>
                       ) : (
                         <IconContext.Provider
                           value={{
-                            className: "w-3 h-3 text-gray-400 mr-2",
-                          }}
-                        >
+                            className: 'w-3 h-3 text-gray-400 mr-2',
+                          }}>
                           <FaCaretRight />
                         </IconContext.Provider>
                       )}
@@ -198,7 +190,7 @@ export default function ProfileDropdownComponent() {
                   )}
                 </Menu.Item>
                 {/* 내 블로그와 프로필 끝 */}
-                <hr className="w-full" />
+                <hr className='w-full' />
                 {/* 로그아웃 */}
                 <Menu.Item>
                   {({ active }) => (
@@ -206,16 +198,14 @@ export default function ProfileDropdownComponent() {
                       onClick={onClickLogout}
                       className={`${
                         active
-                          ? "bg-gray-100 text-gray-700 text-sm"
-                          : "text-gray-700 text-sm"
-                      } group flex rounded-md items-center w-full p-3 text-sm`}
-                    >
+                          ? 'bg-gray-100 text-gray-700 text-sm'
+                          : 'text-gray-700 text-sm'
+                      } group flex rounded-md items-center w-full p-3 text-sm`}>
                       로그아웃
                       <IconContext.Provider
                         value={{
-                          className: "w-4 h-4 ml-auto text-gray-300",
-                        }}
-                      >
+                          className: 'w-4 h-4 ml-auto text-gray-300',
+                        }}>
                         <FaSignOutAlt />
                       </IconContext.Provider>
                     </button>
@@ -229,15 +219,14 @@ export default function ProfileDropdownComponent() {
       ) : (
         // Un Logined
         <button
-          type="button"
-          className="border bg-black text-white px-4 py-2 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline"
-          onClick={onClickGithubLoginButton}
-        >
-          <div className="flex flex-row flex-nowrap align-middle justify-center items-center">
-            <span className="text-sm hidden md:block md:mr-2 ">
+          type='button'
+          className='border bg-black text-white px-4 py-2 transition duration-500 ease select-none hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-white hover:border-black focus:outline-none focus:shadow-outline'
+          onClick={onClickGithubLoginButton}>
+          <div className='flex flex-row flex-nowrap align-middle justify-center items-center'>
+            <span className='text-sm hidden md:block md:mr-2 '>
               Login with Github
             </span>
-            <IconContext.Provider value={{ className: "w-7 h-7" }}>
+            <IconContext.Provider value={{ className: 'w-7 h-7' }}>
               <DiGithubBadge />
             </IconContext.Provider>
           </div>
