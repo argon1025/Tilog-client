@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { getUserInfoToUserName, viewCursorPost } from "../../api";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { getUserInfoToUserName, viewCursorPost } from '../../api';
 
 // 유저 깃허브 PinnedRepo를 가져옵니다.
 export function useViewCursorPost(username) {
@@ -25,21 +25,19 @@ export function useViewCursorPost(username) {
           cursor.current = response.data.nextCursorNumber;
           setStatusCode(200);
         } catch (error) {
+          setError(true);
           // 서버측 응답이 없는 경우
           if (!error.response) {
-            if (error.message === "Network Error") {
-              setError(true);
-              setErrorMessage("서버와 연결이 끊겼습니다.");
+            if (error.message === 'Network Error') {
+              setErrorMessage('서버와 연결이 끊겼습니다.');
               setStatusCode(502);
             } else {
-              setError(true);
               setErrorMessage(error.message);
               setStatusCode(502);
             }
           } else {
-            setStatusCode(error.response.data.statusCode);
             setErrorMessage(error.response.data.message.kr);
-            setError(error.response.data.error);
+            setStatusCode(error.response.data.codeNumber);
           }
         }
       }

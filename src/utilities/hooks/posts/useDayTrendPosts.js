@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { viewTrendPosts } from "../../api";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { viewTrendPosts } from '../../api';
 
 // 트랜드 리스트 훅
 export function useDayTrendPosts(searchScope) {
@@ -27,20 +27,19 @@ export function useDayTrendPosts(searchScope) {
           setStatusCode(200);
         } catch (error) {
           // 서버측 응답이 없는 경우
+          setError(true);
           if (!error.response) {
-            if (error.message === "Network Error") {
-              setError(true);
-              setErrorMessage("서버와 연결이 끊겼습니다.");
+            if (error.message === 'Network Error') {
+              setErrorMessage('서버와 연결이 끊겼습니다.');
               setStatusCode(502);
             } else {
-              setError(true);
               setErrorMessage(error.message);
               setStatusCode(502);
             }
           } else {
-            setError(error.response.data.error);
+            setError(error.response.data.codeText);
             setErrorMessage(error.response.data.message.kr);
-            setStatusCode(error.response.data.statusCode);
+            setStatusCode(error.response.data.codeNumber);
           }
         }
       }
@@ -60,15 +59,14 @@ export function useDayTrendPosts(searchScope) {
       cursor.current = response.data.nextCursorNumber;
       setStatusCode(200);
     } catch (error) {
+      setError(true);
       // 서버측 응답이 없는 경우
       if (!error.response) {
-        setError(true);
         setErrorMessage(error.message);
         setStatusCode(502);
       } else {
-        setError(true);
         setErrorMessage(error.response.data.message.kr);
-        setStatusCode(error.response.data.statusCode);
+        setStatusCode(error.response.data.codeNumber);
       }
     }
   }, []);
