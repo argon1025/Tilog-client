@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { viewDetailPost } from '../../api';
+import { useCallback, useEffect, useState } from "react"
+import { viewDetailPost } from "../../api";
 
 // 포스트 디테일을 가져옵니다.
 export function useViewDetailPost(postId) {
@@ -11,49 +11,50 @@ export function useViewDetailPost(postId) {
   const [errorMessage, setErrorMessage] = useState(null);
   // http 상태 코드
   const [statusCode, setStatusCode] = useState(null);
-  useEffect(() => {
+  useEffect(()=>{
     let unmount = false;
     // 1초간 대기
     const fetchData = async () => {
-      if (!unmount) {
+      if(!unmount) {
         try {
-          const response = await viewDetailPost(postId);
-          setpostData(response.data);
-          setStatusCode(200);
+            const response = await viewDetailPost(postId);
+            setpostData(response.data);
+            setStatusCode(200);
         } catch (error) {
-          setError(true);
           // 서버측 응답이 없는 경우
-          if (!error.response) {
-            setErrorMessage(error.message);
-            setStatusCode(502);
-          } else {
+          if(!error.response) {
+            setError(true);
+              setErrorMessage(error.message);
+              setStatusCode(502);
+        } else {
+            setError(error.response.data.error);
             setErrorMessage(error.response.data.message.kr);
-            setStatusCode(error.response.data.codeNumber);
+            setStatusCode(error.response.data.statusCode);
           }
         }
       }
-    };
-    fetchData();
-    return () => (unmount = true);
-  }, [postId]);
+    }
+    fetchData()
+    return ()=> unmount = true;
+  },[postId])
 
-  const refreshPostData = useCallback(async (postId) => {
+  const refreshPostData = useCallback(async(postId) => {
     try {
-      const response = await viewDetailPost(postId);
-      setpostData(response.data);
-      setStatusCode(200);
+        const response = await viewDetailPost(postId);
+        setpostData(response.data);
+        setStatusCode(200);
     } catch (error) {
       // 서버측 응답이 없는 경우
-      if (!error.response) {
+      if(!error.response) {
         setError(true);
-        setErrorMessage(error.message);
-        setStatusCode(502);
-      } else {
+          setErrorMessage(error.message);
+          setStatusCode(502);
+    } else {
         setError(error.response.data.error);
         setErrorMessage(error.response.data.message.kr);
         setStatusCode(error.response.data.statusCode);
       }
     }
-  }, []);
+  },[])
   return [postData, error, errorMessage, statusCode, refreshPostData];
 }
